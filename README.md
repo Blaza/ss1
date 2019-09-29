@@ -2,6 +2,8 @@
 
 ***Beleške: https://blaza.github.io/ss1***
 
+[![Build Status](https://travis-ci.org/Blaza/ss1.svg?branch=master)](https://travis-ci.org/Blaza/ss1)
+
 ## Ciljevi
 
 - Ucenje osnova programiranja u R-u, kao i nekih naprednih koncepata.
