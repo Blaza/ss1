@@ -1,5 +1,7 @@
 # Statistički Softver 1
 
+**Beleške: https://blaza.github.io/ss1**
+
 ## Ciljevi
 
 - Ucenje osnova programiranja u R-u, kao i nekih naprednih koncepata.
