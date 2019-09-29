@@ -17,7 +17,7 @@ Pored ovih beleški, literatura koja će može biti od koristi je knjiga [R for 
 # Pre nego li počnemo... {-}
 
 ## R / Rstudio {-}
-Pre praćenja materijala, naravano, potrebno je instalirati R i Rstudio, što je opisano na ovim linkovima: [uwaterloo.ca](https://uwaterloo.ca/statistical-consulting-and-collaborative-research-unit/sites/ca.statistical-consulting-and-collaborative-research-unit/files/uploads/files/installation_guide_for_r_and_rstudio.pdf), [rstudio-education.github.io](https://rstudio-education.github.io/hopr/starting.html).
+Pre praćenja materijala, naravano, potrebno je instalirati R i Rstudio, što je opisano na ovim linkovima: [uwaterloo.ca](https://uwaterloo.ca/statistical-consulting-and-collaborative-research-unit/sites/ca.statistical-consulting-and-collaborative-research-unit/files/uploads/files/installation_guide_for_r_and_rstudio.pdf) i  [rstudio-education.github.io](https://rstudio-education.github.io/hopr/starting.html).
 
 ## Github {-}
 
