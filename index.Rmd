@@ -1,0 +1,24 @@
+---
+title: "Statistički softver 1"
+author: "Blagoje Ivanović"
+date: "Poslednja izmena: `r format(Sys.time(), '%d %B, %Y')`"
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook:
+    split_by : rmd
+---
+
+# Predgovor {-}
+
+Na ovoj stranici će se nalaziti materijali za statistički softver 1. Cilj kursa je da se upoznamo sa osnovnim, ali i naprednijim konceptima programiranja u jeziku R. Takodje, insistiraćemo na praćenju dobrih praksi u kodiranju i kroz kurs ćemo se upoznati sa nekim često korišćenim alatima u programerskoj zajednici.
+
+Pored ovih beleški, literatura koja će može biti od koristi je knjiga [R for Dummies](http://sgpwe.izt.uam.mx/files/users/uami/gma/R_for_dummies.pdf) (za početnike), a za one koji bi da nauče dosta više o R-u, obavezna literatura je [Advanced R](http://adv-r.had.co.nz/). Takodje, koristićemo i meni posebno dragu knjigu [R Inferno](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf).
+
+# Pre nego li počnemo... {-}
+
+## R / Rstudio
+Pre praćenja materijala, naravano, potrebno je instalirati R i Rstudio, što je opisano na ovim linkovima: [uwaterloo.ca](https://uwaterloo.ca/statistical-consulting-and-collaborative-research-unit/sites/ca.statistical-consulting-and-collaborative-research-unit/files/uploads/files/installation_guide_for_r_and_rstudio.pdf), [rstudio-education.github.io](https://rstudio-education.github.io/hopr/starting.html).
+
+## Github
+
+Takodje, domaći zadaci i seminarski će se predavati putem Github platforme, koja je najveća platforma koju programeri koriste za deljenje svog koda, kao deo "open source" zajednice. Stoga je za potrebe kursa neophodno da svi naprave nalog na [Github.com](https://github.com).

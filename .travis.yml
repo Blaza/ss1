@@ -1,0 +1,17 @@
+language: r
+
+cache: packages
+
+before_script:
+  - chmod +x ./build.sh
+  - chmod +x ./deploy.sh
+
+script:
+  - ./build.sh
+  - ./deploy.sh
+
+addons:
+  apt:
+    packages:
+    - libproj-dev
+
