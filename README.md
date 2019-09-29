@@ -1,6 +1,6 @@
 # Statistički Softver 1
 
-**Beleške: https://blaza.github.io/ss1**
+***Beleške: https://blaza.github.io/ss1***
 
 ## Ciljevi
 
