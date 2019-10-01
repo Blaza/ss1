@@ -23,4 +23,4 @@ Pre praćenja materijala, naravano, potrebno je instalirati R i Rstudio, što je
 
 ## Github {-}
 
-Takodje, domaći zadaci i seminarski će se predavati putem Github platforme, koja je najveća platforma koju programeri koriste za deljenje svog koda, kao deo "open source" zajednice. Stoga je za potrebe kursa neophodno da svi naprave nalog na [Github.com](https://github.com).
+Takodje, seminarski će se predavati putem Github platforme, koja je najveća platforma koju programeri koriste za deljenje svog koda, kao deo "open source" zajednice. Stoga je za potrebe kursa neophodno da svi naprave nalog na [Github.com](https://github.com).
