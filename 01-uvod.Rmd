@@ -1,0 +1,317 @@
+# Osnovne strukture podataka
+
+## Primitivni tipovi
+
+### Logicki tip - logical
+
+**(true/false)**
+
+```{r}
+1 == 1
+2 == 3
+```
+
+Pisu se velikim slovima, 2 vrednosti - TRUE, FALSE
+
+```{r, eval=FALSE}
+False # ne postoji objekat
+FALSE
+```
+
+Kao uvek, 0 je FALSE
+
+```{r}
+0 == FALSE # TRUE
+```
+
+Postoje operatori kao u drugim jezicima `!`, `&&`, `||`
+
+```{r}
+!(FALSE || TRUE) && FALSE
+```
+
+### Brojevi - numeric 
+
+**(interno uvek double)**
+
+```{r}
+5 + 6
+3 / 2 # = 1.5, tj. brojevi su po default-u double, pa nema problema
+```
+
+sa celobrojnim deljenjem
+
+
+```{r}
+class(5)
+```
+
+### Celi brojevi - integer
+**(interno int (mozda long)):**
+
+```{r}
+5L
+class(5L)
+5L / 3L # deljenje opet gleda kao realno, mora se precizirati da
+```
+
+zelimo celobrojno deljenje
+
+operator celobrojnog deljenja je
+
+```{r}
+5 %/% 3
+```
+
+mozemo i da promenimo klasu broja u integer
+
+
+```{r}
+as.integer(5 / 3)
+```
+
+Operacije nad brojevima koje su moguce su:
+
+`+, -, *, /, %/%, %%, ^`
+
+```{r}
+4 %% 5 # ostatak pri deljenju
+4 ^ 5 # stepenovanje
+```
+
+sve je slicno matlabu
+
+
+postoje ugradjene funkcije exp, sin, cos, tan, atan, asin, itd.
+
+```{r}
+sin(log(exp(pi)))
+```
+
+rezultat ovoga nije bas nula, vec 1.22e-16 = 1.22 * 10^(-16)
+
+standardna prica sa poredjenjem double/float vrednosti stoji
+
+
+```{r}
+sin(log(exp(pi))) == 0 # FALSE
+abs(sin(log(exp(pi)))) < 1e-10 # TRUE, za neku toleranciju
+```
+
+### Stringovi - character
+
+**(ne postoji razlika izmedju stringa i karaktera, sve su stringovi)**
+
+
+```{r}
+class("softveri")
+```
+
+#### Neke korisne funkcije za stringove
+
+spajanje:
+
+
+```{r}
+paste("a", "b")
+paste0("a", "b") # spaja bez razmaka
+paste("Ja", "matf", sep = " <3 ") # sep oznacava separator
+paste(1, 2, 3, sep = " < ") # ako stavimo npr broj, pretvorice se u string
+```
+
+c stil formatiranja
+
+
+```{r}
+sprintf("Broj %d. Izvucen je broj %d.", 7, 8)
+sprintf("Broj %.2f.", pi) # pi postoji kao konstanta, e ne postoji vec exp(1)
+```
+
+#### glue - korisna biblioteka za rad sa stringovima stringova
+
+
+```{r}
+# install.packages("glue") # ovako se instaliraju paketi.
+library(glue) # ovako se ucitavaju paketi
+glue("{who} <3 {what}", who = "Ja", what = "fon")
+glue("{number} == {number}", number = 17)
+```
+
+istrazite sami paket, premocan je
+
+
+## Vektori
+
+vektori se prave sa funkcijom `c` (c = combine)
+
+```{r}
+c(1, 2, 3)
+```
+
+precica za vektore ovog tipa:
+
+
+```{r}
+1:3
+c(1, 3, 45, 65)
+```
+
+sve operacije nad brojevima mogu se primeniti i na vektore i primenjuju se
+
+element po element. Ako znate matlab, razlika je sto su u R sve operacije nad
+
+vektorima rade element po element, a za matricno mnozenje i slicno se koriste
+
+posebni operatori. Znaci a * b u R je isto kao a .* b u MATLAB
+
+```{r}
+c(1, 2) + c(3, 4)
+a <- 1:10 # operator dodele je <-
+b <- 11:20
+a * b
+a + b
+a ^ b
+```
+
+Nad vektorima postoje razne funkcije poput sum, mean, var, sd, median, itd., a
+
+i sve elementarne funkcije koje postoje nad brojevima su vektorizovane za
+
+vektore, pa je npr. sin(c(1, 2)) = c(sin(1), sin(2))
+
+
+```{r}
+sin(a)
+```
+
+vektori mogu sadrzati elemente samo jednog primitivnog tipa
+
+```{r}
+c(1, 2)
+c(1L, 2L)
+c("a", "b")
+c("a", 2)
+c(TRUE, FALSE)
+```
+
+Ukoliko se tipovi ne slazu, pretvorice se u najfleksibilniji tip, znaci
+
+logical -> integer -> numeric -> character
+
+
+```{r}
+class(c(TRUE, 1L, 1, "1"))
+```
+
+I logicki operatori su vektorizovani, pa je
+
+
+```{r}
+1:5 <= c(1, 1, 2, 2, 5) # TRUE FALSE FALSE FALSE TRUE
+```
+
+postoje funkcije any, all kao u MATLAB-u
+
+
+```{r}
+any(rep(2, 3) < 1:3)
+all(rep(2, 3) < 1:3)
+```
+
+Kad su logicki vektori u pitanju obratiti paznju na & i &&, kao i | i ||
+
+R INFERNO and and andand
+
+```{r}
+A <- c(FALSE, TRUE, TRUE, FALSE)
+B <- c(TRUE, FALSE, TRUE, FALSE)
+```
+
+& i | rade vektorski - element po element i vracaju vektor!
+
+```{r}
+A & B 
+A | B
+```
+
+&& i || porede samo prve elemente
+
+
+
+```{r}
+A && B
+A || B
+```
+
+## Matrice
+
+matrice se prave funckijom matrix
+
+```{r}
+matrix(1:9, nrow = 3)
+```
+
+prvi argument oznacava elemente koje ce sadrzati, to je jedan vektor, pri cemu
+
+se u matricu upisuju po kolonama, ukoliko nije specificirano drugacije. nrow
+
+argument (ili ncol) specifikuju koliko vrsta ima matrica.
+
+```{r}
+matrix(c(1, 1, 1, 2, 2, 2, 3, 3, 3), nrow = 3)
+```
+
+za lepsi zapis moze se koristiti byrow = TRUE i pisati ovako
+
+
+```{r}
+matrix(c(1, 1, 1,
+         2, 2, 2,
+         3, 3, 3),
+       byrow = TRUE,
+       nrow = 3)
+```
+
+Sve elementarne funkcije nad matricama rade kao nad vektorima, znaci vracaju
+
+matricu, a primenjuju funkciju na svaki element.
+
+Mnozenje matrica se radi operatorom %*%, transponovanje funkcijom t()
+
+
+
+```{r}
+A <- matrix(c(1, 1, 1,
+              2, 2, 2,
+              3, 3, 3),
+            byrow = TRUE,
+            nrow = 3)
+t(A)
+A %*% A
+```
+
+Skalarno mnozenje se moze implementirati na vise nacina, npr
+
+
+```{r}
+u <- c(1, 2, 3)
+v <- c(4, 5, 6)
+sum(u * v)
+```
+
+ili mnozenjem uTv
+
+```{r}
+t(u) %*% v
+```
+
+Primetimo da poslednji izraz vraca 1x1 matricu, a prvi vraca broj, tj vektor
+
+velicine 1. Sa as.numeric mozemo to srediti.
+
+```{r}
+as.numeric(t(u) %*% v)
+```
+
+Vektori kad se tumace kao matrice su naravno kolone vektori.
+
