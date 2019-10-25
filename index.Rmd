@@ -13,9 +13,17 @@ output:
 
 Na ovoj stranici će se nalaziti materijali za statistički softver 1. Cilj kursa je da se upoznamo sa osnovnim, ali i naprednijim konceptima programiranja u jeziku R. Takodje, insistiraćemo na praćenju dobrih praksi u kodiranju i kroz kurs ćemo se upoznati sa nekim često korišćenim alatima u programerskoj zajednici.
 
-Pored ovih beleški, literatura koja će može biti od koristi je knjiga [R for Dummies](http://sgpwe.izt.uam.mx/files/users/uami/gma/R_for_dummies.pdf) (za početnike), a za one koji bi da nauče dosta više o R-u, obavezna literatura je [Advanced R](http://adv-r.had.co.nz/). Takodje, koristićemo i meni posebno dragu knjigu [R Inferno](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf).
+Kurs će biti praktično orijentisan i ovaj dokument će ličiti na zbirku zadataka iz R-a, gde ćemo implementirati razne funkcije i kroz praksu se suočiti sa problemima.
 
 [Na ovoj stranici](https://www.notion.so/blaza/Statisti-ki-Softver-1-4926625b86184cdd907f628c30422729) je zapisan okvirni plan kursa (koji će se verovatno menjati usput), u malo lepšem formatu.
+
+###  Korisna literatura {-}
+
+Klasičnija literatura koja je od koristi kao uvodni materijal je knjiga [R for Dummies](http://sgpwe.izt.uam.mx/files/users/uami/gma/R_for_dummies.pdf). Tu su metodično opisane mogučnosti R-a i česte radnje u njemu.
+
+Za one koji bi da nauče dosta više o R-u, obavezna literatura je [Advanced R](http://adv-r.had.co.nz/). 
+
+Takodje, koristićemo i meni posebno dragu knjigu [R Inferno](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf), u kojoj su izlistani česti problemi koji se javljaju u radu sa R-om, a vrlo ih je lako prevideti.
 
 # Pre nego li počnemo... {-}
 

@@ -1,4 +1,10 @@
-# Osnovne strukture podataka
+# Početni koraci
+
+U ovom poglavlju proći ćemo kroz osnovne strukture podataka u R-u.
+
+Pored ovoga, dobar pregled nekih osnovnih stvari koje se mogu raditi u R-u se
+može videti [u materijalima koleginice Tamare Milić](http://www.matf.bg.ac.rs/p/files/1525886079-81-SS2_1_cas.html).
+
 
 ## Primitivni tipovi
 
