@@ -13,7 +13,7 @@ output:
 
 Na ovoj stranici će se nalaziti materijali za statistički softver 1. Cilj kursa je da se upoznamo sa osnovnim, ali i naprednijim konceptima programiranja u jeziku R. Takodje, insistiraćemo na praćenju dobrih praksi u kodiranju i kroz kurs ćemo se upoznati sa nekim često korišćenim alatima u programerskoj zajednici.
 
-Kurs će biti praktično orijentisan i ovaj dokument će ličiti na zbirku zadataka iz R-a, gde ćemo implementirati razne funkcije i kroz praksu se suočiti sa problemima.
+Kurs će biti praktično orijentisan i ovaj dokument će ličiti na zbirku zadataka iz R-a, gde ćemo implementirati razne funkcije i kroz praksu se suočiti sa čestim problemima u R programiranju i videti kako se rešavaju.
 
 [Na ovoj stranici](https://www.notion.so/blaza/Statisti-ki-Softver-1-4926625b86184cdd907f628c30422729) je zapisan okvirni plan kursa (koji će se verovatno menjati usput), u malo lepšem formatu.
 
