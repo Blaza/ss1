@@ -205,8 +205,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="provera-dijagonalnosti" class="section level2">
 <h2><span class="header-section-number">2.2</span> Provera dijagonalnosti</h2>
 <p>Radi provere dijagonalnosti, dacemo dve razlicite implementacije, pa cemo ih uporediti sa stanovista brzine i odabrti najbolju za nasu funkciju.</p>
-<div id="implamentacija-1" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Implamentacija 1</h3>
+<div id="implementacija-1" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Implementacija 1</h3>
 <p>Prva implementacija se zasniva na jednostavnom prolazenju kroz matricu i ukoliko nadjemo element van dijagonale koji nije nula, vratimo <code>FALSE</code>.</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1">is_diagonal &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
 <a class="sourceLine" id="cb138-2" data-line-number="2">  <span class="co"># Ukoliko argument mat nije matrica, javljamo gresku</span></a>
@@ -278,21 +278,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Poredjenje za nedijagonalnu:</p>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(nondiag_matrix), <span class="kw">is_diagonal2</span>(nondiag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                          expr     min       lq     mean   median      uq
-##   is_diagonal(nondiag_matrix)   1.950   3.0765 244.6932   5.4885   7.548
-##  is_diagonal2(nondiag_matrix) 443.623 909.6895 990.7212 930.4380 944.356
-##        max neval
-##  23883.701   100
-##   7675.875   100</code></pre>
+##                          expr     min       lq     mean   median       uq
+##   is_diagonal(nondiag_matrix)   1.828   2.7735 244.0221   4.2005   6.9105
+##  is_diagonal2(nondiag_matrix) 429.683 907.2670 980.6318 920.1245 935.9300
+##       max neval
+##  23885.70   100
+##   7372.21   100</code></pre>
 <p>U ovom slucaju je brza prva implementacija. Pogledajmo i poredjenje za dijagonalnu matricu.</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(diag_matrix), <span class="kw">is_diagonal2</span>(diag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                       expr      min       lq      mean    median       uq
-##   is_diagonal(diag_matrix) 7690.326 8079.814 8398.9803 8358.0530 8597.444
-##  is_diagonal2(diag_matrix)  586.820  648.915  927.2842  719.9875 1093.907
+##                       expr      min       lq      mean   median       uq
+##   is_diagonal(diag_matrix) 7654.751 7758.851 7911.1131 7890.541 8019.833
+##  is_diagonal2(diag_matrix)  539.014  572.920  830.4634  629.289 1062.749
 ##       max neval
-##  9959.237   100
-##  4524.468   100</code></pre>
+##  8563.536   100
+##  3510.154   100</code></pre>
 <p>U ovom slucaju je druga implementacija ubedljivo brza. Ako pogledamo pazljivije, druga implementacija ima u oba slucaja isto vreme, dok se u prvoj implementaciji sa <code>for</code> petljom vremena drasticno razlikuju.</p>
 <p>Razlog za to je sto u <code>is_diagonal</code>, ako naidjemo na nenula element van dijagonale, odmah izlazimo iz funkcije, a to se desava prilicno brzo, jer vec u drugoj iteraciji petlje dodjemo na neki element van dijagonale. S druge strane, ako imamo dijagonalnu matricu, moramo da prodjemo kroz sve elemente matrice da bismo zakljucili da zaista nisu nule, a to zahteva veliko vreme.</p>
 <p>Ali avaj! Kada razmislite, druga, brza implementacija uvek mnozi svaki element sa svakim, pa poredi da li su <em>svi</em> elementi neke dve matrice jednaki, sto je mnogo operacija.</p>
