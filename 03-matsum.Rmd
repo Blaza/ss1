@@ -84,7 +84,7 @@ Na kraju zatvaramo `if` i vracamo konstruisanu izlaznu listu.
 
 Radi provere dijagonalnosti, dacemo dve razlicite implementacije, pa cemo ih uporediti sa stanovista brzine i odabrti najbolju za nasu funkciju.
 
-### Implamentacija 1
+### Implementacija 1
 
 Prva implementacija se zasniva na jednostavnom prolazenju kroz matricu i ukoliko nadjemo element van dijagonale koji nije nula, vratimo `FALSE`.
 
