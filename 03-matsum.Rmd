@@ -1,0 +1,180 @@
+# Matrix summary
+
+Napravicemo funkciju ciji cilj je da odredi osnovna svojstva matrice, poput dimenzije, ranga, sopstvenih vrednosti, invertibilnosti, dijagonalnosti i slicno. Nakon toga napravicemo i funkciju koja stampa sazetak osnovnih svojstava matrice u lepom formatu, sa `glue` bibliotekom.
+
+Pisacemo red po red funkcije, uz detaljna objasnjenja, pa na kraju dati kompletan kod.
+
+## Implementacija funkcije `matrix_summary`
+Definisimo prvo funkciju, primace argument `mat` koji predstavlja matricu
+```{r, eval = FALSE}
+matrix_summary <- function(mat) { # ...
+```
+
+Izlaz ce nam biti lista koja sadrzi trazena svojstva matrice. Biramo listu kao izlazni tip, jer zelimo da skladistimo objekte raznih dimenzija i tipova, pa se ne mozemo zadovoljiti vektorskim tipom. Dakle, kreiramo praznu listu, koju cemo dalje popunjavati.
+```{r, eval = FALSE}
+  output <- list()
+```
+
+Za pocetak dodacemo u listu izlaza matricu koju analiziramo, kao i dimenzije
+
+```{r, eval = FALSE}
+  output$matrix <- mat
+  
+  output$dimensions <- dim(mat)
+```
+
+Sledeci je rang matrice. Njega cemo racunati pomocu funkcije `rankMatrix` iz `Matrix` paketa
+```{r, eval = FALSE}
+  library(Matrix)
+  output$rank <- rankMatrix(mat)
+```
+
+Da li je matrica kvadratna cemo proveriti uporedjivanjem dimenzija matrice. Ukoliko je razlika broja kolona i vrsta jednaka 0, to znaci da je matrica kvadratna.
+```{r, eval = FALSE}
+  output$is_square <- diff(dim(mat)) == 0
+```
+  
+Dalja svojstva matrice koja cemo gledati su: kvadratnost, inveritbilnost, inverz, sopstvene vrednosti, simetricnost i dijagonalnosti. Ova svojstva imaju smisla samo za kvadratne matrice, pa ce to biti uslov da razmatramo ova svojstva.
+
+```{r, eval = FALSE}
+  if (output$is_square) { # ...
+```
+
+Da li je matrica singularna (tj. nema inverz) proveravamo tako sto pogledamo da li je rang matrice razlicit od broja vrsta, jer je matrica invertibilna akko je punog ranga.
+```{r, eval = FALSE}
+    output$is_singular <- output$rank != dim(mat)[1]
+```
+
+Ukoliko matrica nije singularna, ima smisla izracunati joj inverz. Za to koristimo funkciju `solve`, koja sluzi za resavanje sistema oblika $Ax = b$, dok ako joj se prosledi samo matrica, ona vraca inverz te matrice kao rezultat (za detalje pogledati dokumentaciju `?solve`).
+```{r, eval = FALSE}
+    if (!output$is_singular) {
+      output$inverse <- solve(mat)
+    }
+```
+Za determinantu, imamo funkciju `det`...
+```{r, eval = FALSE}
+    output$determinant <- det(mat)
+```
+
+Sopstvene vrednosti racunamo funkcijom `eigen`, koja kao rezultat vraca listu, ciji je jedan od elemenata `$values` -- vektor sopstvenih vrednosti.
+```{r, eval = FALSE}  
+    output$eigenvalues <- eigen(mat)$values
+```
+   
+Simetricnost matrice proveravamo tako sto posmatramo da li je jednaka svom transponatu.
+```{r, eval = FALSE}
+    output$is_symmetric <- all(mat == t(mat))
+```
+    
+Za odredjivanje da li je matrica dijagonalna, implementiracemo u nastavku sopstvenu funkciju, za sad cemo samo dodati u listu svojstava njenu vrednost.
+```{r, eval = FALSE}
+    output$is_diagonal <- is_diagonal2(mat)
+```
+    
+Na kraju zatvaramo `if` i vracamo konstruisanu izlaznu listu.
+```{r, eval = FALSE}
+# ...
+  }
+  
+  return(output)
+}
+```
+
+## Provera dijagonalnosti
+
+Radi provere dijagonalnosti, dacemo dve razlicite implementacije, pa cemo ih uporediti sa stanovista brzine i odabrti najbolju za nasu funkciju.
+
+### Implamentacija 1
+
+Prva implementacija se zasniva na jednostavnom prolazenju kroz matricu i ukoliko nadjemo element van dijagonale koji nije nula, vratimo `FALSE`.
+
+```{r}
+is_diagonal <- function(mat) {
+  # Ukoliko argument mat nije matrica, javljamo gresku
+  if (!is.matrix(mat)) {
+    stop("Not a matrix")
+  }
+  
+  # Prolazimo kroz sve redove...
+  for (i in 1:nrow(mat)) {
+    # ...i sve kolone
+    for (j in 1:ncol(mat)) {
+      # ako smo van dijagonale, i matrica na tom mestu nije nula,
+      # zakljucujemo da matrica nije dijagonalna, i vracamo FALSE
+      if (i != j && mat[i,j] != 0)
+        return(FALSE)
+    }
+  }
+  
+  # U opstem slucaju vracamo TRUE
+  return(TRUE)
+}
+```
+
+### Implementacija 2
+
+Druga implementacija se oslanja na to da, kada dijagonalnu matricu element po element pomnozimo sa jedinicnom, na kraju opet dobijamo istu tu matricu. Par primera:
+
+```{r}
+A <- matrix(1:4, ncol = 2)
+B <- diag(c(3, 8))
+E <- diag(2)
+A
+B
+E
+```
+
+```{r}
+A * E # nedijagonalna
+B * E # dijagonalna
+```
+
+To svojstvo mozemo lako implementirati...
+
+```{r}
+is_diagonal2 <- function(mat) {
+  if (!is.matrix(mat)) {
+    stop("Not a matrix")
+  }
+  
+  # Proverimo da li su svi elementi matrice mat, pomnozene identickom
+  # matricom, jednaki originalnoj matrici mat. Pogledati dokumentaciju
+  # funkcije diag (?diag)
+  all(mat * diag(nrow(mat)) == mat)
+}
+```
+
+### Poredjenje brzine implementacija
+
+Za poredjenje brzine implementacija koristicemo biblioteku `microbenchmark`. 
+
+```{r}
+# install.packages("microbenchmark")
+library(microbenchmark)
+```
+
+Uporedicemo brzinu funkcija `is_diagonal` i `is_diagonal2` za 2 razlicite matrice, jednu dijagonalnu i jednu ne-dijagonalnu.
+
+```{r}
+diag_matrix <- diag(300) # 100x100 dijagonalna matrica
+nondiag_matrix <- matrix(rnorm(9e4), ncol = 300) # random matrica 100x100
+```
+Poredjenje za nedijagonalnu:
+```{r}
+microbenchmark(is_diagonal(nondiag_matrix), is_diagonal2(nondiag_matrix))
+```
+U ovom slucaju je brza prva implementacija. Pogledajmo i poredjenje za dijagonalnu matricu.
+```{r}
+microbenchmark(is_diagonal(diag_matrix), is_diagonal2(diag_matrix))
+```
+U ovom slucaju je druga implementacija ubedljivo brza. Ako pogledamo pazljivije, druga implementacija ima u oba slucaja isto vreme, dok se u prvoj implementaciji sa `for` petljom vremena drasticno razlikuju.
+
+Razlog za to je sto u `is_diagonal`, ako naidjemo na nenula element van dijagonale, odmah izlazimo iz funkcije, a to se desava prilicno brzo, jer vec u drugoj iteraciji petlje dodjemo na neki element van dijagonale. S druge strane, ako imamo dijagonalnu matricu, moramo da prodjemo kroz sve elemente matrice da bismo zakljucili da zaista nisu nule, a to zahteva veliko vreme.
+
+Ali avaj! Kada razmislite, druga, brza implementacija uvek mnozi svaki element sa svakim, pa poredi da li su *svi* elementi neke dve matrice jednaki, sto je mnogo operacija.
+
+Zasto je prolazak kroz sve elemente matrice u `for` petlji bio toliko skup, a u `is_diagonal2`, gde mnozimo sve elemente matrice (i cak imamo veci broj operacija!) nemamo tu kaznu u vremenu izvrsavanja?
+
+Odgovor je u tome sto su mnozenje matrica, poredjenja matrica, i sve operacije nad vektorima i matricama u R-u u pozadini implmentirane u programskom jeziku C ili Fortran-u, koji su kompajlirani jezici i neuporedivo su brzi nego rucno prolazenje kroz petlju u R.
+
+Dakle, glavno pravilo kod pisanja brzog koda u R-u je da se oslanjate u sto vecoj meri na ugradjenje funkcije, umesto pravljenja svojih. Takodje, `for` petlje treba izbegavati u sirokom luku, jer vrlo postoji bolje resenje, a petlje dovode do slabe brzine kode.

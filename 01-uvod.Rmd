@@ -321,3 +321,43 @@ as.numeric(t(u) %*% v)
 
 Vektori kad se tumace kao matrice su naravno kolone vektori.
 
+## Liste
+
+Liste su nizovi koji mogu da sadrze objekte razlicitih tipova. Prakticno mogu da sadrze kao svoje elemente bilo koji objekat u R-u: vektore, matrice, druge liste, itd.
+
+```{r}
+n <- c(2, 3, 5)
+s <- c("aa", "bb", "cc", "dd", "ee")
+b <- c(TRUE, FALSE, TRUE, FALSE, FALSE)
+lst <- list(n, s, b)   # lst sadrzi  kopije od n, s, b
+```
+
+
+```{r}
+lst[1] #niz n
+lst[2] #niz s
+```
+
+Na ovaj način dobijamo kopije prvog, odnosno drugog člana liste  
+Međutim ako hoćemo da direktno pristupimo članu liste koristimo `[[ ]]`
+```{r}
+lst[[1]]   
+```
+
+Tada možemo da menjamo sadržaj liste
+```{r}
+lst[[2]]<-c("a","b")
+lst[[2]][1]<-"c"
+```
+
+Liste mogu imati i imena clanova, kojima se onda moze pristupati dolarima `$`.
+
+```{r}
+named_list <- list(brojevi = 1:5,
+                   slova = c("a", "b"))
+
+named_list$brojevi
+named_list[[1]]
+
+```
+
