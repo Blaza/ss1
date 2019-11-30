@@ -178,3 +178,179 @@ Zasto je prolazak kroz sve elemente matrice u `for` petlji bio toliko skup, a u 
 Odgovor je u tome sto su mnozenje matrica, poredjenja matrica, i sve operacije nad vektorima i matricama u R-u u pozadini implmentirane u programskom jeziku C ili Fortran-u, koji su kompajlirani jezici i neuporedivo su brzi nego rucno prolazenje kroz petlju u R.
 
 Dakle, glavno pravilo kod pisanja brzog koda u R-u je da se oslanjate u sto vecoj meri na ugradjenje funkcije, umesto pravljenja svojih. Takodje, `for` petlje treba izbegavati u sirokom luku, jer vrlo postoji bolje resenje, a petlje dovode do slabe brzine kode.
+
+## Funkcija `print_matrix_summary`
+
+Sada cemo napisati jednostavnu funkciju koja ce nase zakljucke iz funkcije `matrix_summary` napisati kao kratak opis matrice. Neki primeri koje bismo ocekivali:
+
+> "m by n matrix of rank r"
+> "n by n square, symmetric, nonsingular matrix of rank n"
+> "n by n square, singular matrix of rank 7"
+
+
+Definisimo prvo funkciju, primace argument `mat` koji predstavlja matricu
+```{r, eval = FALSE}
+print_matrix_summary <- function(mat) { # ...
+```
+
+Ucitacemo biblioteku `glue` koju cemo koristiti za pravljenje poruke.
+```{r, eval = FALSE}
+  library(glue)
+```
+
+Ucitacemo rezultat `matrix_summary` funkcije, na osnovu kog cemo praviti sazeti opis matrice.
+```{r, eval = FALSE}
+  mat_summary <- matrix_summary(mat)
+```
+
+Imamo dva glavna slucaja - kvadratne i nekvadratne matrice.
+
+Ako matrica nije kvadratna, nemamo neki poseban rezultat, vec samo znamo  dimenziju i rang, pa cemo samo to istampati
+
+```{r, eval = FALSE}
+# ako nije kvadratna...
+  if (!mat_summary$is_square) {
+    # ... istampaj...
+      print(
+        # ... poruku koja je oblika "m by n matrix of rank r"
+        # funkcija glue dopusta koriscenje vrednosti promenljivih ako se pisu
+        # unutar zagrada { } i on ce zameniti taj izraz njegovom vrednoscu.
+        glue("{dim(mat)[1]} by {dim(mat)[2]} matrix of rank {mat_summary$rank}")
+      )
+  }
+```
+
+Ako je matrica kvadratna, onda imamo nekoliko svojstava koje zelimo da proverimo i da ispisemo. String koji cemo da ispisemo cemo praviti nadovezivanjem svakog svojstva jedno po jedno, pocevsi od praznog stringa.
+```{r, eval = FALSE}
+  else {
+    # string koji sadrzi svojstva matrice cemo inicijalizovati kao prazan
+    properties <- ""
+    # ako je matrica simetricna, dodacemo string ", symmetric" na string
+    # properties
+    if (mat_summary$is_symmetric)
+      properties <- glue(properties, ", symmetric")
+    # ako je matrica dijagonalna, dodajemo string ", diagonal" na string
+    # properties (kao rezultat dobijamo ", symmetric, diagonal")
+    if (mat_summary$is_diagonal) 
+      properties <- glue(properties, ", diagonal")
+    
+    # konacno, dodajemo string ", singular" ako je matrica singularna
+    # (nema inverz) ili string ", nonsingular" ako matrica nije singularna.
+    properties <- glue(properties, 
+                       ifelse(mat_summary$is_singular,
+                              ", singular",
+                              ", nonsingular"))
+    # properties string sada ima oblik slican ovom:
+    # ", symmetric, diagonal, nonsingular" i ideja je da ga nadovezemo na string
+    # "m by n square", i  na rezultat dodamo " matrix of rank r", cime bi kao 
+    # rezultat dobili string tipa:
+    # "m by n square"+", symmetric, diagonal, nonsingular"+" matrix of rank r" =
+    # "m by n square, symmetric, diagonal, nonsingular matrix of rank r"
+    
+    print(
+      # funkcija glue po default-u nadovezuje argumente koji su joj prosledjeni.
+      glue(
+        "{dim(mat)[1]} by {dim(mat)[2]} square{properties}",
+        " matrix of rank {mat_summary$rank}"
+      )
+    )
+  }
+```
+
+## Celokupni kod
+
+```{r}
+# Returns whether the given matrix is diagonal
+is_diagonal <- function(mat) {
+  if (!is.matrix(mat)) {
+    stop("Not a matrix")
+  }
+  
+  for (i in 1:nrow(mat)) {
+    for (j in 1:ncol(mat)) {
+      if (i != j && mat[i,j] != 0)
+        return(FALSE)
+    }
+  }
+  
+  return(TRUE)
+}
+
+is_diagonal2 <- function(mat) {
+  if (!is.matrix(mat)) {
+    stop("Not a matrix")
+  }
+  
+  all(mat * diag(nrow(mat)) == mat)
+}
+
+# Matrix summary
+# Inputs: matrix mat
+# Outputs: Basic properties od the matrix
+# E.g. Square? Diagonal? Symmetric? Rank, dimensions,
+# eigenvalues, inverse, Singular?, determinant
+matrix_summary <- function(mat) {
+  output <- list()
+  
+  output$matrix <- mat
+  
+  output$dimensions <- dim(mat)
+  
+  library(Matrix)
+  output$rank <- rankMatrix(mat)
+  
+  output$is_square <- diff(dim(mat)) == 0
+  
+  if (output$is_square) {
+    output$is_singular <- !(output$rank == dim(mat)[1])
+    
+    if (!output$is_singular) {
+      output$inverse <- solve(mat)
+    }
+    
+    output$determinant <- det(mat)
+    
+    output$eigenvalues <- eigen(mat)$values
+    
+    output$is_symmetric <- all(mat == t(mat))
+    
+    output$is_diagonal <- is_diagonal2(mat)
+  }
+  
+  class(output) <- "matrixSummary"
+  
+  return(output)
+}
+
+# Prints out matrix description
+# E.g. "m by n matrix of rank r"
+#      "n by n square, symmetric, nonsingular matrix of rank n"
+#      "n by n square, singular matrix of rank 7"
+print_matrix_summary <- function(mat) {
+  library(glue)
+  mat_summary <- matrix_summary(mat)
+  
+  if (!mat_summary$is_square) {
+    print(
+      glue("{dim(mat)[1]} by {dim(mat)[2]} matrix of rank {mat_summary$rank}")
+    )
+  } else {
+    properties <- ""
+    if (mat_summary$is_symmetric)
+      properties <- glue(properties, ", symmetric")
+    if (mat_summary$is_diagonal) 
+      properties <- glue(properties, ", diagonal")
+    
+    properties <- glue(properties, 
+                       ifelse(mat_summary$is_singular,
+                              ", singular",
+                              ", nonsingular"))
+    print(
+      glue(
+        "{dim(mat)[1]} by {dim(mat)[2]} square{properties}",
+        " matrix of rank {mat_summary$rank}"
+      )
+    )
+  }
+}
+```
