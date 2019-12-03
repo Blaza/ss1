@@ -361,3 +361,84 @@ named_list[[1]]
 
 ```
 
+## Dataframe
+
+Dataframe je najčešći način čuvanja podataka u R-u i vrlo je pogodan za rad i analizu. Služi za prikaz tabelarnih podataka, pa liči na matricu, s tim što je dataframe u snovi lista koja sadrži vektore jednakih dužina (kolone), pri čemu ti vektori ne moraju biti istog tipa. Dakle možemo imati jednu kolonu koju čine brojevi, a drugu tekstualni podaci.
+
+Dataframe se pravi na sledeći način:
+
+```{r}
+df <- data.frame(kolona1 = c(1, 2, 3), kolona2 = c("prvi", "drugi", "treci"))
+df
+```
+
+Ovako smo dobili dataframe sa dve kolone, od kojih je jedna numerička a druga tekstualna.
+
+```{r}
+str(df)
+```
+
+R podrazumevano pretvara tekstualne podatke u faktore, to možemo preduprediti ako dodamo argument `stringsAsFactors = FALSE`.
+
+```{r}
+df <- data.frame(kolona1 = c(1, 2, 3), kolona2 = c("prvi", "drugi", "treci"), stringsAsFactors = FALSE)
+str(df)
+df
+```
+
+Dva dataframe-a (koji imaju isi broj kolona) se mogu spojiti da dobijemo više kolona korišćenjem funkcije `cbind`.
+```{r}
+df1 <- data.frame(kolona1 = c(1, 2, 3), kolona2 = c("prvi", "drugi", "treci"), stringsAsFactors = FALSE)
+df2 <- data.frame(kolona3 = c(4,5,6), kolona4 = c("prvi1", "drugi1", "treci1"), stringsAsFactors = FALSE)
+df3 <- cbind(df1, df2)
+df3
+```
+
+Takodje, mogu se nadovezati po vrstama (ako imaju ista imena kolona) funkcijom `rbind`.
+
+```{r}
+df1 <- data.frame(kolona1 = c(1, 2, 3), kolona2 = c("prvi", "drugi", "treci"), stringsAsFactors = FALSE)
+df2 <- data.frame(kolona1 = c(4,5,6), kolona2 = c("prvi1", "drugi1", "treci1"), stringsAsFactors = FALSE)
+df4 <- rbind(df1, df2)
+df4
+```
+
+Vrednostima kolona možemo pristupati pomoću operatora `$`, kao u listama, a istim možemo i dodati nove kolone.
+```{r}
+df$kolona1
+df$kolona5 <- c(7,8,9)
+df
+```
+
+Medjutim, možda elegantniji način filtriranja i odabira podskupova dataframe-a je korišćenjem uglatih zagrada. Koristimo notaciju `df[redovi, kolone]`, gde prvim argumentom odredjujemo koje redove želimo da uzmemo, a drugim koje kolone. Prazno mesto za neki od argumenata znači "uzmi sve".
+
+```{r}
+df[,] # sve
+df[1,] # prva vrsta
+df[,1] # prva kolona
+```
+
+Redovi mogu biti ili vektori brojeva koji označavaju indekse redova koje da uzmemo, ili vektori TRUE/FALSE vrednosti iste dužine kao broj vrsta u dataframe-u, pri čemu se tada biraju redovi na pozicijama gde je u vektoru vrednost TRUE.
+
+```{r}
+df4[c(1,3,4), ] # sve kolone, redovi 1,3,4
+df4[df4$kolona1 > 3, ] # sve kolone, one vrste kod kojih je kolona1 veca od 3
+```
+
+Kolone mogu biti ili vektori brojeva koji označavaju koje kolone da uzmemo prema indeksu, ili vektori stringova, koji označavaju imena kolona koje da uzmemo.
+
+```{r}
+df3[, c(1,3)] # sve vrste, 1 i 3 kolona
+df3[, c("kolona1", "kolona3")] # isto
+df3[c(1,3), c("kolona1", "kolona3")] # prvi i treci red, prva i treca kolona
+```
+
+Korisna stvar je da ako koristimo vektore brojeva za indeksiranje, ukoliko stavimo znak `-` ispred, to znači da izuzimamo te redove/kolone.
+
+```{r}
+df[, -1] # sve bez prve kolone
+df[-2, ] # sve bez druge vrste
+df[-c(1,2), c("kolona2", "kolona5")] # druga i peta kolona, bez prve i druge vrste
+```
+
+Konačno, za osnovne informacije o tabeli postoje funkcije `colnames`, `rownames`, `ncol` i `nrow`, za koje možete pretpostaviti šta rade.
