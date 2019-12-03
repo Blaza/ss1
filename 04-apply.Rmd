@@ -2,16 +2,51 @@
 
 Upoznacemo se u ovom poglavlju sa `*apply` familijom funkcija, i to: `apply`, `sapply` i `lapply` funkcijama, koje cine osnovu funkcionalnog programiranja u R-u. U pitanju su funkcije koje sluze za preslikavanje elemenata vektora/matrica/listi u nove vektore/matrice/liste primenom jedne iste funkcije na svaki element.
 
-Na primer, najjednostavnija od njih, funkcija `sapply` se poziva ovako:
-`sapply(v, f)`, gde je `v` vektor/lista/matrica, a `f` funkcija koju treba primeniti na svaki element od `v`. Dakle dobijamo preslikavanje:
+Pre svega, napomenuo bih da lep tutorijal sa lepim slikama koje ilustruju ove funkcije ima na https://www.datacamp.com/community/tutorials/r-tutorial-apply-family
+
+
+## Funkcija `sapply`
+
+Najjednostavnija od `apply` funkcija, funkcija `sapply` se poziva ovako:
+`sapply(v, f)`, gde je `v` vektor/lista/matrica, a `f` funkcija koju treba primeniti na svaki element od `v`. Dobijamo preslikavanje:
 $$v = (v_1, v_2, \dots, v_n)\stackrel{sapply}{\rightarrow} (f(v_1), f(v_2), \dots, f(v_n)).$$
 
-## Primer `sapply` funkcije
+Dakle, `sapply` primenjuje datu funkciju na svaki element datog vektora/liste/matrice i vraca rezultujuci vektor. Treba napomenuti da uvek pokusava da kao rezultat vrati vektor, a ukoliko to nije moguce, vraca listu.
 
-Kao sto rekosmo, `sapply` primenjuje datu funkciju na svaki element datog vektora/liste/matrice i vraca rezultujuci vektor. Treba napomenuti da uvek pokusava da kao rezultat vrati vektor, a ukoliko to nije moguce, vraca listu.
+### Par kratkih primera
 
-Kao primer koriscenja `sapply` vraticemo se na nas generator metodom inverzne transformacije.
+Prost primer za `sapply` je kvadriranje svakog clana vektora
+```{r}
+x <- 1:5
+sapply(x, function(num) num^2)
+```
 
+Ovaj kod je ekvivalentan sa `x^2`.
+
+Funkcija `sapply` ne mora da prima vektor kao argument vec moze primiti i listu. Kao izlaznu vrednosti opet ce dati vektor. Evo primera ako zelimo da za neku listu matrica zelimo da izracunamo sumu svih vrednosti u matrici.
+
+```{r}
+matrix_list <- list(diag(5), diag(7), matrix(1:10, nrow=2))
+
+# na svaku matricu iz matrix_list primenimo funkciju sum
+matrix_sums <- sapply(matrix_list, sum)
+matrix_sums
+```
+Ovo je naravno isto sto i
+```{r}
+c(sum(diag(5)), sum(diag(7)), sum(matrix(1:10, nrow=2)))
+```
+
+
+Ukoliko se primenjuje visedimenziona funkcija, `sapply` moze vratiti i matricu. Na primer:
+```{r}
+sapply(1:5, function(k) c(k, k^2))
+```
+Svaka kolona je jedan rezultat primenjene funkcije. Vidimo da je prva vrsta `k`, a druga vrsta `k^2`.
+
+### Lepsi generator slucjanih velicina
+
+Kao bolji primer koriscenja `sapply` vraticemo se na nas generator metodom inverzne transformacije.
 
 ```{r}
 generator <- function(n, cdf, support) {
@@ -49,3 +84,78 @@ To je ceo kod! Sveli smo kod prakticno na 2 reda, jer smo izbacili tehnicke stva
 
 Nista vise od toga nije trazeno u matematickom zapisu metoda, pa nema potrebe ni da komplikujemo kod.
 Upravo to je (pored brzine i nekih tehnickih stvari poput bolje otpornosti na greske od petlji) glavna prednost `*apply` funkcija naspram petlji -- kod cine mnogo citljivijim (nakon sto je korisnik upoznat sa ovim funkcijama, naravno).
+
+
+## Funkcija `lapply`
+
+Funkcija `lapply` se koristi na isti nacin kao i `sapply`, s tim sto kao rezultat vraca listu, a ne vektor. Dakle, ukoliko ne ocekujemo rezultat da bude jednog te istog tipa i dimenzije, vec zelimo da izlaz bude lista, onda koristimo `lapply`.
+
+Na primer, ako zelimo za neki vektor brojeva napravimo listu dijagonalnih matrica odgovarajuce dimenzije, to mozemo da uradimo sa
+
+```{r}
+dimensions <- c(1, 3, 5)
+lapply(dimensions, function(d) diag(d))
+```
+
+Dobili smo listu dijagonalnih matrica dimenzija 1, 3 i 5.
+
+Da smo koristili petlje, ovaj kod bi bio dosta nezgrapniji:
+```{r}
+result <- list()
+i <- 1
+for (d in dimensions) {
+  result[[i]] <- diag(d)
+  i <- i + 1
+}
+result
+```
+Moramo da inicijalizujemo listu, da vodimo racuna o brojacu i da element po element dopunjujemo rezultujucu listu.
+
+## Funkcija `apply`
+
+Funkcij `apply` je funkcija koja se koristi kada imamo visedimenzioni ulaz, poput matrice ili dataframe-a, a zelimo da primenimo neku funkciju po kolonama ili po vrstama (ili nekoj trecoj dimenziji ukoliko postoji).
+
+Funkcija se poziva kao `apply(mat, dim, f)`, gde je `m` matrica/dataframe, `dim` je dimenzija po kojoj primenjujemo funkciju (1 je za vrste, 2 je za kolone), a `f` je funkcija koju da primenimo na svaku vrstu/kolonu.
+
+Primenom `apply` dobijamo preslikavanje (po vrstama - `dim = 1`)
+$$
+\begin{pmatrix}1 & 3 & 5\\ 2 & 4 & 6\end{pmatrix} \stackrel{apply(\cdot, 1, f)}{\longrightarrow} \begin{pmatrix}f(1, 3, 5)\\ f(2, 4, 6)\end{pmatrix}
+$$
+
+ili po kolonama (`dim = 2`)
+$$
+\begin{pmatrix}1 & 3 & 5\\ 2 & 4 & 6\end{pmatrix} \stackrel{apply(\cdot, 2, f)}{\longrightarrow} \left(f\binom12, f\binom34, f\binom56\right)
+$$
+
+Na primer, moze se odrediti zbir elemenata u svakoj koloni neke matrice.
+
+```{r}
+mat <- matrix(1:12, ncol = 4)
+mat
+```
+```{r}
+apply(mat, 2, sum)
+```
+Ovo je ekvivalentno pozivu
+```{r}
+colSums(mat)
+```
+
+Ako zelimo prosek po vrstama, mozemo pozvati
+```{r}
+apply(mat, 1, mean)
+```
+
+Sto je isto kao i
+```{r}
+rowMeans(mat)
+```
+
+
+Rezultat ne mora biti vektor, mozemo vratiti rezultat poziva `summary` na svaku kolonu dataframe-a i dobijamo matricu.
+
+```{r}
+cars #ugradjen skup podataka u R
+apply(cars, 2, summary)
+```
+Rezultat je matrica u kojoj svaka kolona sadrzi rezultat poziva `summary` na odgovarajucu kolonu iz skupa podataka `cars` (kolone su `speed` i `dist`)
