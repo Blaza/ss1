@@ -151,7 +151,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="03-matsum.html"><a href="03-matsum.html#celokupni-kod"><i class="fa fa-check"></i><b>3.4</b> Celokupni kod</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="04-apply.html"><a href="04-apply.html"><i class="fa fa-check"></i><b>4</b> <code>*apply</code> funkcije</a><ul>
-<li class="chapter" data-level="4.1" data-path="04-apply.html"><a href="04-apply.html#primer-sapply-funkcije"><i class="fa fa-check"></i><b>4.1</b> Primer <code>sapply</code> funkcije</a></li>
+<li class="chapter" data-level="4.1" data-path="04-apply.html"><a href="04-apply.html#funkcija-sapply"><i class="fa fa-check"></i><b>4.1</b> Funkcija <code>sapply</code></a></li>
+<li class="chapter" data-level="4.2" data-path="04-apply.html"><a href="04-apply.html#funkcija-lapply"><i class="fa fa-check"></i><b>4.2</b> Funkcija <code>lapply</code></a></li>
+<li class="chapter" data-level="4.3" data-path="04-apply.html"><a href="04-apply.html#funkcija-apply"><i class="fa fa-check"></i><b>4.3</b> Funkcija <code>apply</code></a></li>
 </ul></li>
 </ul>
 
@@ -288,21 +290,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Poredjenje za nedijagonalnu:</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(nondiag_matrix), <span class="kw">is_diagonal2</span>(nondiag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                          expr     min     lq     mean   median       uq
-##   is_diagonal(nondiag_matrix)   1.446   2.18  63.2991   2.8615   5.4900
-##  is_diagonal2(nondiag_matrix) 359.928 368.69 619.1401 608.2255 763.4415
+##                          expr     min       lq      mean   median      uq
+##   is_diagonal(nondiag_matrix)   1.520   2.1575  62.99775   3.5625   5.123
+##  is_diagonal2(nondiag_matrix) 356.309 369.3730 617.91302 604.7625 764.016
 ##       max neval
-##  5925.164   100
-##  3418.727   100</code></pre>
+##  5912.806   100
+##  3484.067   100</code></pre>
 <p>U ovom slucaju je brza prva implementacija. Pogledajmo i poredjenje za dijagonalnu matricu.</p>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(diag_matrix), <span class="kw">is_diagonal2</span>(diag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                       expr      min       lq      mean   median        uq
-##   is_diagonal(diag_matrix) 6093.314 6201.724 6288.3920 6261.760 6345.8550
-##  is_diagonal2(diag_matrix)  607.403  899.374  933.0676  912.993  925.7335
+##                       expr      min       lq      mean   median       uq
+##   is_diagonal(diag_matrix) 6112.576 6205.349 6278.9806 6258.910 6313.293
+##  is_diagonal2(diag_matrix)  604.772  909.545  941.7186  922.427  943.782
 ##       max neval
-##  6716.388   100
-##  3890.304   100</code></pre>
+##  6770.144   100
+##  3891.868   100</code></pre>
 <p>U ovom slucaju je druga implementacija ubedljivo brza. Ako pogledamo pazljivije, druga implementacija ima u oba slucaja isto vreme, dok se u prvoj implementaciji sa <code>for</code> petljom vremena drasticno razlikuju.</p>
 <p>Razlog za to je sto u <code>is_diagonal</code>, ako naidjemo na nenula element van dijagonale, odmah izlazimo iz funkcije, a to se desava prilicno brzo, jer vec u drugoj iteraciji petlje dodjemo na neki element van dijagonale. S druge strane, ako imamo dijagonalnu matricu, moramo da prodjemo kroz sve elemente matrice da bismo zakljucili da zaista nisu nule, a to zahteva veliko vreme.</p>
 <p>Ali avaj! Kada razmislite, druga, brza implementacija uvek mnozi svaki element sa svakim, pa poredi da li su <em>svi</em> elementi neke dve matrice jednaki, sto je mnogo operacija.</p>
