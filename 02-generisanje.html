@@ -138,6 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="01-uvod.html"><a href="01-uvod.html#vektori"><i class="fa fa-check"></i><b>1.2</b> Vektori</a></li>
 <li class="chapter" data-level="1.3" data-path="01-uvod.html"><a href="01-uvod.html#matrice"><i class="fa fa-check"></i><b>1.3</b> Matrice</a></li>
 <li class="chapter" data-level="1.4" data-path="01-uvod.html"><a href="01-uvod.html#liste"><i class="fa fa-check"></i><b>1.4</b> Liste</a></li>
+<li class="chapter" data-level="1.5" data-path="01-uvod.html"><a href="01-uvod.html#dataframe"><i class="fa fa-check"></i><b>1.5</b> Dataframe</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="02-generisanje.html"><a href="02-generisanje.html"><i class="fa fa-check"></i><b>2</b> Generisanje slucajnih velicina</a><ul>
 <li class="chapter" data-level="2.1" data-path="02-generisanje.html"><a href="02-generisanje.html#primeri-sa-teorije-verovatnoca"><i class="fa fa-check"></i><b>2.1</b> Primeri sa teorije verovatnoca</a></li>
@@ -181,41 +182,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="raspodela-y-axb" class="section level4">
 <h4><span class="header-section-number">2.1.1.1</span> Raspodela <span class="math inline">\(Y = aX+b\)</span></h4>
 <p>Od ranije (sa TV-a), znamo da treba da bude <span class="math inline">\(Y\sim\mathcal{U}(b, a+b)\)</span>.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="co"># runif sluzi za generisanje slucajnih brojeva iz uniformne (0,1) raspodele</span></a>
-<a class="sourceLine" id="cb125-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e4</span>)</a>
-<a class="sourceLine" id="cb125-3" data-line-number="3"><span class="co"># nacrtamo histogram</span></a>
-<a class="sourceLine" id="cb125-4" data-line-number="4"><span class="kw">hist</span>(x)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1"><span class="co"># generisemo y po definiciji, uzimamo npr. a = 3, b = 7</span></a>
-<a class="sourceLine" id="cb126-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">7</span></a>
-<a class="sourceLine" id="cb126-3" data-line-number="3"><span class="kw">hist</span>(y)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-40-2.png" width="672" />
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="co"># runif sluzi za generisanje slucajnih brojeva iz uniformne (0,1) raspodele</span></a>
+<a class="sourceLine" id="cb163-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e4</span>)</a>
+<a class="sourceLine" id="cb163-3" data-line-number="3"><span class="co"># nacrtamo histogram</span></a>
+<a class="sourceLine" id="cb163-4" data-line-number="4"><span class="kw">hist</span>(x)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1"><span class="co"># generisemo y po definiciji, uzimamo npr. a = 3, b = 7</span></a>
+<a class="sourceLine" id="cb164-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">7</span></a>
+<a class="sourceLine" id="cb164-3" data-line-number="3"><span class="kw">hist</span>(y)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-50-2.png" width="672" />
 Histogrami za <code>x</code> i <code>y</code> izgledaju slicno, kao uniformna raspodela (svi stupci su iste visine), ali nosac za <code>y</code> je od 7 do 10, sto je bas sto smo ocekivali.</p>
 </div>
 <div id="raspodela-w-log-x" class="section level4">
 <h4><span class="header-section-number">2.1.1.2</span> Raspodela <span class="math inline">\(W=-\log X\)</span></h4>
 <p>Treba da bude <span class="math inline">\(W\sim\mathcal{E}(1)\)</span>.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="kw">hist</span>(x)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="co"># transformisemo x u w logaritmom</span></a>
-<a class="sourceLine" id="cb128-2" data-line-number="2">w &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">log</span>(x)</a>
-<a class="sourceLine" id="cb128-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb128-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb128-5" data-line-number="5"><span class="co"># crtamo histogram, probability argument obezbedjuje da na y osi budu</span></a>
-<a class="sourceLine" id="cb128-6" data-line-number="6"><span class="co"># frekvencije umesto broj pojavljivanja.</span></a>
-<a class="sourceLine" id="cb128-7" data-line-number="7"><span class="co"># Slika je ista, ali y osa je sad na (0,1)</span></a>
-<a class="sourceLine" id="cb128-8" data-line-number="8"><span class="kw">hist</span>(w, <span class="dt">probability =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb128-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb128-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb128-11" data-line-number="11"><span class="co"># crtamo funkciju dexp - gustinu eksponencijalne raspodele</span></a>
-<a class="sourceLine" id="cb128-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb128-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb128-14" data-line-number="14"><span class="co"># funkcija curve crta datu krivu</span></a>
-<a class="sourceLine" id="cb128-15" data-line-number="15"><span class="co"># curve uvek prima izraz po x</span></a>
-<a class="sourceLine" id="cb128-16" data-line-number="16"><span class="co"># xlim odredjujegranice x ose na grafiku</span></a>
-<a class="sourceLine" id="cb128-17" data-line-number="17"><span class="co"># add = TRUE znaci da se doda na prethodni grafik</span></a>
-<a class="sourceLine" id="cb128-18" data-line-number="18"><span class="kw">curve</span>(<span class="kw">dexp</span>(x), <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-41-2.png" width="672" />
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1"><span class="kw">hist</span>(x)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1"><span class="co"># transformisemo x u w logaritmom</span></a>
+<a class="sourceLine" id="cb166-2" data-line-number="2">w &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">log</span>(x)</a>
+<a class="sourceLine" id="cb166-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb166-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb166-5" data-line-number="5"><span class="co"># crtamo histogram, probability argument obezbedjuje da na y osi budu</span></a>
+<a class="sourceLine" id="cb166-6" data-line-number="6"><span class="co"># frekvencije umesto broj pojavljivanja.</span></a>
+<a class="sourceLine" id="cb166-7" data-line-number="7"><span class="co"># Slika je ista, ali y osa je sad na (0,1)</span></a>
+<a class="sourceLine" id="cb166-8" data-line-number="8"><span class="kw">hist</span>(w, <span class="dt">probability =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb166-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb166-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb166-11" data-line-number="11"><span class="co"># crtamo funkciju dexp - gustinu eksponencijalne raspodele</span></a>
+<a class="sourceLine" id="cb166-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb166-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb166-14" data-line-number="14"><span class="co"># funkcija curve crta datu krivu</span></a>
+<a class="sourceLine" id="cb166-15" data-line-number="15"><span class="co"># curve uvek prima izraz po x</span></a>
+<a class="sourceLine" id="cb166-16" data-line-number="16"><span class="co"># xlim odredjujegranice x ose na grafiku</span></a>
+<a class="sourceLine" id="cb166-17" data-line-number="17"><span class="co"># add = TRUE znaci da se doda na prethodni grafik</span></a>
+<a class="sourceLine" id="cb166-18" data-line-number="18"><span class="kw">curve</span>(<span class="kw">dexp</span>(x), <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-51-2.png" width="672" />
 Vidimo da se dobro poklapaju histogram i teoretska gustina eksponencijalne raspodele.</p>
 </div>
 </div>
@@ -229,24 +230,24 @@ Vidimo da se dobro poklapaju histogram i teoretska gustina eksponencijalne raspo
 <div id="raspodela-y" class="section level4">
 <h4><span class="header-section-number">2.1.2.1</span> Raspodela <span class="math inline">\(Y\)</span></h4>
 <p>Treba da bude <span class="math inline">\(Y \sim\mathcal{G}(1-e^{-\lambda})\)</span></p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="co"># sa rexp generisemo uzorak iz eksponencijalne raspodele</span></a>
-<a class="sourceLine" id="cb129-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="fl">1e4</span>, <span class="dt">rate =</span> <span class="fl">0.1</span>) <span class="co">#lambda = 0.1</span></a>
-<a class="sourceLine" id="cb129-3" data-line-number="3"><span class="kw">hist</span>(x, <span class="dt">prob =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">floor</span>(x) <span class="co"># ceo deo je floor funkcija</span></a>
-<a class="sourceLine" id="cb130-2" data-line-number="2"><span class="co"># crtamo histogram y</span></a>
-<a class="sourceLine" id="cb130-3" data-line-number="3"><span class="kw">hist</span>(y, <span class="dt">prob =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb130-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb130-5" data-line-number="5"><span class="co"># sad cemo da nacrtamo preko histograma odgovarajuce vrednosti sa zakona</span></a>
-<a class="sourceLine" id="cb130-6" data-line-number="6"><span class="co"># raspodele geometrijske raspodele, posto nemamo gustinu</span></a>
-<a class="sourceLine" id="cb130-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb130-8" data-line-number="8"><span class="co"># uzecemo tacke od 1 do 50, jer geometrijska raspodela uzima vrednosti 1,2,...</span></a>
-<a class="sourceLine" id="cb130-9" data-line-number="9"><span class="co"># (ogranicili smo se na 50 bez posebnog razloga, dovoljno je veliki broj)</span></a>
-<a class="sourceLine" id="cb130-10" data-line-number="10">pts &lt;-<span class="st"> </span><span class="kw">seq_len</span>(<span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb130-11" data-line-number="11"><span class="co"># i nacrtacemo vrednost zakona raspodele, koji se dobija funkcijom dgeom,</span></a>
-<a class="sourceLine" id="cb130-12" data-line-number="12"><span class="co"># koristecu funkciju points, koja na postojeci grafik dodaje tacke.</span></a>
-<a class="sourceLine" id="cb130-13" data-line-number="13"><span class="kw">points</span>(<span class="kw">dgeom</span>(pts, <span class="dt">prob =</span> <span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.1</span>)), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-42-2.png" width="672" /></p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="co"># sa rexp generisemo uzorak iz eksponencijalne raspodele</span></a>
+<a class="sourceLine" id="cb167-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="fl">1e4</span>, <span class="dt">rate =</span> <span class="fl">0.1</span>) <span class="co">#lambda = 0.1</span></a>
+<a class="sourceLine" id="cb167-3" data-line-number="3"><span class="kw">hist</span>(x, <span class="dt">prob =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">floor</span>(x) <span class="co"># ceo deo je floor funkcija</span></a>
+<a class="sourceLine" id="cb168-2" data-line-number="2"><span class="co"># crtamo histogram y</span></a>
+<a class="sourceLine" id="cb168-3" data-line-number="3"><span class="kw">hist</span>(y, <span class="dt">prob =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb168-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb168-5" data-line-number="5"><span class="co"># sad cemo da nacrtamo preko histograma odgovarajuce vrednosti sa zakona</span></a>
+<a class="sourceLine" id="cb168-6" data-line-number="6"><span class="co"># raspodele geometrijske raspodele, posto nemamo gustinu</span></a>
+<a class="sourceLine" id="cb168-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb168-8" data-line-number="8"><span class="co"># uzecemo tacke od 1 do 50, jer geometrijska raspodela uzima vrednosti 1,2,...</span></a>
+<a class="sourceLine" id="cb168-9" data-line-number="9"><span class="co"># (ogranicili smo se na 50 bez posebnog razloga, dovoljno je veliki broj)</span></a>
+<a class="sourceLine" id="cb168-10" data-line-number="10">pts &lt;-<span class="st"> </span><span class="kw">seq_len</span>(<span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb168-11" data-line-number="11"><span class="co"># i nacrtacemo vrednost zakona raspodele, koji se dobija funkcijom dgeom,</span></a>
+<a class="sourceLine" id="cb168-12" data-line-number="12"><span class="co"># koristecu funkciju points, koja na postojeci grafik dodaje tacke.</span></a>
+<a class="sourceLine" id="cb168-13" data-line-number="13"><span class="kw">points</span>(<span class="kw">dgeom</span>(pts, <span class="dt">prob =</span> <span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.1</span>)), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-52-2.png" width="672" /></p>
 </div>
 </div>
 </div>
@@ -257,23 +258,23 @@ Vidimo da se dobro poklapaju histogram i teoretska gustina eksponencijalne raspo
 <p>Na Teoriji verovatnoca samo pokazali da ako je <span class="math inline">\(X\)</span> slucajna velicina sa funkcijom raspodele <span class="math inline">\(F_X\)</span>, onda <span class="math inline">\(Y=F_X(X)\)</span> ima uniformnu raspodelu na <span class="math inline">\([0,1]\)</span></p>
 <p>Slicno, ako je <span class="math inline">\(U\sim \mathcal{U}[0,1]\)</span>, onda <span class="math inline">\(T=F_X^{-1}(U)\)</span> ima istu raspodelu kao <span class="math inline">\(X\)</span>.</p>
 <p>Pogledajmo neke primere</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1">u &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e4</span>)</a>
-<a class="sourceLine" id="cb131-2" data-line-number="2"><span class="kw">hist</span>(u)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1">u &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="fl">1e4</span>)</a>
+<a class="sourceLine" id="cb169-2" data-line-number="2"><span class="kw">hist</span>(u)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <p>Kada na <code>u</code> primenimo <code>qnorm</code> (inverz funkcije raspodele normalne raspodele), treba da dobijemo normalnu raspodelu.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">qnorm</span>(u)</a>
-<a class="sourceLine" id="cb132-2" data-line-number="2"><span class="kw">hist</span>(y)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">qnorm</span>(u)</a>
+<a class="sourceLine" id="cb170-2" data-line-number="2"><span class="kw">hist</span>(y)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <p>Ako zelimo da dobijemo normalnu raspodelu <span class="math inline">\(\mathcal{N}(2, 5)\)</span>, to mozemo uraditi na vise nacina. Jedan je da transformisemo standardnu normalnu raspodelu linearnom transformacijom <span class="math inline">\(\sigma X + m\)</span>, a drugi da prosto damo argumente <code>mean</code> i <code>sd</code> funkciji <code>qnorm</code>.</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">qnorm</span>(u)</a>
-<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="kw">hist</span>(<span class="kw">sqrt</span>(<span class="dv">5</span>)<span class="op">*</span>y <span class="op">+</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">qnorm</span>(u, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="kw">sqrt</span>(<span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb134-2" data-line-number="2"><span class="kw">hist</span>(y)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-45-2.png" width="672" /></p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">qnorm</span>(u)</a>
+<a class="sourceLine" id="cb171-2" data-line-number="2"><span class="kw">hist</span>(<span class="kw">sqrt</span>(<span class="dv">5</span>)<span class="op">*</span>y <span class="op">+</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">qnorm</span>(u, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="kw">sqrt</span>(<span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb172-2" data-line-number="2"><span class="kw">hist</span>(y)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-55-2.png" width="672" /></p>
 <p>Ako hocemo uzorak iz eksponencijalne raspodele, samo na <code>u</code> primenimo <code>qexp</code> sto predstavlja inver funkcije raspodele eksponencijalne raspodele.</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="kw">hist</span>(<span class="kw">qexp</span>(u, <span class="dt">rate =</span> pi))</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="kw">hist</span>(<span class="kw">qexp</span>(u, <span class="dt">rate =</span> pi))</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 </div>
 <div id="opsti-generator" class="section level3">
 <h3><span class="header-section-number">2.2.2</span> Opsti generator</h3>
@@ -282,48 +283,48 @@ Vidimo da se dobro poklapaju histogram i teoretska gustina eksponencijalne raspo
 <p>Ako je <span class="math inline">\(x = F^{-1}(t)\)</span>, to znaci da je <span class="math inline">\(t = F(x)\)</span>, tj. <span class="math inline">\(x\)</span> je resenje jednacine <span class="math inline">\(F(x) - t = 0\)</span>, tj. <span class="math inline">\(x\)</span> je nula funkcije <span class="math inline">\(g(x) = F(x) - t\)</span>.</p>
 <p>Dakle, da bismo nasli numericki inverz neke funkcije <span class="math inline">\(F\)</span>, potrebno je da nadjemo nulu funkcije <span class="math inline">\(g(x) = F(x) - t\)</span>.</p>
 <p>Napravicemo prvo funkciju koja za datu funkciju i tacku <span class="math inline">\(t\)</span> vraca inverz te funkcije u toj tacki.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1"><span class="co"># Funkcija koja vraca inverz funkcije f u tacki t.</span></a>
-<a class="sourceLine" id="cb136-2" data-line-number="2"><span class="co"># Domen funkcije f je argument support.</span></a>
-<a class="sourceLine" id="cb136-3" data-line-number="3"><span class="co"># Primer:</span></a>
-<a class="sourceLine" id="cb136-4" data-line-number="4"><span class="co"># f &lt;- pexp</span></a>
-<a class="sourceLine" id="cb136-5" data-line-number="5"><span class="co"># inv(f, 0.3, c(0, 100000))</span></a>
-<a class="sourceLine" id="cb136-6" data-line-number="6">inv &lt;-<span class="st"> </span><span class="cf">function</span>(f, t, support) {</a>
-<a class="sourceLine" id="cb136-7" data-line-number="7">  <span class="kw">uniroot</span>(<span class="cf">function</span>(x) <span class="kw">f</span>(x) <span class="op">-</span><span class="st"> </span>t,</a>
-<a class="sourceLine" id="cb136-8" data-line-number="8">          <span class="dt">interval =</span> support)<span class="op">$</span>root</a>
-<a class="sourceLine" id="cb136-9" data-line-number="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="co"># Funkcija koja vraca inverz funkcije f u tacki t.</span></a>
+<a class="sourceLine" id="cb174-2" data-line-number="2"><span class="co"># Domen funkcije f je argument support.</span></a>
+<a class="sourceLine" id="cb174-3" data-line-number="3"><span class="co"># Primer:</span></a>
+<a class="sourceLine" id="cb174-4" data-line-number="4"><span class="co"># f &lt;- pexp</span></a>
+<a class="sourceLine" id="cb174-5" data-line-number="5"><span class="co"># inv(f, 0.3, c(0, 100000))</span></a>
+<a class="sourceLine" id="cb174-6" data-line-number="6">inv &lt;-<span class="st"> </span><span class="cf">function</span>(f, t, support) {</a>
+<a class="sourceLine" id="cb174-7" data-line-number="7">  <span class="kw">uniroot</span>(<span class="cf">function</span>(x) <span class="kw">f</span>(x) <span class="op">-</span><span class="st"> </span>t,</a>
+<a class="sourceLine" id="cb174-8" data-line-number="8">          <span class="dt">interval =</span> support)<span class="op">$</span>root</a>
+<a class="sourceLine" id="cb174-9" data-line-number="9">}</a></code></pre></div>
 <p>Testirajmo vrednost koju vraca. <code>inv(pexp...)</code>(<code>pexp</code> je funkcija raspodele) treba da se poklopi sa <code>qexp</code>.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="kw">inv</span>(pexp, <span class="fl">0.3</span>, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">inv</span>(pexp, <span class="fl">0.3</span>, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>))</a></code></pre></div>
 <pre><code>## [1] 0.3566753</code></pre>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="kw">qexp</span>(<span class="fl">0.3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">qexp</span>(<span class="fl">0.3</span>)</a></code></pre></div>
 <pre><code>## [1] 0.3566749</code></pre>
 <p>Napravimo sada fuknciju koja ce da se koristi kao generator.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1"><span class="co"># Kao argument funkcije primamo obim uzorka koji generisemo,</span></a>
-<a class="sourceLine" id="cb141-2" data-line-number="2"><span class="co"># funkciju raspodele trazene raspodele i nosac raspodele.</span></a>
-<a class="sourceLine" id="cb141-3" data-line-number="3">generator &lt;-<span class="st"> </span><span class="cf">function</span>(n, cdf, support) {</a>
-<a class="sourceLine" id="cb141-4" data-line-number="4">  <span class="co"># inicijalizujemo uzorak kao prazan vektor od n elemenata</span></a>
-<a class="sourceLine" id="cb141-5" data-line-number="5">  sample &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)</a>
-<a class="sourceLine" id="cb141-6" data-line-number="6">  <span class="co"># generisemo n brojeva iz uniformne raspodele</span></a>
-<a class="sourceLine" id="cb141-7" data-line-number="7">  u &lt;-<span class="st"> </span><span class="kw">runif</span>(n)</a>
-<a class="sourceLine" id="cb141-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb141-9" data-line-number="9">  <span class="co"># za svaki od brojeva u_i primenimo inverz funkcije raspodele</span></a>
-<a class="sourceLine" id="cb141-10" data-line-number="10">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n) {</a>
-<a class="sourceLine" id="cb141-11" data-line-number="11">    sample[i] &lt;-<span class="st"> </span><span class="kw">inv</span>(cdf, u[i], support)</a>
-<a class="sourceLine" id="cb141-12" data-line-number="12">  }</a>
-<a class="sourceLine" id="cb141-13" data-line-number="13">  <span class="co"># vracamo uzorak</span></a>
-<a class="sourceLine" id="cb141-14" data-line-number="14">  <span class="kw">return</span>(sample)</a>
-<a class="sourceLine" id="cb141-15" data-line-number="15">}</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="co"># Kao argument funkcije primamo obim uzorka koji generisemo,</span></a>
+<a class="sourceLine" id="cb179-2" data-line-number="2"><span class="co"># funkciju raspodele trazene raspodele i nosac raspodele.</span></a>
+<a class="sourceLine" id="cb179-3" data-line-number="3">generator &lt;-<span class="st"> </span><span class="cf">function</span>(n, cdf, support) {</a>
+<a class="sourceLine" id="cb179-4" data-line-number="4">  <span class="co"># inicijalizujemo uzorak kao prazan vektor od n elemenata</span></a>
+<a class="sourceLine" id="cb179-5" data-line-number="5">  sample &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)</a>
+<a class="sourceLine" id="cb179-6" data-line-number="6">  <span class="co"># generisemo n brojeva iz uniformne raspodele</span></a>
+<a class="sourceLine" id="cb179-7" data-line-number="7">  u &lt;-<span class="st"> </span><span class="kw">runif</span>(n)</a>
+<a class="sourceLine" id="cb179-8" data-line-number="8">  </a>
+<a class="sourceLine" id="cb179-9" data-line-number="9">  <span class="co"># za svaki od brojeva u_i primenimo inverz funkcije raspodele</span></a>
+<a class="sourceLine" id="cb179-10" data-line-number="10">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n) {</a>
+<a class="sourceLine" id="cb179-11" data-line-number="11">    sample[i] &lt;-<span class="st"> </span><span class="kw">inv</span>(cdf, u[i], support)</a>
+<a class="sourceLine" id="cb179-12" data-line-number="12">  }</a>
+<a class="sourceLine" id="cb179-13" data-line-number="13">  <span class="co"># vracamo uzorak</span></a>
+<a class="sourceLine" id="cb179-14" data-line-number="14">  <span class="kw">return</span>(sample)</a>
+<a class="sourceLine" id="cb179-15" data-line-number="15">}</a></code></pre></div>
 <p>Testirajmo da li generator pravi dobar uzorak, na primeru normalne raspodele:</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">generator</span>(<span class="dv">1000</span>, pnorm, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1000</span>, <span class="dv">1000</span>))</a>
-<a class="sourceLine" id="cb142-2" data-line-number="2"><span class="kw">hist</span>(x)</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">generator</span>(<span class="dv">1000</span>, pnorm, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1000</span>, <span class="dv">1000</span>))</a>
+<a class="sourceLine" id="cb180-2" data-line-number="2"><span class="kw">hist</span>(x)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
 <div id="zadatak." class="section level4">
 <h4><span class="header-section-number">2.2.2.1</span> Zadatak.</h4>
 <p>Generisati uzorak obima 100 iz raspodele sa funkcijom raspodele <span class="math inline">\(F(x) = \begin{cases} 0,&amp; u &lt; 0 \\ 1 - e^{-\lambda\sqrt{u}},&amp; u \geq0 \end{cases}\)</span></p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1">lambda &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb143-2" data-line-number="2">cdf &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>lambda<span class="op">*</span><span class="kw">sqrt</span>(x))</a>
-<a class="sourceLine" id="cb143-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb143-4" data-line-number="4"><span class="kw">hist</span>(<span class="kw">generator</span>(<span class="dv">100</span>, cdf, <span class="dt">support =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>)))</a></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1">lambda &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb181-2" data-line-number="2">cdf &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>lambda<span class="op">*</span><span class="kw">sqrt</span>(x))</a>
+<a class="sourceLine" id="cb181-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb181-4" data-line-number="4"><span class="kw">hist</span>(<span class="kw">generator</span>(<span class="dv">100</span>, cdf, <span class="dt">support =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10000</span>)))</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 
 </div>
 </div>
