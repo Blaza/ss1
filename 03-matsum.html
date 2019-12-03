@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="02-generisanje.html"/>
-
+<link rel="next" href="04-apply.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -149,6 +149,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="03-matsum.html"><a href="03-matsum.html#provera-dijagonalnosti"><i class="fa fa-check"></i><b>3.2</b> Provera dijagonalnosti</a></li>
 <li class="chapter" data-level="3.3" data-path="03-matsum.html"><a href="03-matsum.html#funkcija-print_matrix_summary"><i class="fa fa-check"></i><b>3.3</b> Funkcija <code>print_matrix_summary</code></a></li>
 <li class="chapter" data-level="3.4" data-path="03-matsum.html"><a href="03-matsum.html#celokupni-kod"><i class="fa fa-check"></i><b>3.4</b> Celokupni kod</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-apply.html"><a href="04-apply.html"><i class="fa fa-check"></i><b>4</b> <code>*apply</code> funkcije</a><ul>
+<li class="chapter" data-level="4.1" data-path="04-apply.html"><a href="04-apply.html#primer-sapply-funkcije"><i class="fa fa-check"></i><b>4.1</b> Primer <code>sapply</code> funkcije</a></li>
 </ul></li>
 </ul>
 
@@ -285,21 +288,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Poredjenje za nedijagonalnu:</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(nondiag_matrix), <span class="kw">is_diagonal2</span>(nondiag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                          expr     min       lq      mean   median      uq
-##   is_diagonal(nondiag_matrix)   1.422   2.1085  64.47586   3.8815   5.269
-##  is_diagonal2(nondiag_matrix) 357.222 369.7025 630.06864 688.4860 759.830
+##                          expr     min     lq     mean   median       uq
+##   is_diagonal(nondiag_matrix)   1.446   2.18  63.2991   2.8615   5.4900
+##  is_diagonal2(nondiag_matrix) 359.928 368.69 619.1401 608.2255 763.4415
 ##       max neval
-##  6054.978   100
-##  3434.519   100</code></pre>
+##  5925.164   100
+##  3418.727   100</code></pre>
 <p>U ovom slucaju je brza prva implementacija. Pogledajmo i poredjenje za dijagonalnu matricu.</p>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(diag_matrix), <span class="kw">is_diagonal2</span>(diag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                       expr      min        lq      mean   median       uq
-##   is_diagonal(diag_matrix) 6117.687 6206.1545 6292.3718 6258.500 6347.921
-##  is_diagonal2(diag_matrix)  598.315  893.4895  935.7627  913.009  933.859
+##                       expr      min       lq      mean   median        uq
+##   is_diagonal(diag_matrix) 6093.314 6201.724 6288.3920 6261.760 6345.8550
+##  is_diagonal2(diag_matrix)  607.403  899.374  933.0676  912.993  925.7335
 ##       max neval
-##  6697.963   100
-##  3807.261   100</code></pre>
+##  6716.388   100
+##  3890.304   100</code></pre>
 <p>U ovom slucaju je druga implementacija ubedljivo brza. Ako pogledamo pazljivije, druga implementacija ima u oba slucaja isto vreme, dok se u prvoj implementaciji sa <code>for</code> petljom vremena drasticno razlikuju.</p>
 <p>Razlog za to je sto u <code>is_diagonal</code>, ako naidjemo na nenula element van dijagonale, odmah izlazimo iz funkcije, a to se desava prilicno brzo, jer vec u drugoj iteraciji petlje dodjemo na neki element van dijagonale. S druge strane, ako imamo dijagonalnu matricu, moramo da prodjemo kroz sve elemente matrice da bismo zakljucili da zaista nisu nule, a to zahteva veliko vreme.</p>
 <p>Ali avaj! Kada razmislite, druga, brza implementacija uvek mnozi svaki element sa svakim, pa poredi da li su <em>svi</em> elementi neke dve matrice jednaki, sto je mnogo operacija.</p>
@@ -472,8 +475,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="02-generisanje.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="02-generisanje.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="04-apply.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

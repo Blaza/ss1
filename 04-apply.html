@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Statistički softver 1</title>
-  <meta name="description" content="Statistički softver 1" />
+  <title>4 *apply funkcije | Statistički softver 1</title>
+  <meta name="description" content="4 *apply funkcije | Statistički softver 1" />
   <meta name="generator" content="bookdown 0.16.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Statistički softver 1" />
+  <meta property="og:title" content="4 *apply funkcije | Statistički softver 1" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Statistički softver 1" />
+  <meta name="twitter:title" content="4 *apply funkcije | Statistički softver 1" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="03-matsum.html"/>
 
-<link rel="next" href="01-uvod.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -170,32 +170,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Statistički softver 1</h1>
-<p class="author"><em>Blagoje Ivanović</em></p>
-<p class="date"><em>Poslednja izmena: 03 December, 2019</em></p>
-</div>
-<div id="predgovor" class="section level1 unnumbered">
-<h1>Predgovor</h1>
-<p>Na ovoj stranici će se nalaziti materijali za statistički softver 1. Cilj kursa je da se upoznamo sa osnovnim, ali i naprednijim konceptima programiranja u jeziku R. Takodje, insistiraćemo na praćenju dobrih praksi u kodiranju i kroz kurs ćemo se upoznati sa nekim često korišćenim alatima u programerskoj zajednici.</p>
-<p>Kurs će biti praktično orijentisan i ovaj dokument će ličiti na zbirku zadataka iz R-a, gde ćemo implementirati razne funkcije i kroz praksu se suočiti sa čestim problemima u R programiranju i videti kako se rešavaju.</p>
-<p><a href="https://www.notion.so/blaza/Statisti-ki-Softver-1-4926625b86184cdd907f628c30422729">Na ovoj stranici</a> je zapisan okvirni plan kursa (koji će se verovatno menjati usput), u malo lepšem formatu.</p>
-<div id="korisna-literatura" class="section level3 unnumbered">
-<h3>Korisna literatura</h3>
-<p>Klasičnija literatura koja je od koristi kao uvodni materijal je knjiga <a href="http://sgpwe.izt.uam.mx/files/users/uami/gma/R_for_dummies.pdf">R for Dummies</a>. Tu su metodično opisane mogučnosti R-a i česte radnje u njemu.</p>
-<p>Za one koji bi da nauče dosta više o R-u, obavezna literatura je <a href="http://adv-r.had.co.nz/">Advanced R</a>.</p>
-<p>Takodje, koristićemo i meni posebno dragu knjigu <a href="https://www.burns-stat.com/pages/Tutor/R_inferno.pdf">R Inferno</a>, u kojoj su izlistani česti problemi koji se javljaju u radu sa R-om, a vrlo ih je lako prevideti.</p>
-</div>
-</div>
-<div id="pre-nego-li-počnemo" class="section level1 unnumbered">
-<h1>Pre nego li počnemo…</h1>
-<div id="r-rstudio" class="section level2 unnumbered">
-<h2>R / Rstudio</h2>
-<p>Pre praćenja materijala, naravano, potrebno je instalirati R i Rstudio, što je opisano na ovim linkovima: <a href="https://uwaterloo.ca/statistical-consulting-and-collaborative-research-unit/sites/ca.statistical-consulting-and-collaborative-research-unit/files/uploads/files/installation_guide_for_r_and_rstudio.pdf">uwaterloo.ca</a> i <a href="https://rstudio-education.github.io/hopr/starting.html">rstudio-education.github.io</a>.</p>
-</div>
-<div id="github" class="section level2 unnumbered">
-<h2>Github</h2>
-<p>Takodje, seminarski će se predavati putem Github platforme, koja je najveća platforma koju programeri koriste za deljenje svog koda, kao deo “open source” zajednice. Stoga je za potrebe kursa neophodno da svi naprave nalog na <a href="https://github.com">Github.com</a>.</p>
+<div id="apply-funkcije" class="section level1">
+<h1><span class="header-section-number">4</span> <code>*apply</code> funkcije</h1>
+<p>Upoznacemo se u ovom poglavlju sa <code>*apply</code> familijom funkcija, i to: <code>apply</code>, <code>sapply</code> i <code>lapply</code> funkcijama, koje cine osnovu funkcionalnog programiranja u R-u. U pitanju su funkcije koje sluze za preslikavanje elemenata vektora/matrica/listi u nove vektore/matrice/liste primenom jedne iste funkcije na svaki element.</p>
+<p>Na primer, najjednostavnija od njih, funkcija <code>sapply</code> se poziva ovako:
+<code>sapply(v, f)</code>, gde je <code>v</code> vektor/lista/matrica, a <code>f</code> funkcija koju treba primeniti na svaki element od <code>v</code>. Dakle dobijamo preslikavanje:
+<span class="math display">\[v = (v_1, v_2, \dots, v_n)\stackrel{sapply}{\rightarrow} (f(v_1), f(v_2), \dots, f(v_n)).\]</span></p>
+<div id="primer-sapply-funkcije" class="section level2">
+<h2><span class="header-section-number">4.1</span> Primer <code>sapply</code> funkcije</h2>
+<p>Kao sto rekosmo, <code>sapply</code> primenjuje datu funkciju na svaki element datog vektora/liste/matrice i vraca rezultujuci vektor. Treba napomenuti da uvek pokusava da kao rezultat vrati vektor, a ukoliko to nije moguce, vraca listu.</p>
+<p>Kao primer koriscenja <code>sapply</code> vraticemo se na nas generator metodom inverzne transformacije.</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1">generator &lt;-<span class="st"> </span><span class="cf">function</span>(n, cdf, support) {</a>
+<a class="sourceLine" id="cb219-2" data-line-number="2">  <span class="co"># inicijalizujemo uzorak kao prazan vektor od n elemenata</span></a>
+<a class="sourceLine" id="cb219-3" data-line-number="3">  sample &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)</a>
+<a class="sourceLine" id="cb219-4" data-line-number="4">  <span class="co"># generisemo n brojeva iz uniformne raspodele</span></a>
+<a class="sourceLine" id="cb219-5" data-line-number="5">  u &lt;-<span class="st"> </span><span class="kw">runif</span>(n)</a>
+<a class="sourceLine" id="cb219-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb219-7" data-line-number="7">  <span class="co"># za svaki od brojeva u_i primenimo inverz funkcije raspodele</span></a>
+<a class="sourceLine" id="cb219-8" data-line-number="8">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n) {</a>
+<a class="sourceLine" id="cb219-9" data-line-number="9">    sample[i] &lt;-<span class="st"> </span><span class="kw">inv</span>(cdf, u[i], support)</a>
+<a class="sourceLine" id="cb219-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb219-11" data-line-number="11">  <span class="co"># vracamo uzorak</span></a>
+<a class="sourceLine" id="cb219-12" data-line-number="12">  <span class="kw">return</span>(sample)</a>
+<a class="sourceLine" id="cb219-13" data-line-number="13">}</a></code></pre></div>
+<p>Vidimo da je ceo kod u generatoru zasnovan na tome da generisemo <span class="math inline">\(n\)</span> brojeva iz uniformne raspodele, pa na svaki od njih primenimo funkciju <code>function(u) inv(cdf, u, support)</code> (<code>u[i]</code> zamenjeno sa <code>u</code>). Ovo je bas ono sto ocekujemo od <code>sapply</code> funkcije! Stoga promenimo kod generatora da to iskoristi.</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" data-line-number="1">generator &lt;-<span class="st"> </span><span class="cf">function</span>(n, cdf, support) {</a>
+<a class="sourceLine" id="cb220-2" data-line-number="2">  <span class="co"># generisemo n brojeva iz uniformne raspodele</span></a>
+<a class="sourceLine" id="cb220-3" data-line-number="3">  u &lt;-<span class="st"> </span><span class="kw">runif</span>(n)</a>
+<a class="sourceLine" id="cb220-4" data-line-number="4">  </a>
+<a class="sourceLine" id="cb220-5" data-line-number="5">  <span class="co"># na svaki element iz u primenimo inverznu transformaciju</span></a>
+<a class="sourceLine" id="cb220-6" data-line-number="6">  sample &lt;-<span class="st"> </span><span class="kw">sapply</span>(u, <span class="cf">function</span>(u) <span class="kw">inv</span>(cdf, u, support))</a>
+<a class="sourceLine" id="cb220-7" data-line-number="7">  <span class="kw">return</span>(sample)</a>
+<a class="sourceLine" id="cb220-8" data-line-number="8">}</a></code></pre></div>
+<p>To je ceo kod! Sveli smo kod prakticno na 2 reda, jer smo izbacili tehnicke stvari poput inicijalizacije vektora koji vracamo, prolazenja kroz petlju i popunjavanja rezultujuceg vektora clan po clan. Ostao je kod koji sadrzi samo sustinu onoga sto hocemo da uradimo:</p>
+<ol style="list-style-type: decimal">
+<li>uzmemo uzorak iz uniformne raspodele (<code>u &lt;- runif(n)</code>)</li>
+<li>Svaki element uzorka transformisemo inverznom transformacijom (<code>sapply(u, function(u) inv(cdf, u, support))</code>)</li>
+</ol>
+<p>Nista vise od toga nije trazeno u matematickom zapisu metoda, pa nema potrebe ni da komplikujemo kod.
+Upravo to je (pored brzine i nekih tehnickih stvari poput bolje otpornosti na greske od petlji) glavna prednost <code>*apply</code> funkcija naspram petlji – kod cine mnogo citljivijim (nakon sto je korisnik upoznat sa ovim funkcijama, naravno).</p>
 
 </div>
 </div>
@@ -204,8 +217,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
+<a href="03-matsum.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="01-uvod.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
