@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Matrix summary | Statistički softver 1</title>
-  <meta name="description" content="2 Matrix summary | Statistički softver 1" />
+  <title>3 Matrix summary | Statistički softver 1</title>
+  <meta name="description" content="3 Matrix summary | Statistički softver 1" />
   <meta name="generator" content="bookdown 0.16.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Matrix summary | Statistički softver 1" />
+  <meta property="og:title" content="3 Matrix summary | Statistički softver 1" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Matrix summary | Statistički softver 1" />
+  <meta name="twitter:title" content="3 Matrix summary | Statistički softver 1" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="01-uvod.html"/>
+<link rel="prev" href="02-generisanje.html"/>
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -139,11 +139,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3" data-path="01-uvod.html"><a href="01-uvod.html#matrice"><i class="fa fa-check"></i><b>1.3</b> Matrice</a></li>
 <li class="chapter" data-level="1.4" data-path="01-uvod.html"><a href="01-uvod.html#liste"><i class="fa fa-check"></i><b>1.4</b> Liste</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="03-matsum.html"><a href="03-matsum.html"><i class="fa fa-check"></i><b>2</b> Matrix summary</a><ul>
-<li class="chapter" data-level="2.1" data-path="03-matsum.html"><a href="03-matsum.html#implementacija-funkcije-matrix_summary"><i class="fa fa-check"></i><b>2.1</b> Implementacija funkcije <code>matrix_summary</code></a></li>
-<li class="chapter" data-level="2.2" data-path="03-matsum.html"><a href="03-matsum.html#provera-dijagonalnosti"><i class="fa fa-check"></i><b>2.2</b> Provera dijagonalnosti</a></li>
-<li class="chapter" data-level="2.3" data-path="03-matsum.html"><a href="03-matsum.html#funkcija-print_matrix_summary"><i class="fa fa-check"></i><b>2.3</b> Funkcija <code>print_matrix_summary</code></a></li>
-<li class="chapter" data-level="2.4" data-path="03-matsum.html"><a href="03-matsum.html#celokupni-kod"><i class="fa fa-check"></i><b>2.4</b> Celokupni kod</a></li>
+<li class="chapter" data-level="2" data-path="02-generisanje.html"><a href="02-generisanje.html"><i class="fa fa-check"></i><b>2</b> Generisanje slucajnih velicina</a><ul>
+<li class="chapter" data-level="2.1" data-path="02-generisanje.html"><a href="02-generisanje.html#primeri-sa-teorije-verovatnoca"><i class="fa fa-check"></i><b>2.1</b> Primeri sa teorije verovatnoca</a></li>
+<li class="chapter" data-level="2.2" data-path="02-generisanje.html"><a href="02-generisanje.html#metoda-inverzne-transformacije"><i class="fa fa-check"></i><b>2.2</b> Metoda inverzne transformacije</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-matsum.html"><a href="03-matsum.html"><i class="fa fa-check"></i><b>3</b> Matrix summary</a><ul>
+<li class="chapter" data-level="3.1" data-path="03-matsum.html"><a href="03-matsum.html#implementacija-funkcije-matrix_summary"><i class="fa fa-check"></i><b>3.1</b> Implementacija funkcije <code>matrix_summary</code></a></li>
+<li class="chapter" data-level="3.2" data-path="03-matsum.html"><a href="03-matsum.html#provera-dijagonalnosti"><i class="fa fa-check"></i><b>3.2</b> Provera dijagonalnosti</a></li>
+<li class="chapter" data-level="3.3" data-path="03-matsum.html"><a href="03-matsum.html#funkcija-print_matrix_summary"><i class="fa fa-check"></i><b>3.3</b> Funkcija <code>print_matrix_summary</code></a></li>
+<li class="chapter" data-level="3.4" data-path="03-matsum.html"><a href="03-matsum.html#celokupni-kod"><i class="fa fa-check"></i><b>3.4</b> Celokupni kod</a></li>
 </ul></li>
 </ul>
 
@@ -163,138 +167,138 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="matrix-summary" class="section level1">
-<h1><span class="header-section-number">2</span> Matrix summary</h1>
+<h1><span class="header-section-number">3</span> Matrix summary</h1>
 <p>Napravicemo funkciju ciji cilj je da odredi osnovna svojstva matrice, poput dimenzije, ranga, sopstvenih vrednosti, invertibilnosti, dijagonalnosti i slicno. Nakon toga napravicemo i funkciju koja stampa sazetak osnovnih svojstava matrice u lepom formatu, sa <code>glue</code> bibliotekom.</p>
 <p>Pisacemo red po red funkcije, uz detaljna objasnjenja, pa na kraju dati kompletan kod.</p>
 <div id="implementacija-funkcije-matrix_summary" class="section level2">
-<h2><span class="header-section-number">2.1</span> Implementacija funkcije <code>matrix_summary</code></h2>
+<h2><span class="header-section-number">3.1</span> Implementacija funkcije <code>matrix_summary</code></h2>
 <p>Definisimo prvo funkciju, primace argument <code>mat</code> koji predstavlja matricu</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1">matrix_summary &lt;-<span class="st"> </span><span class="cf">function</span>(mat) { <span class="co"># ...</span></a></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1">matrix_summary &lt;-<span class="st"> </span><span class="cf">function</span>(mat) { <span class="co"># ...</span></a></code></pre></div>
 <p>Izlaz ce nam biti lista koja sadrzi trazena svojstva matrice. Biramo listu kao izlazni tip, jer zelimo da skladistimo objekte raznih dimenzija i tipova, pa se ne mozemo zadovoljiti vektorskim tipom. Dakle, kreiramo praznu listu, koju cemo dalje popunjavati.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb126-1" data-line-number="1">  output &lt;-<span class="st"> </span><span class="kw">list</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">  output &lt;-<span class="st"> </span><span class="kw">list</span>()</a></code></pre></div>
 <p>Za pocetak dodacemo u listu izlaza matricu koju analiziramo, kao i dimenzije</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">  output<span class="op">$</span>matrix &lt;-<span class="st"> </span>mat</a>
-<a class="sourceLine" id="cb127-2" data-line-number="2">  </a>
-<a class="sourceLine" id="cb127-3" data-line-number="3">  output<span class="op">$</span>dimensions &lt;-<span class="st"> </span><span class="kw">dim</span>(mat)</a></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1">  output<span class="op">$</span>matrix &lt;-<span class="st"> </span>mat</a>
+<a class="sourceLine" id="cb146-2" data-line-number="2">  </a>
+<a class="sourceLine" id="cb146-3" data-line-number="3">  output<span class="op">$</span>dimensions &lt;-<span class="st"> </span><span class="kw">dim</span>(mat)</a></code></pre></div>
 <p>Sledeci je rang matrice. Njega cemo racunati pomocu funkcije <code>rankMatrix</code> iz <code>Matrix</code> paketa</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1">  <span class="kw">library</span>(Matrix)</a>
-<a class="sourceLine" id="cb128-2" data-line-number="2">  output<span class="op">$</span>rank &lt;-<span class="st"> </span><span class="kw">rankMatrix</span>(mat)</a></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1">  <span class="kw">library</span>(Matrix)</a>
+<a class="sourceLine" id="cb147-2" data-line-number="2">  output<span class="op">$</span>rank &lt;-<span class="st"> </span><span class="kw">rankMatrix</span>(mat)</a></code></pre></div>
 <p>Da li je matrica kvadratna cemo proveriti uporedjivanjem dimenzija matrice. Ukoliko je razlika broja kolona i vrsta jednaka 0, to znaci da je matrica kvadratna.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">  output<span class="op">$</span>is_square &lt;-<span class="st"> </span><span class="kw">diff</span>(<span class="kw">dim</span>(mat)) <span class="op">==</span><span class="st"> </span><span class="dv">0</span></a></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1">  output<span class="op">$</span>is_square &lt;-<span class="st"> </span><span class="kw">diff</span>(<span class="kw">dim</span>(mat)) <span class="op">==</span><span class="st"> </span><span class="dv">0</span></a></code></pre></div>
 <p>Dalja svojstva matrice koja cemo gledati su: kvadratnost, inveritbilnost, inverz, sopstvene vrednosti, simetricnost i dijagonalnosti. Ova svojstva imaju smisla samo za kvadratne matrice, pa ce to biti uslov da razmatramo ova svojstva.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">  <span class="cf">if</span> (output<span class="op">$</span>is_square) { <span class="co"># ...</span></a></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1">  <span class="cf">if</span> (output<span class="op">$</span>is_square) { <span class="co"># ...</span></a></code></pre></div>
 <p>Da li je matrica singularna (tj. nema inverz) proveravamo tako sto pogledamo da li je rang matrice razlicit od broja vrsta, jer je matrica invertibilna akko je punog ranga.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1">    output<span class="op">$</span>is_singular &lt;-<span class="st"> </span>output<span class="op">$</span>rank <span class="op">!=</span><span class="st"> </span><span class="kw">dim</span>(mat)[<span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1">    output<span class="op">$</span>is_singular &lt;-<span class="st"> </span>output<span class="op">$</span>rank <span class="op">!=</span><span class="st"> </span><span class="kw">dim</span>(mat)[<span class="dv">1</span>]</a></code></pre></div>
 <p>Ukoliko matrica nije singularna, ima smisla izracunati joj inverz. Za to koristimo funkciju <code>solve</code>, koja sluzi za resavanje sistema oblika <span class="math inline">\(Ax = b\)</span>, dok ako joj se prosledi samo matrica, ona vraca inverz te matrice kao rezultat (za detalje pogledati dokumentaciju <code>?solve</code>).</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">    <span class="cf">if</span> (<span class="op">!</span>output<span class="op">$</span>is_singular) {</a>
-<a class="sourceLine" id="cb132-2" data-line-number="2">      output<span class="op">$</span>inverse &lt;-<span class="st"> </span><span class="kw">solve</span>(mat)</a>
-<a class="sourceLine" id="cb132-3" data-line-number="3">    }</a></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1">    <span class="cf">if</span> (<span class="op">!</span>output<span class="op">$</span>is_singular) {</a>
+<a class="sourceLine" id="cb151-2" data-line-number="2">      output<span class="op">$</span>inverse &lt;-<span class="st"> </span><span class="kw">solve</span>(mat)</a>
+<a class="sourceLine" id="cb151-3" data-line-number="3">    }</a></code></pre></div>
 <p>Za determinantu, imamo funkciju <code>det</code>…</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1">    output<span class="op">$</span>determinant &lt;-<span class="st"> </span><span class="kw">det</span>(mat)</a></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1">    output<span class="op">$</span>determinant &lt;-<span class="st"> </span><span class="kw">det</span>(mat)</a></code></pre></div>
 <p>Sopstvene vrednosti racunamo funkcijom <code>eigen</code>, koja kao rezultat vraca listu, ciji je jedan od elemenata <code>$values</code> – vektor sopstvenih vrednosti.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1">    output<span class="op">$</span>eigenvalues &lt;-<span class="st"> </span><span class="kw">eigen</span>(mat)<span class="op">$</span>values</a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1">    output<span class="op">$</span>eigenvalues &lt;-<span class="st"> </span><span class="kw">eigen</span>(mat)<span class="op">$</span>values</a></code></pre></div>
 <p>Simetricnost matrice proveravamo tako sto posmatramo da li je jednaka svom transponatu.</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1">    output<span class="op">$</span>is_symmetric &lt;-<span class="st"> </span><span class="kw">all</span>(mat <span class="op">==</span><span class="st"> </span><span class="kw">t</span>(mat))</a></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1">    output<span class="op">$</span>is_symmetric &lt;-<span class="st"> </span><span class="kw">all</span>(mat <span class="op">==</span><span class="st"> </span><span class="kw">t</span>(mat))</a></code></pre></div>
 <p>Za odredjivanje da li je matrica dijagonalna, implementiracemo u nastavku sopstvenu funkciju, za sad cemo samo dodati u listu svojstava njenu vrednost.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1">    output<span class="op">$</span>is_diagonal &lt;-<span class="st"> </span><span class="kw">is_diagonal2</span>(mat)</a></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">    output<span class="op">$</span>is_diagonal &lt;-<span class="st"> </span><span class="kw">is_diagonal2</span>(mat)</a></code></pre></div>
 <p>Na kraju zatvaramo <code>if</code> i vracamo konstruisanu izlaznu listu.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="co"># ...</span></a>
-<a class="sourceLine" id="cb137-2" data-line-number="2">  <span class="er">}</span></a>
-<a class="sourceLine" id="cb137-3" data-line-number="3">  </a>
-<a class="sourceLine" id="cb137-4" data-line-number="4">  <span class="kw">return</span>(output)</a>
-<a class="sourceLine" id="cb137-5" data-line-number="5"><span class="er">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1"><span class="co"># ...</span></a>
+<a class="sourceLine" id="cb156-2" data-line-number="2">  <span class="er">}</span></a>
+<a class="sourceLine" id="cb156-3" data-line-number="3">  </a>
+<a class="sourceLine" id="cb156-4" data-line-number="4">  <span class="kw">return</span>(output)</a>
+<a class="sourceLine" id="cb156-5" data-line-number="5"><span class="er">}</span></a></code></pre></div>
 </div>
 <div id="provera-dijagonalnosti" class="section level2">
-<h2><span class="header-section-number">2.2</span> Provera dijagonalnosti</h2>
+<h2><span class="header-section-number">3.2</span> Provera dijagonalnosti</h2>
 <p>Radi provere dijagonalnosti, dacemo dve razlicite implementacije, pa cemo ih uporediti sa stanovista brzine i odabrti najbolju za nasu funkciju.</p>
 <div id="implementacija-1" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Implementacija 1</h3>
+<h3><span class="header-section-number">3.2.1</span> Implementacija 1</h3>
 <p>Prva implementacija se zasniva na jednostavnom prolazenju kroz matricu i ukoliko nadjemo element van dijagonale koji nije nula, vratimo <code>FALSE</code>.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1">is_diagonal &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
-<a class="sourceLine" id="cb138-2" data-line-number="2">  <span class="co"># Ukoliko argument mat nije matrica, javljamo gresku</span></a>
-<a class="sourceLine" id="cb138-3" data-line-number="3">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.matrix</span>(mat)) {</a>
-<a class="sourceLine" id="cb138-4" data-line-number="4">    <span class="kw">stop</span>(<span class="st">&quot;Not a matrix&quot;</span>)</a>
-<a class="sourceLine" id="cb138-5" data-line-number="5">  }</a>
-<a class="sourceLine" id="cb138-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb138-7" data-line-number="7">  <span class="co"># Prolazimo kroz sve redove...</span></a>
-<a class="sourceLine" id="cb138-8" data-line-number="8">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(mat)) {</a>
-<a class="sourceLine" id="cb138-9" data-line-number="9">    <span class="co"># ...i sve kolone</span></a>
-<a class="sourceLine" id="cb138-10" data-line-number="10">    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(mat)) {</a>
-<a class="sourceLine" id="cb138-11" data-line-number="11">      <span class="co"># ako smo van dijagonale, i matrica na tom mestu nije nula,</span></a>
-<a class="sourceLine" id="cb138-12" data-line-number="12">      <span class="co"># zakljucujemo da matrica nije dijagonalna, i vracamo FALSE</span></a>
-<a class="sourceLine" id="cb138-13" data-line-number="13">      <span class="cf">if</span> (i <span class="op">!=</span><span class="st"> </span>j <span class="op">&amp;&amp;</span><span class="st"> </span>mat[i,j] <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb138-14" data-line-number="14">        <span class="kw">return</span>(<span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb138-15" data-line-number="15">    }</a>
-<a class="sourceLine" id="cb138-16" data-line-number="16">  }</a>
-<a class="sourceLine" id="cb138-17" data-line-number="17">  </a>
-<a class="sourceLine" id="cb138-18" data-line-number="18">  <span class="co"># U opstem slucaju vracamo TRUE</span></a>
-<a class="sourceLine" id="cb138-19" data-line-number="19">  <span class="kw">return</span>(<span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb138-20" data-line-number="20">}</a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">is_diagonal &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
+<a class="sourceLine" id="cb157-2" data-line-number="2">  <span class="co"># Ukoliko argument mat nije matrica, javljamo gresku</span></a>
+<a class="sourceLine" id="cb157-3" data-line-number="3">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.matrix</span>(mat)) {</a>
+<a class="sourceLine" id="cb157-4" data-line-number="4">    <span class="kw">stop</span>(<span class="st">&quot;Not a matrix&quot;</span>)</a>
+<a class="sourceLine" id="cb157-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb157-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb157-7" data-line-number="7">  <span class="co"># Prolazimo kroz sve redove...</span></a>
+<a class="sourceLine" id="cb157-8" data-line-number="8">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(mat)) {</a>
+<a class="sourceLine" id="cb157-9" data-line-number="9">    <span class="co"># ...i sve kolone</span></a>
+<a class="sourceLine" id="cb157-10" data-line-number="10">    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(mat)) {</a>
+<a class="sourceLine" id="cb157-11" data-line-number="11">      <span class="co"># ako smo van dijagonale, i matrica na tom mestu nije nula,</span></a>
+<a class="sourceLine" id="cb157-12" data-line-number="12">      <span class="co"># zakljucujemo da matrica nije dijagonalna, i vracamo FALSE</span></a>
+<a class="sourceLine" id="cb157-13" data-line-number="13">      <span class="cf">if</span> (i <span class="op">!=</span><span class="st"> </span>j <span class="op">&amp;&amp;</span><span class="st"> </span>mat[i,j] <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb157-14" data-line-number="14">        <span class="kw">return</span>(<span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb157-15" data-line-number="15">    }</a>
+<a class="sourceLine" id="cb157-16" data-line-number="16">  }</a>
+<a class="sourceLine" id="cb157-17" data-line-number="17">  </a>
+<a class="sourceLine" id="cb157-18" data-line-number="18">  <span class="co"># U opstem slucaju vracamo TRUE</span></a>
+<a class="sourceLine" id="cb157-19" data-line-number="19">  <span class="kw">return</span>(<span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb157-20" data-line-number="20">}</a></code></pre></div>
 </div>
 <div id="implementacija-2" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Implementacija 2</h3>
+<h3><span class="header-section-number">3.2.2</span> Implementacija 2</h3>
 <p>Druga implementacija se oslanja na to da, kada dijagonalnu matricu element po element pomnozimo sa jedinicnom, na kraju opet dobijamo istu tu matricu. Par primera:</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb139-2" data-line-number="2">B &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>))</a>
-<a class="sourceLine" id="cb139-3" data-line-number="3">E &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb139-4" data-line-number="4">A</a></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb158-2" data-line-number="2">B &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>))</a>
+<a class="sourceLine" id="cb158-3" data-line-number="3">E &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb158-4" data-line-number="4">A</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    3
 ## [2,]    2    4</code></pre>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1">B</a></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1">B</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    3    0
 ## [2,]    0    8</code></pre>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1">E</a></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1">E</a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    0
 ## [2,]    0    1</code></pre>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">A <span class="op">*</span><span class="st"> </span>E <span class="co"># nedijagonalna</span></a></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1">A <span class="op">*</span><span class="st"> </span>E <span class="co"># nedijagonalna</span></a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    0
 ## [2,]    0    4</code></pre>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1">B <span class="op">*</span><span class="st"> </span>E <span class="co"># dijagonalna</span></a></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1">B <span class="op">*</span><span class="st"> </span>E <span class="co"># dijagonalna</span></a></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    3    0
 ## [2,]    0    8</code></pre>
 <p>To svojstvo mozemo lako implementirati…</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1">is_diagonal2 &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
-<a class="sourceLine" id="cb149-2" data-line-number="2">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.matrix</span>(mat)) {</a>
-<a class="sourceLine" id="cb149-3" data-line-number="3">    <span class="kw">stop</span>(<span class="st">&quot;Not a matrix&quot;</span>)</a>
-<a class="sourceLine" id="cb149-4" data-line-number="4">  }</a>
-<a class="sourceLine" id="cb149-5" data-line-number="5">  </a>
-<a class="sourceLine" id="cb149-6" data-line-number="6">  <span class="co"># Proverimo da li su svi elementi matrice mat, pomnozene identickom</span></a>
-<a class="sourceLine" id="cb149-7" data-line-number="7">  <span class="co"># matricom, jednaki originalnoj matrici mat. Pogledati dokumentaciju</span></a>
-<a class="sourceLine" id="cb149-8" data-line-number="8">  <span class="co"># funkcije diag (?diag)</span></a>
-<a class="sourceLine" id="cb149-9" data-line-number="9">  <span class="kw">all</span>(mat <span class="op">*</span><span class="st"> </span><span class="kw">diag</span>(<span class="kw">nrow</span>(mat)) <span class="op">==</span><span class="st"> </span>mat)</a>
-<a class="sourceLine" id="cb149-10" data-line-number="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" data-line-number="1">is_diagonal2 &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
+<a class="sourceLine" id="cb168-2" data-line-number="2">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.matrix</span>(mat)) {</a>
+<a class="sourceLine" id="cb168-3" data-line-number="3">    <span class="kw">stop</span>(<span class="st">&quot;Not a matrix&quot;</span>)</a>
+<a class="sourceLine" id="cb168-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb168-5" data-line-number="5">  </a>
+<a class="sourceLine" id="cb168-6" data-line-number="6">  <span class="co"># Proverimo da li su svi elementi matrice mat, pomnozene identickom</span></a>
+<a class="sourceLine" id="cb168-7" data-line-number="7">  <span class="co"># matricom, jednaki originalnoj matrici mat. Pogledati dokumentaciju</span></a>
+<a class="sourceLine" id="cb168-8" data-line-number="8">  <span class="co"># funkcije diag (?diag)</span></a>
+<a class="sourceLine" id="cb168-9" data-line-number="9">  <span class="kw">all</span>(mat <span class="op">*</span><span class="st"> </span><span class="kw">diag</span>(<span class="kw">nrow</span>(mat)) <span class="op">==</span><span class="st"> </span>mat)</a>
+<a class="sourceLine" id="cb168-10" data-line-number="10">}</a></code></pre></div>
 </div>
 <div id="poredjenje-brzine-implementacija" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> Poredjenje brzine implementacija</h3>
+<h3><span class="header-section-number">3.2.3</span> Poredjenje brzine implementacija</h3>
 <p>Za poredjenje brzine implementacija koristicemo biblioteku <code>microbenchmark</code>.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="co"># install.packages(&quot;microbenchmark&quot;)</span></a>
-<a class="sourceLine" id="cb150-2" data-line-number="2"><span class="kw">library</span>(microbenchmark)</a></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="co"># install.packages(&quot;microbenchmark&quot;)</span></a>
+<a class="sourceLine" id="cb169-2" data-line-number="2"><span class="kw">library</span>(microbenchmark)</a></code></pre></div>
 <p>Uporedicemo brzinu funkcija <code>is_diagonal</code> i <code>is_diagonal2</code> za 2 razlicite matrice, jednu dijagonalnu i jednu ne-dijagonalnu.</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1">diag_matrix &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="dv">300</span>) <span class="co"># 100x100 dijagonalna matrica</span></a>
-<a class="sourceLine" id="cb151-2" data-line-number="2">nondiag_matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="fl">9e4</span>), <span class="dt">ncol =</span> <span class="dv">300</span>) <span class="co"># random matrica 100x100</span></a></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1">diag_matrix &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="dv">300</span>) <span class="co"># 100x100 dijagonalna matrica</span></a>
+<a class="sourceLine" id="cb170-2" data-line-number="2">nondiag_matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="fl">9e4</span>), <span class="dt">ncol =</span> <span class="dv">300</span>) <span class="co"># random matrica 100x100</span></a></code></pre></div>
 <p>Poredjenje za nedijagonalnu:</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(nondiag_matrix), <span class="kw">is_diagonal2</span>(nondiag_matrix))</a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(nondiag_matrix), <span class="kw">is_diagonal2</span>(nondiag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                          expr     min      lq     mean   median       uq
-##   is_diagonal(nondiag_matrix)   1.858   2.800 234.0170   4.7705   5.5775
-##  is_diagonal2(nondiag_matrix) 439.148 897.038 940.9237 906.6270 918.7980
+##                          expr     min      lq      mean   median       uq
+##   is_diagonal(nondiag_matrix)   1.747   2.644  67.05128   3.9745   5.3345
+##  is_diagonal2(nondiag_matrix) 426.267 442.946 728.87453 481.5410 907.9020
 ##       max neval
-##  22931.62   100
-##   6994.46   100</code></pre>
+##  6297.339   100
+##  4663.122   100</code></pre>
 <p>U ovom slucaju je brza prva implementacija. Pogledajmo i poredjenje za dijagonalnu matricu.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(diag_matrix), <span class="kw">is_diagonal2</span>(diag_matrix))</a></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(diag_matrix), <span class="kw">is_diagonal2</span>(diag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                       expr      min        lq      mean   median       uq
-##   is_diagonal(diag_matrix) 7601.455 7703.0125 7804.4625 7775.847 7869.494
-##  is_diagonal2(diag_matrix)  535.709  560.9655  795.7103  584.988 1033.199
+##                       expr      min       lq     mean   median       uq
+##   is_diagonal(diag_matrix) 7688.091 7827.493 7941.591 7890.381 7999.667
+##  is_diagonal2(diag_matrix)  579.575 1025.001 1073.977 1044.926 1072.385
 ##       max neval
-##  8758.531   100
-##  3251.506   100</code></pre>
+##  8970.872   100
+##  4549.001   100</code></pre>
 <p>U ovom slucaju je druga implementacija ubedljivo brza. Ako pogledamo pazljivije, druga implementacija ima u oba slucaja isto vreme, dok se u prvoj implementaciji sa <code>for</code> petljom vremena drasticno razlikuju.</p>
 <p>Razlog za to je sto u <code>is_diagonal</code>, ako naidjemo na nenula element van dijagonale, odmah izlazimo iz funkcije, a to se desava prilicno brzo, jer vec u drugoj iteraciji petlje dodjemo na neki element van dijagonale. S druge strane, ako imamo dijagonalnu matricu, moramo da prodjemo kroz sve elemente matrice da bismo zakljucili da zaista nisu nule, a to zahteva veliko vreme.</p>
 <p>Ali avaj! Kada razmislite, druga, brza implementacija uvek mnozi svaki element sa svakim, pa poredi da li su <em>svi</em> elementi neke dve matrice jednaki, sto je mnogo operacija.</p>
@@ -304,7 +308,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div id="funkcija-print_matrix_summary" class="section level2">
-<h2><span class="header-section-number">2.3</span> Funkcija <code>print_matrix_summary</code></h2>
+<h2><span class="header-section-number">3.3</span> Funkcija <code>print_matrix_summary</code></h2>
 <p>Sada cemo napisati jednostavnu funkciju koja ce nase zakljucke iz funkcije <code>matrix_summary</code> napisati kao kratak opis matrice. Neki primeri koje bismo ocekivali:</p>
 <blockquote>
 <p>“m by n matrix of rank r”
@@ -312,153 +316,153 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 “n by n square, singular matrix of rank 7”</p>
 </blockquote>
 <p>Definisimo prvo funkciju, primace argument <code>mat</code> koji predstavlja matricu</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1">print_matrix_summary &lt;-<span class="st"> </span><span class="cf">function</span>(mat) { <span class="co"># ...</span></a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1">print_matrix_summary &lt;-<span class="st"> </span><span class="cf">function</span>(mat) { <span class="co"># ...</span></a></code></pre></div>
 <p>Ucitacemo biblioteku <code>glue</code> koju cemo koristiti za pravljenje poruke.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">  <span class="kw">library</span>(glue)</a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1">  <span class="kw">library</span>(glue)</a></code></pre></div>
 <p>Ucitacemo rezultat <code>matrix_summary</code> funkcije, na osnovu kog cemo praviti sazeti opis matrice.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" data-line-number="1">  mat_summary &lt;-<span class="st"> </span><span class="kw">matrix_summary</span>(mat)</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1">  mat_summary &lt;-<span class="st"> </span><span class="kw">matrix_summary</span>(mat)</a></code></pre></div>
 <p>Imamo dva glavna slucaja - kvadratne i nekvadratne matrice.</p>
 <p>Ako matrica nije kvadratna, nemamo neki poseban rezultat, vec samo znamo dimenziju i rang, pa cemo samo to istampati</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1"><span class="co"># ako nije kvadratna...</span></a>
-<a class="sourceLine" id="cb159-2" data-line-number="2">  <span class="cf">if</span> (<span class="op">!</span>mat_summary<span class="op">$</span>is_square) {</a>
-<a class="sourceLine" id="cb159-3" data-line-number="3">    <span class="co"># ... istampaj...</span></a>
-<a class="sourceLine" id="cb159-4" data-line-number="4">      <span class="kw">print</span>(</a>
-<a class="sourceLine" id="cb159-5" data-line-number="5">        <span class="co"># ... poruku koja je oblika &quot;m by n matrix of rank r&quot;</span></a>
-<a class="sourceLine" id="cb159-6" data-line-number="6">        <span class="co"># funkcija glue dopusta koriscenje vrednosti promenljivih ako se pisu</span></a>
-<a class="sourceLine" id="cb159-7" data-line-number="7">        <span class="co"># unutar zagrada { } i on ce zameniti taj izraz njegovom vrednoscu.</span></a>
-<a class="sourceLine" id="cb159-8" data-line-number="8">        <span class="kw">glue</span>(<span class="st">&quot;{dim(mat)[1]} by {dim(mat)[2]} matrix of rank {mat_summary$rank}&quot;</span>)</a>
-<a class="sourceLine" id="cb159-9" data-line-number="9">      )</a>
-<a class="sourceLine" id="cb159-10" data-line-number="10">  }</a></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="co"># ako nije kvadratna...</span></a>
+<a class="sourceLine" id="cb178-2" data-line-number="2">  <span class="cf">if</span> (<span class="op">!</span>mat_summary<span class="op">$</span>is_square) {</a>
+<a class="sourceLine" id="cb178-3" data-line-number="3">    <span class="co"># ... istampaj...</span></a>
+<a class="sourceLine" id="cb178-4" data-line-number="4">      <span class="kw">print</span>(</a>
+<a class="sourceLine" id="cb178-5" data-line-number="5">        <span class="co"># ... poruku koja je oblika &quot;m by n matrix of rank r&quot;</span></a>
+<a class="sourceLine" id="cb178-6" data-line-number="6">        <span class="co"># funkcija glue dopusta koriscenje vrednosti promenljivih ako se pisu</span></a>
+<a class="sourceLine" id="cb178-7" data-line-number="7">        <span class="co"># unutar zagrada { } i on ce zameniti taj izraz njegovom vrednoscu.</span></a>
+<a class="sourceLine" id="cb178-8" data-line-number="8">        <span class="kw">glue</span>(<span class="st">&quot;{dim(mat)[1]} by {dim(mat)[2]} matrix of rank {mat_summary$rank}&quot;</span>)</a>
+<a class="sourceLine" id="cb178-9" data-line-number="9">      )</a>
+<a class="sourceLine" id="cb178-10" data-line-number="10">  }</a></code></pre></div>
 <p>Ako je matrica kvadratna, onda imamo nekoliko svojstava koje zelimo da proverimo i da ispisemo. String koji cemo da ispisemo cemo praviti nadovezivanjem svakog svojstva jedno po jedno, pocevsi od praznog stringa.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1">  <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb160-2" data-line-number="2">    <span class="co"># string koji sadrzi svojstva matrice cemo inicijalizovati kao prazan</span></a>
-<a class="sourceLine" id="cb160-3" data-line-number="3">    properties &lt;-<span class="st"> &quot;&quot;</span></a>
-<a class="sourceLine" id="cb160-4" data-line-number="4">    <span class="co"># ako je matrica simetricna, dodacemo string &quot;, symmetric&quot; na string</span></a>
-<a class="sourceLine" id="cb160-5" data-line-number="5">    <span class="co"># properties</span></a>
-<a class="sourceLine" id="cb160-6" data-line-number="6">    <span class="cf">if</span> (mat_summary<span class="op">$</span>is_symmetric)</a>
-<a class="sourceLine" id="cb160-7" data-line-number="7">      properties &lt;-<span class="st"> </span><span class="kw">glue</span>(properties, <span class="st">&quot;, symmetric&quot;</span>)</a>
-<a class="sourceLine" id="cb160-8" data-line-number="8">    <span class="co"># ako je matrica dijagonalna, dodajemo string &quot;, diagonal&quot; na string</span></a>
-<a class="sourceLine" id="cb160-9" data-line-number="9">    <span class="co"># properties (kao rezultat dobijamo &quot;, symmetric, diagonal&quot;)</span></a>
-<a class="sourceLine" id="cb160-10" data-line-number="10">    <span class="cf">if</span> (mat_summary<span class="op">$</span>is_diagonal) </a>
-<a class="sourceLine" id="cb160-11" data-line-number="11">      properties &lt;-<span class="st"> </span><span class="kw">glue</span>(properties, <span class="st">&quot;, diagonal&quot;</span>)</a>
-<a class="sourceLine" id="cb160-12" data-line-number="12">    </a>
-<a class="sourceLine" id="cb160-13" data-line-number="13">    <span class="co"># konacno, dodajemo string &quot;, singular&quot; ako je matrica singularna</span></a>
-<a class="sourceLine" id="cb160-14" data-line-number="14">    <span class="co"># (nema inverz) ili string &quot;, nonsingular&quot; ako matrica nije singularna.</span></a>
-<a class="sourceLine" id="cb160-15" data-line-number="15">    properties &lt;-<span class="st"> </span><span class="kw">glue</span>(properties, </a>
-<a class="sourceLine" id="cb160-16" data-line-number="16">                       <span class="kw">ifelse</span>(mat_summary<span class="op">$</span>is_singular,</a>
-<a class="sourceLine" id="cb160-17" data-line-number="17">                              <span class="st">&quot;, singular&quot;</span>,</a>
-<a class="sourceLine" id="cb160-18" data-line-number="18">                              <span class="st">&quot;, nonsingular&quot;</span>))</a>
-<a class="sourceLine" id="cb160-19" data-line-number="19">    <span class="co"># properties string sada ima oblik slican ovom:</span></a>
-<a class="sourceLine" id="cb160-20" data-line-number="20">    <span class="co"># &quot;, symmetric, diagonal, nonsingular&quot; i ideja je da ga nadovezemo na string</span></a>
-<a class="sourceLine" id="cb160-21" data-line-number="21">    <span class="co"># &quot;m by n square&quot;, i  na rezultat dodamo &quot; matrix of rank r&quot;, cime bi kao </span></a>
-<a class="sourceLine" id="cb160-22" data-line-number="22">    <span class="co"># rezultat dobili string tipa:</span></a>
-<a class="sourceLine" id="cb160-23" data-line-number="23">    <span class="co"># &quot;m by n square&quot;+&quot;, symmetric, diagonal, nonsingular&quot;+&quot; matrix of rank r&quot; =</span></a>
-<a class="sourceLine" id="cb160-24" data-line-number="24">    <span class="co"># &quot;m by n square, symmetric, diagonal, nonsingular matrix of rank r&quot;</span></a>
-<a class="sourceLine" id="cb160-25" data-line-number="25">    </a>
-<a class="sourceLine" id="cb160-26" data-line-number="26">    <span class="kw">print</span>(</a>
-<a class="sourceLine" id="cb160-27" data-line-number="27">      <span class="co"># funkcija glue po default-u nadovezuje argumente koji su joj prosledjeni.</span></a>
-<a class="sourceLine" id="cb160-28" data-line-number="28">      <span class="kw">glue</span>(</a>
-<a class="sourceLine" id="cb160-29" data-line-number="29">        <span class="st">&quot;{dim(mat)[1]} by {dim(mat)[2]} square{properties}&quot;</span>,</a>
-<a class="sourceLine" id="cb160-30" data-line-number="30">        <span class="st">&quot; matrix of rank {mat_summary$rank}&quot;</span></a>
-<a class="sourceLine" id="cb160-31" data-line-number="31">      )</a>
-<a class="sourceLine" id="cb160-32" data-line-number="32">    )</a>
-<a class="sourceLine" id="cb160-33" data-line-number="33">  }</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1">  <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb179-2" data-line-number="2">    <span class="co"># string koji sadrzi svojstva matrice cemo inicijalizovati kao prazan</span></a>
+<a class="sourceLine" id="cb179-3" data-line-number="3">    properties &lt;-<span class="st"> &quot;&quot;</span></a>
+<a class="sourceLine" id="cb179-4" data-line-number="4">    <span class="co"># ako je matrica simetricna, dodacemo string &quot;, symmetric&quot; na string</span></a>
+<a class="sourceLine" id="cb179-5" data-line-number="5">    <span class="co"># properties</span></a>
+<a class="sourceLine" id="cb179-6" data-line-number="6">    <span class="cf">if</span> (mat_summary<span class="op">$</span>is_symmetric)</a>
+<a class="sourceLine" id="cb179-7" data-line-number="7">      properties &lt;-<span class="st"> </span><span class="kw">glue</span>(properties, <span class="st">&quot;, symmetric&quot;</span>)</a>
+<a class="sourceLine" id="cb179-8" data-line-number="8">    <span class="co"># ako je matrica dijagonalna, dodajemo string &quot;, diagonal&quot; na string</span></a>
+<a class="sourceLine" id="cb179-9" data-line-number="9">    <span class="co"># properties (kao rezultat dobijamo &quot;, symmetric, diagonal&quot;)</span></a>
+<a class="sourceLine" id="cb179-10" data-line-number="10">    <span class="cf">if</span> (mat_summary<span class="op">$</span>is_diagonal) </a>
+<a class="sourceLine" id="cb179-11" data-line-number="11">      properties &lt;-<span class="st"> </span><span class="kw">glue</span>(properties, <span class="st">&quot;, diagonal&quot;</span>)</a>
+<a class="sourceLine" id="cb179-12" data-line-number="12">    </a>
+<a class="sourceLine" id="cb179-13" data-line-number="13">    <span class="co"># konacno, dodajemo string &quot;, singular&quot; ako je matrica singularna</span></a>
+<a class="sourceLine" id="cb179-14" data-line-number="14">    <span class="co"># (nema inverz) ili string &quot;, nonsingular&quot; ako matrica nije singularna.</span></a>
+<a class="sourceLine" id="cb179-15" data-line-number="15">    properties &lt;-<span class="st"> </span><span class="kw">glue</span>(properties, </a>
+<a class="sourceLine" id="cb179-16" data-line-number="16">                       <span class="kw">ifelse</span>(mat_summary<span class="op">$</span>is_singular,</a>
+<a class="sourceLine" id="cb179-17" data-line-number="17">                              <span class="st">&quot;, singular&quot;</span>,</a>
+<a class="sourceLine" id="cb179-18" data-line-number="18">                              <span class="st">&quot;, nonsingular&quot;</span>))</a>
+<a class="sourceLine" id="cb179-19" data-line-number="19">    <span class="co"># properties string sada ima oblik slican ovom:</span></a>
+<a class="sourceLine" id="cb179-20" data-line-number="20">    <span class="co"># &quot;, symmetric, diagonal, nonsingular&quot; i ideja je da ga nadovezemo na string</span></a>
+<a class="sourceLine" id="cb179-21" data-line-number="21">    <span class="co"># &quot;m by n square&quot;, i  na rezultat dodamo &quot; matrix of rank r&quot;, cime bi kao </span></a>
+<a class="sourceLine" id="cb179-22" data-line-number="22">    <span class="co"># rezultat dobili string tipa:</span></a>
+<a class="sourceLine" id="cb179-23" data-line-number="23">    <span class="co"># &quot;m by n square&quot;+&quot;, symmetric, diagonal, nonsingular&quot;+&quot; matrix of rank r&quot; =</span></a>
+<a class="sourceLine" id="cb179-24" data-line-number="24">    <span class="co"># &quot;m by n square, symmetric, diagonal, nonsingular matrix of rank r&quot;</span></a>
+<a class="sourceLine" id="cb179-25" data-line-number="25">    </a>
+<a class="sourceLine" id="cb179-26" data-line-number="26">    <span class="kw">print</span>(</a>
+<a class="sourceLine" id="cb179-27" data-line-number="27">      <span class="co"># funkcija glue po default-u nadovezuje argumente koji su joj prosledjeni.</span></a>
+<a class="sourceLine" id="cb179-28" data-line-number="28">      <span class="kw">glue</span>(</a>
+<a class="sourceLine" id="cb179-29" data-line-number="29">        <span class="st">&quot;{dim(mat)[1]} by {dim(mat)[2]} square{properties}&quot;</span>,</a>
+<a class="sourceLine" id="cb179-30" data-line-number="30">        <span class="st">&quot; matrix of rank {mat_summary$rank}&quot;</span></a>
+<a class="sourceLine" id="cb179-31" data-line-number="31">      )</a>
+<a class="sourceLine" id="cb179-32" data-line-number="32">    )</a>
+<a class="sourceLine" id="cb179-33" data-line-number="33">  }</a></code></pre></div>
 </div>
 <div id="celokupni-kod" class="section level2">
-<h2><span class="header-section-number">2.4</span> Celokupni kod</h2>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1"><span class="co"># Returns whether the given matrix is diagonal</span></a>
-<a class="sourceLine" id="cb161-2" data-line-number="2">is_diagonal &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
-<a class="sourceLine" id="cb161-3" data-line-number="3">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.matrix</span>(mat)) {</a>
-<a class="sourceLine" id="cb161-4" data-line-number="4">    <span class="kw">stop</span>(<span class="st">&quot;Not a matrix&quot;</span>)</a>
-<a class="sourceLine" id="cb161-5" data-line-number="5">  }</a>
-<a class="sourceLine" id="cb161-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb161-7" data-line-number="7">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(mat)) {</a>
-<a class="sourceLine" id="cb161-8" data-line-number="8">    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(mat)) {</a>
-<a class="sourceLine" id="cb161-9" data-line-number="9">      <span class="cf">if</span> (i <span class="op">!=</span><span class="st"> </span>j <span class="op">&amp;&amp;</span><span class="st"> </span>mat[i,j] <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb161-10" data-line-number="10">        <span class="kw">return</span>(<span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb161-11" data-line-number="11">    }</a>
-<a class="sourceLine" id="cb161-12" data-line-number="12">  }</a>
-<a class="sourceLine" id="cb161-13" data-line-number="13">  </a>
-<a class="sourceLine" id="cb161-14" data-line-number="14">  <span class="kw">return</span>(<span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb161-15" data-line-number="15">}</a>
-<a class="sourceLine" id="cb161-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb161-17" data-line-number="17">is_diagonal2 &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
-<a class="sourceLine" id="cb161-18" data-line-number="18">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.matrix</span>(mat)) {</a>
-<a class="sourceLine" id="cb161-19" data-line-number="19">    <span class="kw">stop</span>(<span class="st">&quot;Not a matrix&quot;</span>)</a>
-<a class="sourceLine" id="cb161-20" data-line-number="20">  }</a>
-<a class="sourceLine" id="cb161-21" data-line-number="21">  </a>
-<a class="sourceLine" id="cb161-22" data-line-number="22">  <span class="kw">all</span>(mat <span class="op">*</span><span class="st"> </span><span class="kw">diag</span>(<span class="kw">nrow</span>(mat)) <span class="op">==</span><span class="st"> </span>mat)</a>
-<a class="sourceLine" id="cb161-23" data-line-number="23">}</a>
-<a class="sourceLine" id="cb161-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb161-25" data-line-number="25"><span class="co"># Matrix summary</span></a>
-<a class="sourceLine" id="cb161-26" data-line-number="26"><span class="co"># Inputs: matrix mat</span></a>
-<a class="sourceLine" id="cb161-27" data-line-number="27"><span class="co"># Outputs: Basic properties od the matrix</span></a>
-<a class="sourceLine" id="cb161-28" data-line-number="28"><span class="co"># E.g. Square? Diagonal? Symmetric? Rank, dimensions,</span></a>
-<a class="sourceLine" id="cb161-29" data-line-number="29"><span class="co"># eigenvalues, inverse, Singular?, determinant</span></a>
-<a class="sourceLine" id="cb161-30" data-line-number="30">matrix_summary &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
-<a class="sourceLine" id="cb161-31" data-line-number="31">  output &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb161-32" data-line-number="32">  </a>
-<a class="sourceLine" id="cb161-33" data-line-number="33">  output<span class="op">$</span>matrix &lt;-<span class="st"> </span>mat</a>
-<a class="sourceLine" id="cb161-34" data-line-number="34">  </a>
-<a class="sourceLine" id="cb161-35" data-line-number="35">  output<span class="op">$</span>dimensions &lt;-<span class="st"> </span><span class="kw">dim</span>(mat)</a>
-<a class="sourceLine" id="cb161-36" data-line-number="36">  </a>
-<a class="sourceLine" id="cb161-37" data-line-number="37">  <span class="kw">library</span>(Matrix)</a>
-<a class="sourceLine" id="cb161-38" data-line-number="38">  output<span class="op">$</span>rank &lt;-<span class="st"> </span><span class="kw">rankMatrix</span>(mat)</a>
-<a class="sourceLine" id="cb161-39" data-line-number="39">  </a>
-<a class="sourceLine" id="cb161-40" data-line-number="40">  output<span class="op">$</span>is_square &lt;-<span class="st"> </span><span class="kw">diff</span>(<span class="kw">dim</span>(mat)) <span class="op">==</span><span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb161-41" data-line-number="41">  </a>
-<a class="sourceLine" id="cb161-42" data-line-number="42">  <span class="cf">if</span> (output<span class="op">$</span>is_square) {</a>
-<a class="sourceLine" id="cb161-43" data-line-number="43">    output<span class="op">$</span>is_singular &lt;-<span class="st"> </span><span class="op">!</span>(output<span class="op">$</span>rank <span class="op">==</span><span class="st"> </span><span class="kw">dim</span>(mat)[<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb161-44" data-line-number="44">    </a>
-<a class="sourceLine" id="cb161-45" data-line-number="45">    <span class="cf">if</span> (<span class="op">!</span>output<span class="op">$</span>is_singular) {</a>
-<a class="sourceLine" id="cb161-46" data-line-number="46">      output<span class="op">$</span>inverse &lt;-<span class="st"> </span><span class="kw">solve</span>(mat)</a>
-<a class="sourceLine" id="cb161-47" data-line-number="47">    }</a>
-<a class="sourceLine" id="cb161-48" data-line-number="48">    </a>
-<a class="sourceLine" id="cb161-49" data-line-number="49">    output<span class="op">$</span>determinant &lt;-<span class="st"> </span><span class="kw">det</span>(mat)</a>
-<a class="sourceLine" id="cb161-50" data-line-number="50">    </a>
-<a class="sourceLine" id="cb161-51" data-line-number="51">    output<span class="op">$</span>eigenvalues &lt;-<span class="st"> </span><span class="kw">eigen</span>(mat)<span class="op">$</span>values</a>
-<a class="sourceLine" id="cb161-52" data-line-number="52">    </a>
-<a class="sourceLine" id="cb161-53" data-line-number="53">    output<span class="op">$</span>is_symmetric &lt;-<span class="st"> </span><span class="kw">all</span>(mat <span class="op">==</span><span class="st"> </span><span class="kw">t</span>(mat))</a>
-<a class="sourceLine" id="cb161-54" data-line-number="54">    </a>
-<a class="sourceLine" id="cb161-55" data-line-number="55">    output<span class="op">$</span>is_diagonal &lt;-<span class="st"> </span><span class="kw">is_diagonal2</span>(mat)</a>
-<a class="sourceLine" id="cb161-56" data-line-number="56">  }</a>
-<a class="sourceLine" id="cb161-57" data-line-number="57">  </a>
-<a class="sourceLine" id="cb161-58" data-line-number="58">  <span class="kw">class</span>(output) &lt;-<span class="st"> &quot;matrixSummary&quot;</span></a>
-<a class="sourceLine" id="cb161-59" data-line-number="59">  </a>
-<a class="sourceLine" id="cb161-60" data-line-number="60">  <span class="kw">return</span>(output)</a>
-<a class="sourceLine" id="cb161-61" data-line-number="61">}</a>
-<a class="sourceLine" id="cb161-62" data-line-number="62"></a>
-<a class="sourceLine" id="cb161-63" data-line-number="63"><span class="co"># Prints out matrix description</span></a>
-<a class="sourceLine" id="cb161-64" data-line-number="64"><span class="co"># E.g. &quot;m by n matrix of rank r&quot;</span></a>
-<a class="sourceLine" id="cb161-65" data-line-number="65"><span class="co">#      &quot;n by n square, symmetric, nonsingular matrix of rank n&quot;</span></a>
-<a class="sourceLine" id="cb161-66" data-line-number="66"><span class="co">#      &quot;n by n square, singular matrix of rank 7&quot;</span></a>
-<a class="sourceLine" id="cb161-67" data-line-number="67">print_matrix_summary &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
-<a class="sourceLine" id="cb161-68" data-line-number="68">  <span class="kw">library</span>(glue)</a>
-<a class="sourceLine" id="cb161-69" data-line-number="69">  mat_summary &lt;-<span class="st"> </span><span class="kw">matrix_summary</span>(mat)</a>
-<a class="sourceLine" id="cb161-70" data-line-number="70">  </a>
-<a class="sourceLine" id="cb161-71" data-line-number="71">  <span class="cf">if</span> (<span class="op">!</span>mat_summary<span class="op">$</span>is_square) {</a>
-<a class="sourceLine" id="cb161-72" data-line-number="72">    <span class="kw">print</span>(</a>
-<a class="sourceLine" id="cb161-73" data-line-number="73">      <span class="kw">glue</span>(<span class="st">&quot;{dim(mat)[1]} by {dim(mat)[2]} matrix of rank {mat_summary$rank}&quot;</span>)</a>
-<a class="sourceLine" id="cb161-74" data-line-number="74">    )</a>
-<a class="sourceLine" id="cb161-75" data-line-number="75">  } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb161-76" data-line-number="76">    properties &lt;-<span class="st"> &quot;&quot;</span></a>
-<a class="sourceLine" id="cb161-77" data-line-number="77">    <span class="cf">if</span> (mat_summary<span class="op">$</span>is_symmetric)</a>
-<a class="sourceLine" id="cb161-78" data-line-number="78">      properties &lt;-<span class="st"> </span><span class="kw">glue</span>(properties, <span class="st">&quot;, symmetric&quot;</span>)</a>
-<a class="sourceLine" id="cb161-79" data-line-number="79">    <span class="cf">if</span> (mat_summary<span class="op">$</span>is_diagonal) </a>
-<a class="sourceLine" id="cb161-80" data-line-number="80">      properties &lt;-<span class="st"> </span><span class="kw">glue</span>(properties, <span class="st">&quot;, diagonal&quot;</span>)</a>
-<a class="sourceLine" id="cb161-81" data-line-number="81">    </a>
-<a class="sourceLine" id="cb161-82" data-line-number="82">    properties &lt;-<span class="st"> </span><span class="kw">glue</span>(properties, </a>
-<a class="sourceLine" id="cb161-83" data-line-number="83">                       <span class="kw">ifelse</span>(mat_summary<span class="op">$</span>is_singular,</a>
-<a class="sourceLine" id="cb161-84" data-line-number="84">                              <span class="st">&quot;, singular&quot;</span>,</a>
-<a class="sourceLine" id="cb161-85" data-line-number="85">                              <span class="st">&quot;, nonsingular&quot;</span>))</a>
-<a class="sourceLine" id="cb161-86" data-line-number="86">    <span class="kw">print</span>(</a>
-<a class="sourceLine" id="cb161-87" data-line-number="87">      <span class="kw">glue</span>(</a>
-<a class="sourceLine" id="cb161-88" data-line-number="88">        <span class="st">&quot;{dim(mat)[1]} by {dim(mat)[2]} square{properties}&quot;</span>,</a>
-<a class="sourceLine" id="cb161-89" data-line-number="89">        <span class="st">&quot; matrix of rank {mat_summary$rank}&quot;</span></a>
-<a class="sourceLine" id="cb161-90" data-line-number="90">      )</a>
-<a class="sourceLine" id="cb161-91" data-line-number="91">    )</a>
-<a class="sourceLine" id="cb161-92" data-line-number="92">  }</a>
-<a class="sourceLine" id="cb161-93" data-line-number="93">}</a></code></pre></div>
+<h2><span class="header-section-number">3.4</span> Celokupni kod</h2>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1"><span class="co"># Returns whether the given matrix is diagonal</span></a>
+<a class="sourceLine" id="cb180-2" data-line-number="2">is_diagonal &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
+<a class="sourceLine" id="cb180-3" data-line-number="3">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.matrix</span>(mat)) {</a>
+<a class="sourceLine" id="cb180-4" data-line-number="4">    <span class="kw">stop</span>(<span class="st">&quot;Not a matrix&quot;</span>)</a>
+<a class="sourceLine" id="cb180-5" data-line-number="5">  }</a>
+<a class="sourceLine" id="cb180-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb180-7" data-line-number="7">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(mat)) {</a>
+<a class="sourceLine" id="cb180-8" data-line-number="8">    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(mat)) {</a>
+<a class="sourceLine" id="cb180-9" data-line-number="9">      <span class="cf">if</span> (i <span class="op">!=</span><span class="st"> </span>j <span class="op">&amp;&amp;</span><span class="st"> </span>mat[i,j] <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb180-10" data-line-number="10">        <span class="kw">return</span>(<span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb180-11" data-line-number="11">    }</a>
+<a class="sourceLine" id="cb180-12" data-line-number="12">  }</a>
+<a class="sourceLine" id="cb180-13" data-line-number="13">  </a>
+<a class="sourceLine" id="cb180-14" data-line-number="14">  <span class="kw">return</span>(<span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb180-15" data-line-number="15">}</a>
+<a class="sourceLine" id="cb180-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb180-17" data-line-number="17">is_diagonal2 &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
+<a class="sourceLine" id="cb180-18" data-line-number="18">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.matrix</span>(mat)) {</a>
+<a class="sourceLine" id="cb180-19" data-line-number="19">    <span class="kw">stop</span>(<span class="st">&quot;Not a matrix&quot;</span>)</a>
+<a class="sourceLine" id="cb180-20" data-line-number="20">  }</a>
+<a class="sourceLine" id="cb180-21" data-line-number="21">  </a>
+<a class="sourceLine" id="cb180-22" data-line-number="22">  <span class="kw">all</span>(mat <span class="op">*</span><span class="st"> </span><span class="kw">diag</span>(<span class="kw">nrow</span>(mat)) <span class="op">==</span><span class="st"> </span>mat)</a>
+<a class="sourceLine" id="cb180-23" data-line-number="23">}</a>
+<a class="sourceLine" id="cb180-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb180-25" data-line-number="25"><span class="co"># Matrix summary</span></a>
+<a class="sourceLine" id="cb180-26" data-line-number="26"><span class="co"># Inputs: matrix mat</span></a>
+<a class="sourceLine" id="cb180-27" data-line-number="27"><span class="co"># Outputs: Basic properties od the matrix</span></a>
+<a class="sourceLine" id="cb180-28" data-line-number="28"><span class="co"># E.g. Square? Diagonal? Symmetric? Rank, dimensions,</span></a>
+<a class="sourceLine" id="cb180-29" data-line-number="29"><span class="co"># eigenvalues, inverse, Singular?, determinant</span></a>
+<a class="sourceLine" id="cb180-30" data-line-number="30">matrix_summary &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
+<a class="sourceLine" id="cb180-31" data-line-number="31">  output &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb180-32" data-line-number="32">  </a>
+<a class="sourceLine" id="cb180-33" data-line-number="33">  output<span class="op">$</span>matrix &lt;-<span class="st"> </span>mat</a>
+<a class="sourceLine" id="cb180-34" data-line-number="34">  </a>
+<a class="sourceLine" id="cb180-35" data-line-number="35">  output<span class="op">$</span>dimensions &lt;-<span class="st"> </span><span class="kw">dim</span>(mat)</a>
+<a class="sourceLine" id="cb180-36" data-line-number="36">  </a>
+<a class="sourceLine" id="cb180-37" data-line-number="37">  <span class="kw">library</span>(Matrix)</a>
+<a class="sourceLine" id="cb180-38" data-line-number="38">  output<span class="op">$</span>rank &lt;-<span class="st"> </span><span class="kw">rankMatrix</span>(mat)</a>
+<a class="sourceLine" id="cb180-39" data-line-number="39">  </a>
+<a class="sourceLine" id="cb180-40" data-line-number="40">  output<span class="op">$</span>is_square &lt;-<span class="st"> </span><span class="kw">diff</span>(<span class="kw">dim</span>(mat)) <span class="op">==</span><span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb180-41" data-line-number="41">  </a>
+<a class="sourceLine" id="cb180-42" data-line-number="42">  <span class="cf">if</span> (output<span class="op">$</span>is_square) {</a>
+<a class="sourceLine" id="cb180-43" data-line-number="43">    output<span class="op">$</span>is_singular &lt;-<span class="st"> </span><span class="op">!</span>(output<span class="op">$</span>rank <span class="op">==</span><span class="st"> </span><span class="kw">dim</span>(mat)[<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb180-44" data-line-number="44">    </a>
+<a class="sourceLine" id="cb180-45" data-line-number="45">    <span class="cf">if</span> (<span class="op">!</span>output<span class="op">$</span>is_singular) {</a>
+<a class="sourceLine" id="cb180-46" data-line-number="46">      output<span class="op">$</span>inverse &lt;-<span class="st"> </span><span class="kw">solve</span>(mat)</a>
+<a class="sourceLine" id="cb180-47" data-line-number="47">    }</a>
+<a class="sourceLine" id="cb180-48" data-line-number="48">    </a>
+<a class="sourceLine" id="cb180-49" data-line-number="49">    output<span class="op">$</span>determinant &lt;-<span class="st"> </span><span class="kw">det</span>(mat)</a>
+<a class="sourceLine" id="cb180-50" data-line-number="50">    </a>
+<a class="sourceLine" id="cb180-51" data-line-number="51">    output<span class="op">$</span>eigenvalues &lt;-<span class="st"> </span><span class="kw">eigen</span>(mat)<span class="op">$</span>values</a>
+<a class="sourceLine" id="cb180-52" data-line-number="52">    </a>
+<a class="sourceLine" id="cb180-53" data-line-number="53">    output<span class="op">$</span>is_symmetric &lt;-<span class="st"> </span><span class="kw">all</span>(mat <span class="op">==</span><span class="st"> </span><span class="kw">t</span>(mat))</a>
+<a class="sourceLine" id="cb180-54" data-line-number="54">    </a>
+<a class="sourceLine" id="cb180-55" data-line-number="55">    output<span class="op">$</span>is_diagonal &lt;-<span class="st"> </span><span class="kw">is_diagonal2</span>(mat)</a>
+<a class="sourceLine" id="cb180-56" data-line-number="56">  }</a>
+<a class="sourceLine" id="cb180-57" data-line-number="57">  </a>
+<a class="sourceLine" id="cb180-58" data-line-number="58">  <span class="kw">class</span>(output) &lt;-<span class="st"> &quot;matrixSummary&quot;</span></a>
+<a class="sourceLine" id="cb180-59" data-line-number="59">  </a>
+<a class="sourceLine" id="cb180-60" data-line-number="60">  <span class="kw">return</span>(output)</a>
+<a class="sourceLine" id="cb180-61" data-line-number="61">}</a>
+<a class="sourceLine" id="cb180-62" data-line-number="62"></a>
+<a class="sourceLine" id="cb180-63" data-line-number="63"><span class="co"># Prints out matrix description</span></a>
+<a class="sourceLine" id="cb180-64" data-line-number="64"><span class="co"># E.g. &quot;m by n matrix of rank r&quot;</span></a>
+<a class="sourceLine" id="cb180-65" data-line-number="65"><span class="co">#      &quot;n by n square, symmetric, nonsingular matrix of rank n&quot;</span></a>
+<a class="sourceLine" id="cb180-66" data-line-number="66"><span class="co">#      &quot;n by n square, singular matrix of rank 7&quot;</span></a>
+<a class="sourceLine" id="cb180-67" data-line-number="67">print_matrix_summary &lt;-<span class="st"> </span><span class="cf">function</span>(mat) {</a>
+<a class="sourceLine" id="cb180-68" data-line-number="68">  <span class="kw">library</span>(glue)</a>
+<a class="sourceLine" id="cb180-69" data-line-number="69">  mat_summary &lt;-<span class="st"> </span><span class="kw">matrix_summary</span>(mat)</a>
+<a class="sourceLine" id="cb180-70" data-line-number="70">  </a>
+<a class="sourceLine" id="cb180-71" data-line-number="71">  <span class="cf">if</span> (<span class="op">!</span>mat_summary<span class="op">$</span>is_square) {</a>
+<a class="sourceLine" id="cb180-72" data-line-number="72">    <span class="kw">print</span>(</a>
+<a class="sourceLine" id="cb180-73" data-line-number="73">      <span class="kw">glue</span>(<span class="st">&quot;{dim(mat)[1]} by {dim(mat)[2]} matrix of rank {mat_summary$rank}&quot;</span>)</a>
+<a class="sourceLine" id="cb180-74" data-line-number="74">    )</a>
+<a class="sourceLine" id="cb180-75" data-line-number="75">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb180-76" data-line-number="76">    properties &lt;-<span class="st"> &quot;&quot;</span></a>
+<a class="sourceLine" id="cb180-77" data-line-number="77">    <span class="cf">if</span> (mat_summary<span class="op">$</span>is_symmetric)</a>
+<a class="sourceLine" id="cb180-78" data-line-number="78">      properties &lt;-<span class="st"> </span><span class="kw">glue</span>(properties, <span class="st">&quot;, symmetric&quot;</span>)</a>
+<a class="sourceLine" id="cb180-79" data-line-number="79">    <span class="cf">if</span> (mat_summary<span class="op">$</span>is_diagonal) </a>
+<a class="sourceLine" id="cb180-80" data-line-number="80">      properties &lt;-<span class="st"> </span><span class="kw">glue</span>(properties, <span class="st">&quot;, diagonal&quot;</span>)</a>
+<a class="sourceLine" id="cb180-81" data-line-number="81">    </a>
+<a class="sourceLine" id="cb180-82" data-line-number="82">    properties &lt;-<span class="st"> </span><span class="kw">glue</span>(properties, </a>
+<a class="sourceLine" id="cb180-83" data-line-number="83">                       <span class="kw">ifelse</span>(mat_summary<span class="op">$</span>is_singular,</a>
+<a class="sourceLine" id="cb180-84" data-line-number="84">                              <span class="st">&quot;, singular&quot;</span>,</a>
+<a class="sourceLine" id="cb180-85" data-line-number="85">                              <span class="st">&quot;, nonsingular&quot;</span>))</a>
+<a class="sourceLine" id="cb180-86" data-line-number="86">    <span class="kw">print</span>(</a>
+<a class="sourceLine" id="cb180-87" data-line-number="87">      <span class="kw">glue</span>(</a>
+<a class="sourceLine" id="cb180-88" data-line-number="88">        <span class="st">&quot;{dim(mat)[1]} by {dim(mat)[2]} square{properties}&quot;</span>,</a>
+<a class="sourceLine" id="cb180-89" data-line-number="89">        <span class="st">&quot; matrix of rank {mat_summary$rank}&quot;</span></a>
+<a class="sourceLine" id="cb180-90" data-line-number="90">      )</a>
+<a class="sourceLine" id="cb180-91" data-line-number="91">    )</a>
+<a class="sourceLine" id="cb180-92" data-line-number="92">  }</a>
+<a class="sourceLine" id="cb180-93" data-line-number="93">}</a></code></pre></div>
 
 </div>
 </div>
@@ -467,7 +471,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="01-uvod.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="02-generisanje.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
