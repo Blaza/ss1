@@ -1,0 +1,51 @@
+# `*apply` funkcije
+
+Upoznacemo se u ovom poglavlju sa `*apply` familijom funkcija, i to: `apply`, `sapply` i `lapply` funkcijama, koje cine osnovu funkcionalnog programiranja u R-u. U pitanju su funkcije koje sluze za preslikavanje elemenata vektora/matrica/listi u nove vektore/matrice/liste primenom jedne iste funkcije na svaki element.
+
+Na primer, najjednostavnija od njih, funkcija `sapply` se poziva ovako:
+`sapply(v, f)`, gde je `v` vektor/lista/matrica, a `f` funkcija koju treba primeniti na svaki element od `v`. Dakle dobijamo preslikavanje:
+$$v = (v_1, v_2, \dots, v_n)\stackrel{sapply}{\rightarrow} (f(v_1), f(v_2), \dots, f(v_n)).$$
+
+## Primer `sapply` funkcije
+
+Kao sto rekosmo, `sapply` primenjuje datu funkciju na svaki element datog vektora/liste/matrice i vraca rezultujuci vektor. Treba napomenuti da uvek pokusava da kao rezultat vrati vektor, a ukoliko to nije moguce, vraca listu.
+
+Kao primer koriscenja `sapply` vraticemo se na nas generator metodom inverzne transformacije.
+
+
+```{r}
+generator <- function(n, cdf, support) {
+  # inicijalizujemo uzorak kao prazan vektor od n elemenata
+  sample <- numeric(n)
+  # generisemo n brojeva iz uniformne raspodele
+  u <- runif(n)
+  
+  # za svaki od brojeva u_i primenimo inverz funkcije raspodele
+  for (i in 1:n) {
+    sample[i] <- inv(cdf, u[i], support)
+  }
+  # vracamo uzorak
+  return(sample)
+}
+```
+
+Vidimo da je ceo kod u generatoru zasnovan na tome da generisemo $n$ brojeva iz uniformne raspodele, pa na svaki od njih primenimo funkciju `function(u) inv(cdf, u, support)` (`u[i]` zamenjeno sa `u`). Ovo je bas ono sto ocekujemo od `sapply` funkcije! Stoga promenimo kod generatora da to iskoristi.
+
+```{r}
+generator <- function(n, cdf, support) {
+  # generisemo n brojeva iz uniformne raspodele
+  u <- runif(n)
+  
+  # na svaki element iz u primenimo inverznu transformaciju
+  sample <- sapply(u, function(u) inv(cdf, u, support))
+  return(sample)
+}
+```
+
+To je ceo kod! Sveli smo kod prakticno na 2 reda, jer smo izbacili tehnicke stvari poput inicijalizacije vektora koji vracamo, prolazenja kroz petlju i popunjavanja rezultujuceg vektora clan po clan. Ostao je kod koji sadrzi samo sustinu onoga sto hocemo da uradimo:
+
+1. uzmemo uzorak iz uniformne raspodele (`u <- runif(n)`)
+1. Svaki element uzorka transformisemo inverznom transformacijom (`sapply(u, function(u) inv(cdf, u, support))`)
+
+Nista vise od toga nije trazeno u matematickom zapisu metoda, pa nema potrebe ni da komplikujemo kod.
+Upravo to je (pored brzine i nekih tehnickih stvari poput bolje otpornosti na greske od petlji) glavna prednost `*apply` funkcija naspram petlji -- kod cine mnogo citljivijim (nakon sto je korisnik upoznat sa ovim funkcijama, naravno).
