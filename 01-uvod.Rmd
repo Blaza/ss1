@@ -386,7 +386,7 @@ str(df)
 df
 ```
 
-Dva dataframe-a (koji imaju isi broj kolona) se mogu spojiti da dobijemo više kolona korišćenjem funkcije `cbind`.
+Dva dataframe-a (koji imaju isi broj vrsta) se mogu spojiti da dobijemo više kolona korišćenjem funkcije `cbind`.
 ```{r}
 df1 <- data.frame(kolona1 = c(1, 2, 3), kolona2 = c("prvi", "drugi", "treci"), stringsAsFactors = FALSE)
 df2 <- data.frame(kolona3 = c(4,5,6), kolona4 = c("prvi1", "drugi1", "treci1"), stringsAsFactors = FALSE)
