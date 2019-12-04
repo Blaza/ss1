@@ -457,7 +457,7 @@ Međutim ako hoćemo da direktno pristupimo članu liste koristimo <code>[[ ]]</
 ## 1       1    prvi
 ## 2       2   drugi
 ## 3       3   treci</code></pre>
-<p>Dva dataframe-a (koji imaju isi broj kolona) se mogu spojiti da dobijemo više kolona korišćenjem funkcije <code>cbind</code>.</p>
+<p>Dva dataframe-a (koji imaju isi broj vrsta) se mogu spojiti da dobijemo više kolona korišćenjem funkcije <code>cbind</code>.</p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1">df1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">kolona1 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="dt">kolona2 =</span> <span class="kw">c</span>(<span class="st">&quot;prvi&quot;</span>, <span class="st">&quot;drugi&quot;</span>, <span class="st">&quot;treci&quot;</span>), <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb133-2" data-line-number="2">df2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">kolona3 =</span> <span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="dt">kolona4 =</span> <span class="kw">c</span>(<span class="st">&quot;prvi1&quot;</span>, <span class="st">&quot;drugi1&quot;</span>, <span class="st">&quot;treci1&quot;</span>), <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb133-3" data-line-number="3">df3 &lt;-<span class="st"> </span><span class="kw">cbind</span>(df1, df2)</a>
