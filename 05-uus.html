@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Uvod u statistiku | Statistički softver 1</title>
+  <meta name="description" content="5 Uvod u statistiku | Statistički softver 1" />
+  <meta name="generator" content="bookdown 0.16.5 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Uvod u statistiku | Statistički softver 1" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Uvod u statistiku | Statistički softver 1" />
+  
+  
+  
+
+<meta name="author" content="Blagoje Ivanović" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="04-apply.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Predgovor</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-nego-li-počnemo"><i class="fa fa-check"></i>Pre nego li počnemo…</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#r-rstudio"><i class="fa fa-check"></i>R / Rstudio</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#github"><i class="fa fa-check"></i>Github</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="01-uvod.html"><a href="01-uvod.html"><i class="fa fa-check"></i><b>1</b> Početni koraci</a><ul>
+<li class="chapter" data-level="1.1" data-path="01-uvod.html"><a href="01-uvod.html#primitivni-tipovi"><i class="fa fa-check"></i><b>1.1</b> Primitivni tipovi</a></li>
+<li class="chapter" data-level="1.2" data-path="01-uvod.html"><a href="01-uvod.html#vektori"><i class="fa fa-check"></i><b>1.2</b> Vektori</a></li>
+<li class="chapter" data-level="1.3" data-path="01-uvod.html"><a href="01-uvod.html#matrice"><i class="fa fa-check"></i><b>1.3</b> Matrice</a></li>
+<li class="chapter" data-level="1.4" data-path="01-uvod.html"><a href="01-uvod.html#liste"><i class="fa fa-check"></i><b>1.4</b> Liste</a></li>
+<li class="chapter" data-level="1.5" data-path="01-uvod.html"><a href="01-uvod.html#dataframe"><i class="fa fa-check"></i><b>1.5</b> Dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-generisanje.html"><a href="02-generisanje.html"><i class="fa fa-check"></i><b>2</b> Generisanje slucajnih velicina</a><ul>
+<li class="chapter" data-level="2.1" data-path="02-generisanje.html"><a href="02-generisanje.html#primeri-sa-teorije-verovatnoca"><i class="fa fa-check"></i><b>2.1</b> Primeri sa teorije verovatnoca</a></li>
+<li class="chapter" data-level="2.2" data-path="02-generisanje.html"><a href="02-generisanje.html#metoda-inverzne-transformacije"><i class="fa fa-check"></i><b>2.2</b> Metoda inverzne transformacije</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="03-matsum.html"><a href="03-matsum.html"><i class="fa fa-check"></i><b>3</b> Matrix summary</a><ul>
+<li class="chapter" data-level="3.1" data-path="03-matsum.html"><a href="03-matsum.html#implementacija-funkcije-matrix_summary"><i class="fa fa-check"></i><b>3.1</b> Implementacija funkcije <code>matrix_summary</code></a></li>
+<li class="chapter" data-level="3.2" data-path="03-matsum.html"><a href="03-matsum.html#provera-dijagonalnosti"><i class="fa fa-check"></i><b>3.2</b> Provera dijagonalnosti</a></li>
+<li class="chapter" data-level="3.3" data-path="03-matsum.html"><a href="03-matsum.html#funkcija-print_matrix_summary"><i class="fa fa-check"></i><b>3.3</b> Funkcija <code>print_matrix_summary</code></a></li>
+<li class="chapter" data-level="3.4" data-path="03-matsum.html"><a href="03-matsum.html#celokupni-kod"><i class="fa fa-check"></i><b>3.4</b> Celokupni kod</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="04-apply.html"><a href="04-apply.html"><i class="fa fa-check"></i><b>4</b> <code>*apply</code> funkcije</a><ul>
+<li class="chapter" data-level="4.1" data-path="04-apply.html"><a href="04-apply.html#funkcija-sapply"><i class="fa fa-check"></i><b>4.1</b> Funkcija <code>sapply</code></a></li>
+<li class="chapter" data-level="4.2" data-path="04-apply.html"><a href="04-apply.html#funkcija-lapply"><i class="fa fa-check"></i><b>4.2</b> Funkcija <code>lapply</code></a></li>
+<li class="chapter" data-level="4.3" data-path="04-apply.html"><a href="04-apply.html#funkcija-apply"><i class="fa fa-check"></i><b>4.3</b> Funkcija <code>apply</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="05-uus.html"><a href="05-uus.html"><i class="fa fa-check"></i><b>5</b> Uvod u statistiku</a><ul>
+<li class="chapter" data-level="5.1" data-path="05-uus.html"><a href="05-uus.html#intrervali-poverenja"><i class="fa fa-check"></i><b>5.1</b> Intrervali poverenja</a></li>
+<li class="chapter" data-level="5.2" data-path="05-uus.html"><a href="05-uus.html#studentov-t-test"><i class="fa fa-check"></i><b>5.2</b> Studentov t test</a></li>
+<li class="chapter" data-level="5.3" data-path="05-uus.html"><a href="05-uus.html#neparametarski-testovi"><i class="fa fa-check"></i><b>5.3</b> Neparametarski testovi</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistički softver 1</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="uvod-u-statistiku" class="section level1">
+<h1><span class="header-section-number">5</span> Uvod u statistiku</h1>
+<p>R je napravljen od strane statisticara, i namena mu je prevashodno bas primena statistickih metoda na racunaru. Stoga je vrlo pogodan za implementaciju raznih statistickih alata o kojima smo ucili na Uvodu u statistiku, a skoro svi su vec i implementirani u nekom od nebrojano mnogo paketa na CRAN repozitorijumu. Za vecinu metoda koje biste zeleli da primenite u statistici, verovatno postoji bar 1 paket koji to vec radi, pa mozete preskociti rucnu implementaciju. U ovom, poslednjem, poglavlju cemo proci kroz neke od statistickih testova koje smo prosli na kursu Uvod u statistiku.</p>
+<p>Pre svega, digresija… Ukoliko vam treba da formule iz pdf-ova pretvarate u LaTeX bez prekucavanja, koristite program <a href="https://mathpix.com/">MathPix</a>.</p>
+<div id="intrervali-poverenja" class="section level2">
+<h2><span class="header-section-number">5.1</span> Intrervali poverenja</h2>
+<p>Pre testova, podseticemo se intervala poverenja i implementirati ih u R-u. Ako pretpostavimo uzorak <span class="math inline">\(X_1, \dots, X_n\)</span> potice iz normalne raspodele <span class="math inline">\(\mathcal{N}(m, \sigma^2)\)</span>, znamo da vazi sledece
+<span class="math display">\[
+\frac{\overline{X} - m}{\widetilde{S}}\sqrt{n} \sim t_{n-1},
+\]</span>
+gde je <span class="math inline">\(\overline{X}\)</span> uzoracka sredina, a <span class="math inline">\(\widetilde{S}\)</span> (popravljena) uzoracka standardna devijacija.</p>
+<p>Imajuci u vidu ovu raspodelu, interval poverenja nivoa <span class="math inline">\(\beta\)</span> za parametar <span class="math inline">\(m\)</span> se lako izvodi i dobija se da je jednak
+<span class="math display">\[
+\left( \overline{X} - C\frac{\widetilde{S}}{\sqrt{n}},\quad \overline{X} + C\frac{\widetilde{S}}{\sqrt{n}}\right),
+\]</span>
+gde je <span class="math inline">\(C = F^{-1}_{t_{n-1}}(\frac{1+\beta}2)\)</span>.</p>
+<p>Ovakav interval se moze koristiti ne samo za normalnu raspodelu, vec primenu nalazi i za druge raspodele kada je uzorak jako veliki, zbog efekta centralne granicne teoreme. Naravno, u tom slucaju trazi se interval poverenja za <strong>ocekivanje</strong> date raspodele, sto je u slucaju normalne bas <span class="math inline">\(m\)</span>.</p>
+<p>Implementiracemo sad funkciju koja za dati uzorak vraca ovaj interval poverenja, pa se malo pozabaviti interpretacijom.</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb253-1" data-line-number="1">confidence_interval &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">beta =</span> <span class="fl">0.95</span>) {</a>
+<a class="sourceLine" id="cb253-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="kw">length</span>(x) <span class="co"># obim uzorka</span></a>
+<a class="sourceLine" id="cb253-3" data-line-number="3">  <span class="co"># iz formule vrednost C - kvantil t raspodele</span></a>
+<a class="sourceLine" id="cb253-4" data-line-number="4">  C &lt;-<span class="st"> </span><span class="kw">qt</span>((<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>beta)<span class="op">/</span><span class="dv">2</span>, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb253-5" data-line-number="5">  </a>
+<a class="sourceLine" id="cb253-6" data-line-number="6">  <span class="co"># vracamo interval poverenja</span></a>
+<a class="sourceLine" id="cb253-7" data-line-number="7">  <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb253-8" data-line-number="8">    <span class="kw">mean</span>(x) <span class="op">-</span><span class="st"> </span>C <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(x) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n),</a>
+<a class="sourceLine" id="cb253-9" data-line-number="9">    <span class="kw">mean</span>(x) <span class="op">+</span><span class="st"> </span>C <span class="op">*</span><span class="st"> </span><span class="kw">sd</span>(x) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n)</a>
+<a class="sourceLine" id="cb253-10" data-line-number="10">  )</a>
+<a class="sourceLine" id="cb253-11" data-line-number="11">}</a></code></pre></div>
+<p>Primer upotrebe:</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb254-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb254-3" data-line-number="3"><span class="kw">confidence_interval</span>(x, <span class="fl">0.95</span>)</a></code></pre></div>
+<pre><code>## [1] -0.1605538  0.3993458</code></pre>
+<p>Obratimo paznju na trenutak na interpretaciju nivoa poverenja <span class="math inline">\(\beta\)</span>. To je verovatnoca da dobijeni interval poverenja obuhvati stvarnu vrednost parametra <span class="math inline">\(m\)</span>. To znaci (ako je <span class="math inline">\(\beta=0.95\)</span>) da ako mnogo puta izvucemo uzorak, u <span class="math inline">\(95%\)</span> slucajeva ce interval poverenja sadrzati vrednost <span class="math inline">\(m\)</span>. Ispitajmo to:</p>
+<p>Prvo generisemo 10000 uzoraka i odgovarajucih intervala poverenja</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1">intervals &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="fl">1e4</span>, {</a>
+<a class="sourceLine" id="cb256-2" data-line-number="2">  x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb256-3" data-line-number="3">  <span class="kw">confidence_interval</span>(x, <span class="fl">0.95</span>)</a>
+<a class="sourceLine" id="cb256-4" data-line-number="4">})</a>
+<a class="sourceLine" id="cb256-5" data-line-number="5">intervals[, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
+<pre><code>##            [,1]       [,2]       [,3]       [,4]       [,5]
+## [1,] -0.1358313 -0.1580114 -0.4081886 -0.2097923 -0.3424593
+## [2,]  0.3367278  0.3926643  0.1032177  0.3635308  0.2798359</code></pre>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" data-line-number="1"><span class="kw">dim</span>(intervals)</a></code></pre></div>
+<pre><code>## [1]     2 10000</code></pre>
+<p>Kao rezultat poziva <code>replicate</code> dobijamo matricu sa 2 vrste i 10000 kolona, gde svaka kolona predstavlja jedan interval poverenja.</p>
+<p>Pogledajmo koliko od tih intervala poverenja sadrzi nulu, koja je bila stvarna vrednost parametra <span class="math inline">\(m\)</span> (<code>rnorm</code> po default-u uzima <span class="math inline">\(m=0, \sigma=1\)</span>):</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" data-line-number="1"><span class="co"># pravimo logicki vektor koji oznacava da li interval sadrzi nulu</span></a>
+<a class="sourceLine" id="cb260-2" data-line-number="2">contains_zero &lt;-<span class="st"> </span><span class="kw">apply</span>(intervals, <span class="dv">2</span>, <span class="cf">function</span>(interval) {</a>
+<a class="sourceLine" id="cb260-3" data-line-number="3">  interval[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;&amp;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&lt;</span><span class="st"> </span>interval[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb260-4" data-line-number="4">})</a>
+<a class="sourceLine" id="cb260-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb260-6" data-line-number="6"><span class="co"># gledamo u koliko intervala je sadrzana nula</span></a>
+<a class="sourceLine" id="cb260-7" data-line-number="7"><span class="kw">mean</span>(contains_zero)</a></code></pre></div>
+<pre><code>## [1] 0.9491</code></pre>
+<p>Vidimo da je nula sadrzana u <span class="math inline">\(94.9%\)</span> intervala, sto je jako blizu trazenog nivoa poverenja od <span class="math inline">\(95%\)</span>.</p>
+<p>Rekli smo da se ovaj interval moze primeniti i na neke druge raspodele kad je uzorak veliki (<strong>za trazenje intervala poverenja za ocekivanje</strong>), pa mozemo i to probati, na primer na eksponencijalnoj raspodeli.</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" data-line-number="1"><span class="kw">mean</span>(<span class="kw">replicate</span>(<span class="fl">1e4</span>, {</a>
+<a class="sourceLine" id="cb262-2" data-line-number="2">  lambda =<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb262-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">1000</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb262-4" data-line-number="4">  interval &lt;-<span class="st"> </span><span class="kw">confidence_interval</span>(x, <span class="fl">0.95</span>)</a>
+<a class="sourceLine" id="cb262-5" data-line-number="5">  interval[<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>lambda <span class="op">&amp;&amp;</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>lambda <span class="op">&lt;</span><span class="st"> </span>interval[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb262-6" data-line-number="6">}))</a></code></pre></div>
+<pre><code>## [1] 0.9498</code></pre>
+<p>Opet nam je u <span class="math inline">\(94.9%\)</span> slucajeva stvarna vrednost ocekivanja <span class="math inline">\(\frac1\lambda = 1/2\)</span> upala u intervale poverenja.</p>
+</div>
+<div id="studentov-t-test" class="section level2">
+<h2><span class="header-section-number">5.2</span> Studentov t test</h2>
+<div id="slucaj-jednog-uzorka" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Slucaj jednog uzorka</h3>
+<p>Ako imamo uzorak iz normalne <span class="math inline">\(\mathcal{N}(m, \sigma^2\)</span> raspodele, mozemo testirati hipotezu <span class="math display">\[H_0: m = m_0,\]</span> naspram neke od alternativa oblika <span class="math display">\[H1: \begin{cases}m&lt; m_0\\m\neq m_0\\m &gt; m_0\end{cases}.\]</span> Za to mozemo da koristimo test statistiku <span class="math display">\[t= \frac{\overline{X} - m_0}{\widetilde{S}}\sqrt{n} \sim t_{n-1}.\]</span></p>
+<p>Kriticna oblast ovog testa, sa nivoom <span class="math inline">\(\alpha\)</span> je oblika (za odgovarajuce alternative)</p>
+<p><span class="math display">\[W = \begin{cases}\{t &lt; F^{-1}_{t_{n-1}}(\alpha)\}\\ \{ |t| &gt; F^{-1}_{t_{n-1}}(1-\frac\alpha2)\}\\\{t &gt; F^{-1}_{t_{n-1}}(1-\alpha)\}\end{cases}.\]</span></p>
+<p>Cesci nacin na koji se u statistickim paketima vrsi testiranje je nalazenje p vrednosti testa, pa poredjenje te vrednosti sa nivoom znacajnosti. P vrednst testa se ugubo moze opisati kao “kolicina dokaza za nultu hipotezu”, pa ukoliko je velika (<span class="math inline">\(p&gt;\alpha\)</span>), onda ne odbacujemo nultu hipotezu, a ako je <span class="math inline">\(p &lt; \alpha\)</span>, onda odbacujemo nultu hipotezu u korist alternativne. P vrednost mozemo da izracunamo (u dvostranoj nultoj hipotezi slicno za ostale) kao <span class="math display">\[p = P\{|t| &gt; t_0\},\]</span> gde je <span class="math inline">\(t_0\)</span> realizovana vrednost test statistike na osnovu uzorka. U slucaju <span class="math inline">\(t\)</span> testa, p vrednost ce biti jednaka
+<span class="math display">\[
+p = \begin{cases}F_{t_{n-1}}(t_0)\\ 2(1-F_{t_{n-1}}(|t_0|))\\ 1 - F_{t_{n-1}}(t_0)\end{cases},
+\]</span>
+za odgovarajuce alternativne hipoteze, redom.</p>
+<p>Implementiracemo ovaj test za jedan uzorak, pa cemo nadalje koristiti ugradjenu funkciju u R-u <code>t.test</code>.</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" data-line-number="1">pval_t_test &lt;-<span class="st"> </span><span class="cf">function</span>(x, m0, alternative){</a>
+<a class="sourceLine" id="cb264-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</a>
+<a class="sourceLine" id="cb264-3" data-line-number="3">  stat &lt;-<span class="st"> </span>(<span class="kw">mean</span>(x) <span class="op">-</span><span class="st"> </span>m0)<span class="op">/</span><span class="kw">sd</span>(x)<span class="op">*</span><span class="kw">sqrt</span>(n)</a>
+<a class="sourceLine" id="cb264-4" data-line-number="4">  </a>
+<a class="sourceLine" id="cb264-5" data-line-number="5">  <span class="cf">if</span>(alternative <span class="op">==</span><span class="st"> &quot;less&quot;</span>) {</a>
+<a class="sourceLine" id="cb264-6" data-line-number="6">    pval &lt;-<span class="st"> </span><span class="kw">pt</span>(stat, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb264-7" data-line-number="7">  } <span class="cf">else</span> <span class="cf">if</span>(alternative <span class="op">==</span><span class="st"> &quot;both&quot;</span>) {</a>
+<a class="sourceLine" id="cb264-8" data-line-number="8">    pval &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pt</span>(<span class="kw">abs</span>(stat), <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb264-9" data-line-number="9">  } <span class="cf">else</span> <span class="cf">if</span>(alternative <span class="op">==</span><span class="st"> &quot;greater&quot;</span>) {</a>
+<a class="sourceLine" id="cb264-10" data-line-number="10">    pval &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pt</span>(stat, <span class="dt">df =</span> n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb264-11" data-line-number="11">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb264-12" data-line-number="12">    <span class="kw">stop</span>(<span class="st">&quot;Unknown alternative&quot;</span>)</a>
+<a class="sourceLine" id="cb264-13" data-line-number="13">  }</a>
+<a class="sourceLine" id="cb264-14" data-line-number="14">  </a>
+<a class="sourceLine" id="cb264-15" data-line-number="15">  <span class="kw">return</span>(pval)</a>
+<a class="sourceLine" id="cb264-16" data-line-number="16">}</a></code></pre></div>
+<p>Ugradjena funkcija u R-u koja sprovodi <span class="math inline">\(t\)</span> test se naziva <code>t.test</code>. Uporedicemo rezultate nase i ugradjene funkcije:</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>, <span class="dv">1</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb265-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb265-3" data-line-number="3"><span class="kw">pval_t_test</span>(x, <span class="dv">1</span>, <span class="st">&quot;both&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 0.03838225</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" data-line-number="1"><span class="kw">t.test</span>(x, <span class="dt">mu=</span><span class="dv">1</span>, <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</a></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = -2.1281, df = 49, p-value = 0.03838
+## alternative hypothesis: true mean is not equal to 1
+## 95 percent confidence interval:
+##  -0.182027  0.966136
+## sample estimates:
+## mean of x 
+## 0.3920545</code></pre>
+<p>Ugradjena funkcija nam daje vise informacija od same p vrednosti, a p vrednost se poklapa u nasoj funkciji i ugradjenoj.</p>
+<p>Ugradjena funkcija nam daje i interval poverenja, pa mozemo i to proveriti:</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" data-line-number="1"><span class="kw">confidence_interval</span>(x, <span class="fl">0.95</span>)</a></code></pre></div>
+<pre><code>## [1] -0.182027  0.966136</code></pre>
+<p>Naravno, poklapaju se vrednosti.</p>
+<p>Pogledajmo kroz ugradjenu funkciju i moguce alternative</p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" data-line-number="1"><span class="co"># H1: m &lt; m_0</span></a>
+<a class="sourceLine" id="cb271-2" data-line-number="2"><span class="kw">t.test</span>(x, <span class="dt">mu=</span><span class="dv">1</span>, <span class="dt">alternative =</span> <span class="st">&quot;less&quot;</span>)</a></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = -2.1281, df = 49, p-value = 0.01919
+## alternative hypothesis: true mean is less than 1
+## 95 percent confidence interval:
+##   -Inf 0.871
+## sample estimates:
+## mean of x 
+## 0.3920545</code></pre>
+<p>ko testiramo <span class="math inline">\(H_1 : m &lt; m_0\)</span>, dobijamo vrlo visoku p vrednost, pa cemo da prihvatimo hipotezu <span class="math inline">\(H_0: m = 1\)</span>. Primetimo i da interval poverenja koji vrati ova funkcija u slucaju da gledamo jednostrani test je takodje jednostran – leva granica mu je <span class="math inline">\(-\infty\)</span>.</p>
+<p>Ako testiramo <span class="math inline">\(H_1 : m &gt; m_0\)</span> rezultat je slican</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" data-line-number="1"><span class="kw">t.test</span>(x, <span class="dt">mu=</span><span class="dv">1</span>, <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>)</a></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = -2.1281, df = 49, p-value = 0.9808
+## alternative hypothesis: true mean is greater than 1
+## 95 percent confidence interval:
+##  -0.08689089         Inf
+## sample estimates:
+## mean of x 
+## 0.3920545</code></pre>
+<p>Nadalje cemo samo koristiti ugradjene testove u R-u i necemo implementirati svoje.</p>
+</div>
+<div id="slucaj-dva-uzorka" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Slucaj dva uzorka</h3>
+<p>Ukoliko imamo dva nezavisna uzorka <span class="math inline">\(X_1,\dots,X_{n_1}\)</span> i <span class="math inline">\(Y_1,\dots, Y_{n_2}\)</span>, iz raspodela, redom, <span class="math inline">\(\mathcal{N}(m_1, \sigma_1)\)</span> i <span class="math inline">\(\mathcal{N}(m_2, \sigma_2)\)</span>, za testiranje hipoteze <span class="math display">\[H_0: m_1 = m_2\]</span> koristimo test statistiku
+<span class="math display">\[t=\frac{\overline{X}_{n_{1}}-\overline{Y}_{n_{2}}}{\sqrt{\frac{\widetilde{S}_{n_{1}}^{2}}{n_{1}}+\frac{\widetilde{S}_{n_{2}}^{2}}{n_{2}}}},\]</span> koja ima studentovu raspodelu pod <span class="math inline">\(H_0\)</span>.</p>
+<p>Alternativne hipoteze mogu biti kao u slucaju jednog uzorka (<span class="math inline">\(m_1&lt;m_2, m_1\neq m_2, m_1&gt;m_2\)</span>).</p>
+<p>Ovaj test se u R-u izvrsava dodajuci jos jedan uzorak u poziv <code>t.test</code>. Primer:</p>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb275-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">35</span>, <span class="dt">mean =</span> <span class="dv">2</span>, <span class="dt">sd =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb275-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb275-4" data-line-number="4"><span class="kw">t.test</span>(x, y)</a></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  x and y
+## t = -3.2342, df = 36.018, p-value = 0.002614
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -3.651159 -0.836842
+## sample estimates:
+## mean of x mean of y 
+## 0.1004483 2.3444487</code></pre>
+<p>Ovde dobijamo malu p vrednost (0.002), sto ukazuje na to da treba odbaciti nultu hipotezuu korist alternativne, koja je po default-u <span class="math inline">\(H_1:m_1 \neq m_2\)</span>, sto i pise u izlazu funkcije.</p>
+<p>Ako bismo testirali sa alternativom <span class="math inline">\(H_1:m_1 &gt; m_2\)</span>…</p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" data-line-number="1"><span class="kw">t.test</span>(x, y, <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>)</a></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  x and y
+## t = -3.2342, df = 36.018, p-value = 0.9987
+## alternative hypothesis: true difference in means is greater than 0
+## 95 percent confidence interval:
+##  -3.415402       Inf
+## sample estimates:
+## mean of x mean of y 
+## 0.1004483 2.3444487</code></pre>
+<p>…dobijena je p vrednost 0.99 sto je jako veliko, pa ne bismo mogli da odbacimo nultu hipotezu! Primetimo, ne znaci da je nulta hipoteza tacna, nego na osnovu dobijenog uzorka, ne mozemo odbaciti nultu hipotezu u korist alternative.</p>
+</div>
+<div id="upareni-test" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> Upareni test</h3>
+<p>Ako obelezja <span class="math inline">\(X\)</span> i <span class="math inline">\(Y\)</span> nisu nezavisna, vec imamo uzorak parova <span class="math inline">\((X_1,Y_1),\dots,(X_n,Y_n)\)</span> testiranje hipoteze <span class="math inline">\(H_0: m_1 = m_2\)</span> se vrsi uparenim <span class="math inline">\(t\)</span> testom, koji je u R-u implementiran takodje u funkciji <code>t.test</code>, gde se samo doda argument <code>paired = TRUE</code>.</p>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>, <span class="dt">mean =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb279-2" data-line-number="2">y &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>, <span class="dt">sd =</span> <span class="fl">0.1</span>) <span class="co"># Y nije nezavisno od X nego je X + mali sum</span></a>
+<a class="sourceLine" id="cb279-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb279-4" data-line-number="4"><span class="kw">t.test</span>(x, y, <span class="dt">paired =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  x and y
+## t = 0.3173, df = 49, p-value = 0.7524
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.02659998  0.03657477
+## sample estimates:
+## mean of the differences 
+##             0.004987398</code></pre>
+<p>Kao rezultat imamo veliku p vrednost i ne odbacujemo nultu hipotezu.</p>
+</div>
+</div>
+<div id="neparametarski-testovi" class="section level2">
+<h2><span class="header-section-number">5.3</span> Neparametarski testovi</h2>
+<div id="vilkoksonov-test-zasnovan-na-rangovima-i-znakovima" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Vilkoksonov test zasnovan na rangovima i znakovima</h3>
+<p>Vilkoksonov test ima slicnu svrhu kao t test, ali pretpostavljamo da je raspodela obelezja <span class="math inline">\(X\)</span> simetricna i zelimo da
+testiramo <span class="math inline">\(H_0 : m = m_0\)</span>, bez pretpostavke normalnosti. Koristimo test statistiku <span class="math display">\[T=\sum_{i=1}^{n} r_{i} I\left\{X_{i}-m_{0} \geq 0\right\}\]</span>, gde su <span class="math inline">\(r_i\)</span> rangovi elemenata <span class="math inline">\(|X_i-m_0|\)</span> u uzorku <span class="math inline">\(\left|X_{1}-m_{0}\right|, \ldots,\left|X_{n}-m_{0}\right|\)</span>.</p>
+<p>U R-u je oovaj test implementiran u funkciji <code>wilcox.test</code>. Ova funkcija ima isti interfejs kao <code>t.test</code> (argumente koje prima i slicno).</p>
+<p>Proverimo test nekim uzorkom iz binomne raspodele <span class="math inline">\(\mathcal{B}(10, 0.3)\)</span>. Trebalo bi da bude ocekivanje <span class="math inline">\(3\)</span>.</p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">50</span>, <span class="dv">10</span>, <span class="fl">0.3</span>)</a>
+<a class="sourceLine" id="cb281-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb281-3" data-line-number="3"><span class="kw">wilcox.test</span>(x, <span class="dt">mu =</span> <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## Warning in wilcox.test.default(x, mu = 3): cannot compute exact p-value with
+## ties</code></pre>
+<pre><code>## Warning in wilcox.test.default(x, mu = 3): cannot compute exact p-value with
+## zeroes</code></pre>
+<pre><code>## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  x
+## V = 507.5, p-value = 0.3053
+## alternative hypothesis: true location is not equal to 3</code></pre>
+<p>Primenimo ga i na neki uzorak iz <code>t</code> raspodele, za npr. alternativu <span class="math inline">\(H_1:m&gt;0\)</span>.</p>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rt</span>(<span class="dv">20</span>, <span class="dt">df =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb285-2" data-line-number="2"><span class="kw">wilcox.test</span>(x, <span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">alternative =</span> <span class="st">&quot;greater&quot;</span>)</a></code></pre></div>
+<pre><code>## 
+##  Wilcoxon signed rank test
+## 
+## data:  x
+## V = 72, p-value = 0.8919
+## alternative hypothesis: true location is greater than 0</code></pre>
+<blockquote>
+<p>Dakle, ukoliko imamo pretpostavku o normalnoj raspodeli, koristimo <code>t.test</code>, a ukoliko nemamo, <code>wilcox.test</code> moze biti zadovoljavajuci.</p>
+</blockquote>
+<p>Kao i <code>t.test</code> i <code>wilcox.test</code> se moze primeniti na 2 uzorka (upareni i neupareni)</p>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb287-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb287-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">30</span>)</a>
+<a class="sourceLine" id="cb287-3" data-line-number="3"><span class="kw">wilcox.test</span>(x, y)</a></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  x and y
+## W = 832, p-value = 0.418
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+<div id="kolmogorovsmirnovljev-test-saglasnosti-sa-raspodelom" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Kolmogorov–Smirnovljev test saglasnosti sa raspodelom</h3>
+<p>Test Kolmogorov–Smirnova sluzi za testiranje da li se za neki uzorak <span class="math inline">\(X_1,\dots,X_n\)</span> moze reci da odgovara raspodeli sa funkcijom raspodele <span class="math inline">\(F_0\)</span>. Zasnovan je na test statistici
+<span class="math display">\[T=\sup _{x}\left|F_{n}(x)-F_{0}(x)\right|,\]</span> gde je <span class="math inline">\(F_n\)</span> empirijska funkcija raspodele uzorka.</p>
+<p>U R-u je implementiran kroz funkciju <code>ks.test</code>, a kao argumente prima uzorak, kao i funkciju raspodele (funkcije koje obicno pocinju sa <code>p*</code>, npr. <code>pnorm</code>, <code>pexp</code> itd.)</p>
+<p>Testirajmo da li kolona <code>speed</code> iz skupa podataka <code>cars</code> ima standardnu normalnu raspodelu:</p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" data-line-number="1">x &lt;-<span class="st"> </span>cars<span class="op">$</span>speed</a>
+<a class="sourceLine" id="cb289-2" data-line-number="2"><span class="kw">ks.test</span>(x, <span class="st">&quot;pnorm&quot;</span>)</a></code></pre></div>
+<pre><code>## Warning in ks.test(x, &quot;pnorm&quot;): ties should not be present for the Kolmogorov-
+## Smirnov test</code></pre>
+<pre><code>## 
+##  One-sample Kolmogorov-Smirnov test
+## 
+## data:  x
+## D = 0.99997, p-value &lt; 2.2e-16
+## alternative hypothesis: two-sided</code></pre>
+<p>p vrednost je prakticno nula, pa odbacujemo nultu hipotezu koja kaze da uzorak ima normalnu <span class="math inline">\(\mathcal{N}(0,1)\)</span> raspodelu.</p>
+<p>Mozemo da testiramo da li ima normalnu raspodelu <span class="math inline">\(\mathcal{N}(15,5)\)</span> (primetite promenjene parametre)</p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" data-line-number="1"><span class="kw">ks.test</span>(cars<span class="op">$</span>speed, <span class="cf">function</span>(x) <span class="kw">pnorm</span>(x, <span class="dv">15</span>, <span class="dv">5</span>))</a></code></pre></div>
+<pre><code>## Warning in ks.test(cars$speed, function(x) pnorm(x, 15, 5)): ties should not be
+## present for the Kolmogorov-Smirnov test</code></pre>
+<pre><code>## 
+##  One-sample Kolmogorov-Smirnov test
+## 
+## data:  cars$speed
+## D = 0.10575, p-value = 0.631
+## alternative hypothesis: two-sided</code></pre>
+<p>U ovom slucaju je p vrednost 0.6, sto je vece od <span class="math inline">\(\alpha=0.05\)</span>, pa ne odbacujemo hipotezu koja kaze da je uzorak <code>cars$speed</code> saglasan sa normalnom <span class="math inline">\(\mathcal{N}(15,5)\)</span> raspodelom.</p>
+<p>I ovaj test se moze primeniti na testiranje o saglasnosti raspodele dva uzorka, tj. da li 2 uzorka imaju istu raspodelu:</p>
+<p>Npr. ako imamo dva uzorka iz iste normalne raspodele, ocekujemo visoku p vrednost</p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb295-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb295-3" data-line-number="3"><span class="kw">ks.test</span>(x, y)</a></code></pre></div>
+<pre><code>## 
+##  Two-sample Kolmogorov-Smirnov test
+## 
+## data:  x and y
+## D = 0.165, p-value = 0.5286
+## alternative hypothesis: two-sided</code></pre>
+<p>A ako imamo uzorke iz razlicitih raspodela ocekujemo nisku p vrednost…</p>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb297-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">40</span>)</a>
+<a class="sourceLine" id="cb297-3" data-line-number="3"><span class="kw">ks.test</span>(x, y)</a></code></pre></div>
+<pre><code>## 
+##  Two-sample Kolmogorov-Smirnov test
+## 
+## data:  x and y
+## D = 0.56, p-value = 6.168e-07
+## alternative hypothesis: two-sided</code></pre>
+<p>…sto i dobijamo.</p>
+</div>
+<div id="chi2-test-nezavisnosti" class="section level3">
+<h3><span class="header-section-number">5.3.3</span> <span class="math inline">\(\chi^2\)</span> test nezavisnosti</h3>
+<p>Konacno, prikazacemo i upotrebu <span class="math inline">\(\chi^2\)</span> testa koji se koristi za testiranje nezavisnosti dva obelezja <span class="math inline">\(X\)</span> i <span class="math inline">\(Y\)</span>, koji je zasnovan na test statistici <span class="math display">\[T=\sum_{i j} \frac{\left(M_{i j}-n \hat{p}_{i j}\right)^{2}}{n \hat{p}_{i j}}.\]</span></p>
+<p>Koristicemo podatke <code>survey</code> iz paketa <code>MASS</code>.</p>
+<p>U ovom skupu postoje promenljive <code>Smoke</code> i <code>Exer</code> koje se ticu toga da li je student pusac i u kojoj meri, kao i o ucestalosti bavljenja fizickom aktivnoscu. Tabelu kontigencije vidimo i sledecoj tabeli (pozivom funkcije <code>table</code> pravimo tabelu kontigencije).</p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" data-line-number="1"><span class="kw">library</span>(MASS)</a>
+<a class="sourceLine" id="cb299-2" data-line-number="2"><span class="kw">table</span>(survey<span class="op">$</span>Smoke, survey<span class="op">$</span>Exer) </a></code></pre></div>
+<pre><code>##        
+##         Freq None Some
+##   Heavy    7    1    3
+##   Never   87   18   84
+##   Occas   12    3    4
+##   Regul    9    1    7</code></pre>
+<p>Zanima nas da li postoji zavisnost izmedju cinjenice da je student pusac i nivoa fizicke aktivnosti. Da testiramo hipotezu da su ova dva obelezja nezavisna (nulta hipoteza), mozemo da koristimo funkciju <code>chisq.test</code>:</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" data-line-number="1"><span class="kw">chisq.test</span>(survey<span class="op">$</span>Smoke, survey<span class="op">$</span>Exer)</a></code></pre></div>
+<pre><code>## Warning in chisq.test(survey$Smoke, survey$Exer): Chi-squared approximation may
+## be incorrect</code></pre>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  survey$Smoke and survey$Exer
+## X-squared = 5.4885, df = 6, p-value = 0.4828</code></pre>
+<p>P vrednost od 0.49 nam ukazuje da ne mozemo da odbacimo nultu hipotezu o nezavisnosti, tako da nemamo dokaza da tvrdimo da postoji veza izmedju pusenja i fizicke aktivnosti.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="04-apply.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
