@@ -1,0 +1,289 @@
+# Uvod u statistiku
+
+R je napravljen od strane statisticara, i namena mu je prevashodno bas primena statistickih metoda na racunaru. Stoga je vrlo pogodan za implementaciju raznih statistickih alata o kojima smo ucili na Uvodu u statistiku, a skoro svi su vec i implementirani u nekom od nebrojano mnogo paketa na CRAN repozitorijumu. Za vecinu metoda koje biste zeleli da primenite u statistici, verovatno postoji bar 1 paket koji to vec radi, pa mozete preskociti rucnu implementaciju. U ovom, poslednjem, poglavlju cemo proci kroz neke od statistickih testova koje smo prosli na kursu Uvod u statistiku.
+
+Pre svega, digresija... Ukoliko vam treba da formule iz pdf-ova pretvarate u LaTeX bez prekucavanja, koristite program [MathPix](https://mathpix.com/).
+
+## Intrervali poverenja
+
+Pre testova, podseticemo se intervala poverenja i implementirati ih u R-u. Ako pretpostavimo uzorak $X_1, \dots, X_n$ potice iz normalne raspodele $\mathcal{N}(m, \sigma^2)$, znamo da vazi sledece
+$$
+\frac{\overline{X} - m}{\widetilde{S}}\sqrt{n} \sim t_{n-1},
+$$
+gde je $\overline{X}$ uzoracka sredina, a $\widetilde{S}$ (popravljena) uzoracka standardna devijacija.
+
+Imajuci u vidu ovu raspodelu, interval poverenja nivoa $\beta$ za parametar $m$ se lako izvodi i dobija se da je jednak
+$$
+\left( \overline{X} - C\frac{\widetilde{S}}{\sqrt{n}},\quad \overline{X} + C\frac{\widetilde{S}}{\sqrt{n}}\right),
+$$
+gde je $C = F^{-1}_{t_{n-1}}(\frac{1+\beta}2)$.
+
+Ovakav interval se moze koristiti ne samo za normalnu raspodelu, vec primenu nalazi i za druge raspodele kada je uzorak jako veliki, zbog efekta centralne granicne teoreme. Naravno, u tom slucaju trazi se interval poverenja za **ocekivanje** date raspodele, sto je u slucaju normalne bas $m$.
+
+Implementiracemo sad funkciju koja za dati uzorak vraca ovaj interval poverenja, pa se malo pozabaviti interpretacijom.
+
+```{r}
+confidence_interval <- function(x, beta = 0.95) {
+  n <- length(x) # obim uzorka
+  # iz formule vrednost C - kvantil t raspodele
+  C <- qt((1 + beta)/2, df = n - 1)
+  
+  # vracamo interval poverenja
+  c(
+    mean(x) - C * sd(x) / sqrt(n),
+    mean(x) + C * sd(x) / sqrt(n)
+  )
+}
+```
+
+Primer upotrebe:
+```{r}
+x <- rnorm(50)
+
+confidence_interval(x, 0.95)
+```
+
+Obratimo paznju na trenutak na interpretaciju nivoa poverenja $\beta$. To je verovatnoca da dobijeni interval poverenja obuhvati stvarnu vrednost parametra $m$. To znaci (ako je $\beta=0.95$) da ako mnogo puta izvucemo uzorak, u $95%$ slucajeva ce interval poverenja sadrzati vrednost $m$. Ispitajmo to:
+
+Prvo generisemo 10000 uzoraka i odgovarajucih intervala poverenja
+```{r, include = FALSE}
+set.seed(1) # osiguravamo uvek isti rezultat, moze se ignorisati
+```
+```{r}
+intervals <- replicate(1e4, {
+  x <- rnorm(50)
+  confidence_interval(x, 0.95)
+})
+intervals[, 1:5]
+dim(intervals)
+```
+Kao rezultat poziva `replicate` dobijamo matricu sa 2 vrste i 10000 kolona, gde svaka kolona predstavlja jedan interval poverenja.
+
+Pogledajmo koliko od tih intervala poverenja sadrzi nulu, koja je bila stvarna vrednost parametra $m$ (`rnorm` po default-u uzima $m=0, \sigma=1$):
+```{r}
+# pravimo logicki vektor koji oznacava da li interval sadrzi nulu
+contains_zero <- apply(intervals, 2, function(interval) {
+  interval[1] < 0 && 0 < interval[2]
+})
+
+# gledamo u koliko intervala je sadrzana nula
+mean(contains_zero)
+```
+Vidimo da je nula sadrzana u $94.9%$ intervala, sto je jako blizu trazenog nivoa poverenja od $95%$.
+
+Rekli smo da se ovaj interval moze primeniti i na neke druge raspodele kad je uzorak veliki (**za trazenje intervala poverenja za ocekivanje**), pa mozemo i to probati, na primer na eksponencijalnoj raspodeli.
+
+```{r, include = FALSE}
+set.seed(216) # osiguravamo uvek isti rezultat, moze se ignorisati
+```
+```{r}
+mean(replicate(1e4, {
+  lambda = 2
+  x <- rexp(1000, 2)
+  interval <- confidence_interval(x, 0.95)
+  interval[1] < 1/lambda && 1/lambda < interval[2]
+}))
+```
+Opet nam je u $94.9%$ slucajeva stvarna vrednost ocekivanja $\frac1\lambda = 1/2$ upala u intervale poverenja.
+
+## Studentov t test
+
+
+### Slucaj jednog uzorka
+
+Ako imamo uzorak iz normalne $\mathcal{N}(m, \sigma^2$ raspodele, mozemo testirati hipotezu $$H_0: m = m_0,$$ naspram neke od alternativa oblika $$H1: \begin{cases}m< m_0\\m\neq m_0\\m > m_0\end{cases}.$$ Za to mozemo da koristimo test statistiku $$t= \frac{\overline{X} - m_0}{\widetilde{S}}\sqrt{n} \sim t_{n-1}.$$
+
+Kriticna oblast ovog testa, sa nivoom $\alpha$ je oblika (za odgovarajuce alternative)
+
+$$W = \begin{cases}\{t < F^{-1}_{t_{n-1}}(\alpha)\}\\ \{ |t| > F^{-1}_{t_{n-1}}(1-\frac\alpha2)\}\\\{t > F^{-1}_{t_{n-1}}(1-\alpha)\}\end{cases}.$$
+
+Cesci nacin na koji se u statistickim paketima vrsi testiranje je nalazenje p vrednosti testa, pa poredjenje te vrednosti sa nivoom znacajnosti. P vrednst testa se ugubo moze opisati kao "kolicina dokaza za nultu hipotezu", pa ukoliko je velika ($p>\alpha$), onda ne odbacujemo nultu hipotezu, a ako je $p < \alpha$, onda odbacujemo nultu hipotezu u korist alternativne. P vrednost mozemo da izracunamo (u dvostranoj nultoj hipotezi slicno za ostale) kao $$p = P\{|t| > t_0\},$$ gde je $t_0$ realizovana vrednost test statistike na osnovu uzorka. U slucaju $t$ testa, p vrednost ce biti jednaka
+$$
+p = \begin{cases}F_{t_{n-1}}(t_0)\\ 2(1-F_{t_{n-1}}(|t_0|))\\ 1 - F_{t_{n-1}}(t_0)\end{cases},
+$$
+za odgovarajuce alternativne hipoteze, redom.
+
+Implementiracemo ovaj test za jedan uzorak, pa cemo nadalje koristiti ugradjenu funkciju u R-u `t.test`.
+
+```{r}
+pval_t_test <- function(x, m0, alternative){
+  n <- length(x)
+  stat <- (mean(x) - m0)/sd(x)*sqrt(n)
+  
+  if(alternative == "less") {
+    pval <- pt(stat, df = n - 1)
+  } else if(alternative == "both") {
+    pval <- 2 * (1 - pt(abs(stat), df = n - 1))
+  } else if(alternative == "greater") {
+    pval <- 1 - pt(stat, df = n - 1)
+  } else {
+    stop("Unknown alternative")
+  }
+  
+  return(pval)
+}
+```
+
+Ugradjena funkcija u R-u koja sprovodi $t$ test se naziva `t.test`. Uporedicemo rezultate nase i ugradjene funkcije:
+
+```{r}
+x <- rnorm(50, 1, 2)
+
+pval_t_test(x, 1, "both")
+t.test(x, mu=1, alternative = "two.sided")
+```
+Ugradjena funkcija nam daje vise informacija od same p vrednosti, a p vrednost se poklapa u nasoj funkciji i ugradjenoj. 
+
+Ugradjena funkcija nam daje i interval poverenja, pa mozemo i to proveriti:
+```{r}
+confidence_interval(x, 0.95)
+```
+Naravno, poklapaju se vrednosti.
+
+Pogledajmo kroz ugradjenu funkciju i moguce alternative
+
+```{r}
+# H1: m < m_0
+t.test(x, mu=1, alternative = "less")
+```
+ko testiramo $H_1 : m < m_0$, dobijamo vrlo visoku p vrednost, pa cemo da prihvatimo hipotezu $H_0: m = 1$. Primetimo i da interval poverenja koji vrati ova funkcija u slucaju da gledamo jednostrani test je takodje jednostran -- leva granica mu je $-\infty$.
+
+Ako testiramo $H_1 : m > m_0$ rezultat je slican
+```{r}
+t.test(x, mu=1, alternative = "greater")
+```
+
+Nadalje cemo samo koristiti ugradjene testove u R-u i necemo implementirati svoje.
+
+
+### Slucaj dva uzorka
+
+Ukoliko imamo dva nezavisna uzorka $X_1,\dots,X_{n_1}$ i $Y_1,\dots, Y_{n_2}$, iz raspodela, redom, $\mathcal{N}(m_1, \sigma_1)$ i $\mathcal{N}(m_2, \sigma_2)$, za testiranje hipoteze $$H_0: m_1 = m_2$$ koristimo test statistiku
+$$t=\frac{\overline{X}_{n_{1}}-\overline{Y}_{n_{2}}}{\sqrt{\frac{\widetilde{S}_{n_{1}}^{2}}{n_{1}}+\frac{\widetilde{S}_{n_{2}}^{2}}{n_{2}}}},$$ koja ima studentovu raspodelu pod $H_0$.
+
+Alternativne hipoteze mogu biti kao u slucaju jednog uzorka ($m_1<m_2, m_1\neq m_2, m_1>m_2$).
+
+Ovaj test se u R-u izvrsava dodajuci jos jedan uzorak u poziv `t.test`. Primer:
+
+```{r, include=FALSE}
+set.seed(1)
+```
+```{r}
+x <- rnorm(50)
+y <- rnorm(35, mean = 2, sd = 4)
+
+t.test(x, y)
+```
+
+Ovde dobijamo malu p vrednost (0.002), sto ukazuje na to da treba odbaciti nultu hipotezuu korist alternativne, koja je po default-u $H_1:m_1 \neq m_2$, sto i pise u izlazu funkcije.
+
+Ako bismo testirali sa alternativom $H_1:m_1 > m_2$...
+```{r}
+t.test(x, y, alternative = "greater")
+```
+...dobijena je p vrednost 0.99 sto je jako veliko, pa ne bismo mogli da odbacimo nultu hipotezu! Primetimo, ne znaci da je nulta hipoteza tacna, nego na osnovu dobijenog uzorka, ne mozemo odbaciti nultu hipotezu u korist alternative.
+
+### Upareni test
+
+Ako obelezja $X$ i $Y$ nisu nezavisna, vec imamo uzorak parova $(X_1,Y_1),\dots,(X_n,Y_n)$ testiranje hipoteze $H_0: m_1 = m_2$ se vrsi uparenim $t$ testom, koji je u R-u implementiran takodje u funkciji `t.test`, gde se samo doda argument `paired = TRUE`.
+
+```{r}
+x <- rnorm(50, mean = 2)
+y <- x + rnorm(50, sd = 0.1) # Y nije nezavisno od X nego je X + mali sum
+
+t.test(x, y, paired = TRUE)
+```
+Kao rezultat imamo veliku p vrednost i ne odbacujemo nultu hipotezu.
+
+## Neparametarski testovi
+
+### Vilkoksonov test zasnovan na rangovima i znakovima
+
+Vilkoksonov test ima slicnu svrhu kao t test, ali pretpostavljamo da je raspodela obelezja $X$ simetricna i zelimo da
+testiramo $H_0 : m = m_0$, bez pretpostavke normalnosti. Koristimo test statistiku $$T=\sum_{i=1}^{n} r_{i} I\left\{X_{i}-m_{0} \geq 0\right\}$$, gde su $r_i$ rangovi elemenata $|X_i-m_0|$ u uzorku $\left|X_{1}-m_{0}\right|, \ldots,\left|X_{n}-m_{0}\right|$.
+
+U R-u je oovaj test implementiran u funkciji `wilcox.test`. Ova funkcija ima isti interfejs kao `t.test` (argumente koje prima i slicno).
+
+Proverimo test nekim uzorkom iz binomne raspodele $\mathcal{B}(10, 0.3)$. Trebalo bi da bude ocekivanje $3$.
+```{r}
+x <- rbinom(50, 10, 0.3)
+
+wilcox.test(x, mu = 3)
+```
+
+Primenimo ga i na neki uzorak iz `t` raspodele, za npr. alternativu $H_1:m>0$.
+```{r}
+x <- rt(20, df = 2)
+wilcox.test(x, mu = 0, alternative = "greater")
+```
+
+> Dakle, ukoliko imamo pretpostavku o normalnoj raspodeli, koristimo `t.test`, a ukoliko nemamo, `wilcox.test` moze biti zadovoljavajuci.
+
+Kao i `t.test` i `wilcox.test` se moze primeniti na 2 uzorka (upareni i neupareni)
+```{r}
+x <- rexp(50)
+y <- rexp(30)
+wilcox.test(x, y)
+```
+
+### Kolmogorov--Smirnovljev test saglasnosti sa raspodelom
+
+Test Kolmogorov--Smirnova sluzi za testiranje da li se za neki uzorak $X_1,\dots,X_n$ moze reci da odgovara raspodeli sa funkcijom raspodele $F_0$. Zasnovan je na test statistici
+$$T=\sup _{x}\left|F_{n}(x)-F_{0}(x)\right|,$$ gde je $F_n$ empirijska funkcija raspodele uzorka.
+
+U R-u je implementiran kroz funkciju `ks.test`, a kao argumente prima uzorak, kao i funkciju raspodele (funkcije koje obicno pocinju sa `p*`, npr. `pnorm`, `pexp` itd.)
+
+Testirajmo da li kolona `speed` iz skupa podataka `cars` ima standardnu normalnu raspodelu:
+
+```{r}
+x <- cars$speed
+ks.test(x, "pnorm")
+```
+
+p vrednost je prakticno nula, pa odbacujemo nultu hipotezu koja kaze da uzorak ima normalnu $\mathcal{N}(0,1)$ raspodelu.
+
+Mozemo da testiramo da li ima normalnu raspodelu $\mathcal{N}(15,5)$ (primetite promenjene parametre)
+```{r}
+ks.test(cars$speed, function(x) pnorm(x, 15, 5))
+```
+U ovom slucaju je p vrednost 0.6, sto je vece od $\alpha=0.05$, pa ne odbacujemo hipotezu koja kaze da je uzorak `cars$speed` saglasan sa normalnom $\mathcal{N}(15,5)$ raspodelom.
+
+I ovaj test se moze primeniti na testiranje o saglasnosti raspodele dva uzorka, tj. da li 2 uzorka imaju istu raspodelu:
+
+Npr. ako imamo dva uzorka iz iste normalne raspodele, ocekujemo visoku p vrednost
+```{r}
+x <- rnorm(50)
+y <- rnorm(40)
+ks.test(x, y)
+```
+
+A ako imamo uzorke iz razlicitih raspodela ocekujemo nisku p vrednost...
+
+```{r}
+x <- rnorm(50)
+y <- rexp(40)
+ks.test(x, y)
+```
+...sto i dobijamo.
+
+
+### $\chi^2$ test nezavisnosti
+
+Konacno, prikazacemo i upotrebu $\chi^2$ testa koji se koristi za testiranje nezavisnosti dva obelezja $X$ i $Y$, koji je zasnovan na test statistici $$T=\sum_{i j} \frac{\left(M_{i j}-n \hat{p}_{i j}\right)^{2}}{n \hat{p}_{i j}}.$$
+
+Koristicemo podatke `survey` iz paketa `MASS`.
+
+U ovom skupu postoje promenljive `Smoke` i `Exer` koje se ticu toga da li je student pusac i u kojoj meri, kao i o ucestalosti bavljenja fizickom aktivnoscu. Tabelu kontigencije vidimo i sledecoj tabeli (pozivom funkcije `table` pravimo tabelu kontigencije).
+
+```{r}
+library(MASS)
+table(survey$Smoke, survey$Exer) 
+```
+
+Zanima nas da li postoji zavisnost izmedju cinjenice da je student pusac i nivoa fizicke aktivnosti. Da testiramo hipotezu da su ova dva obelezja nezavisna (nulta hipoteza), mozemo da koristimo funkciju `chisq.test`:
+
+```{r}
+chisq.test(survey$Smoke, survey$Exer)
+```
+
+P vrednost od 0.49 nam ukazuje da ne mozemo da odbacimo nultu hipotezu o nezavisnosti, tako da nemamo dokaza da tvrdimo da postoji veza izmedju pusenja i fizicke aktivnosti.
