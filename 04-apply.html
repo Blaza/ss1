@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 *apply funkcije | Statistički softver 1</title>
   <meta name="description" content="4 *apply funkcije | Statistički softver 1" />
-  <meta name="generator" content="bookdown 0.16.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16.5 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 *apply funkcije | Statistički softver 1" />
   <meta property="og:type" content="book" />
@@ -383,7 +383,77 @@ Upravo to je (pored brzine i nekih tehnickih stvari poput bolje otpornosti na gr
 ## 3rd Qu.  19.0  56.00
 ## Max.     25.0 120.00</code></pre>
 <p>Rezultat je matrica u kojoj svaka kolona sadrzi rezultat poziva <code>summary</code> na odgovarajucu kolonu iz skupa podataka <code>cars</code> (kolone su <code>speed</code> i <code>dist</code>)</p>
+<div id="standardizacija-kolona-dataframe-a" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Standardizacija kolona dataframe-a</h3>
+<p>Cesto je neophodno standradizovati kolone dataframe-a, primenom transformacije <span class="math inline">\(\frac{X-m}{\sigma}\)</span>, da bismo dobili promenljivu sa ocekivanjem <span class="math inline">\(0\)</span> i disperzijom <span class="math inline">\(1\)</span>. To mozemo lako odraditi funkcijom <code>apply</code>.</p>
+<p>Na primer, standardizovacemo kolone iz <code>cars</code> skupa podataka.</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" data-line-number="1">scaled_cars &lt;-<span class="st"> </span><span class="kw">apply</span>(cars, <span class="dv">2</span>, <span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb247-2" data-line-number="2">  (x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(x)</a>
+<a class="sourceLine" id="cb247-3" data-line-number="3">})</a>
+<a class="sourceLine" id="cb247-4" data-line-number="4">scaled_cars</a></code></pre></div>
+<pre><code>##             speed        dist
+##  [1,] -2.15596948 -1.59025960
+##  [2,] -2.15596948 -1.27981361
+##  [3,] -1.58860909 -1.51264810
+##  [4,] -1.58860909 -0.81414462
+##  [5,] -1.39948896 -1.04697911
+##  [6,] -1.21036883 -1.27981361
+##  [7,] -1.02124870 -0.96936762
+##  [8,] -1.02124870 -0.65892162
+##  [9,] -1.02124870 -0.34847563
+## [10,] -0.83212857 -1.00817336
+## [11,] -0.83212857 -0.58131012
+## [12,] -0.64300844 -1.12459061
+## [13,] -0.64300844 -0.89175612
+## [14,] -0.64300844 -0.73653312
+## [15,] -0.64300844 -0.58131012
+## [16,] -0.45388831 -0.65892162
+## [17,] -0.45388831 -0.34847563
+## [18,] -0.45388831 -0.34847563
+## [19,] -0.45388831  0.11719336
+## [20,] -0.26476818 -0.65892162
+## [21,] -0.26476818 -0.27086413
+## [22,] -0.26476818  0.66047385
+## [23,] -0.26476818  1.43658884
+## [24,] -0.07564805 -0.89175612
+## [25,] -0.07564805 -0.65892162
+## [26,] -0.07564805  0.42763936
+## [27,]  0.11347208 -0.42608713
+## [28,]  0.11347208 -0.11564113
+## [29,]  0.30259221 -0.42608713
+## [30,]  0.30259221 -0.11564113
+## [31,]  0.30259221  0.27241636
+## [32,]  0.49171234 -0.03802963
+## [33,]  0.49171234  0.50525085
+## [34,]  0.49171234  1.28136584
+## [35,]  0.49171234  1.59181183
+## [36,]  0.68083247 -0.27086413
+## [37,]  0.68083247  0.11719336
+## [38,]  0.68083247  0.97091984
+## [39,]  0.86995260 -0.42608713
+## [40,]  0.86995260  0.19480486
+## [41,]  0.86995260  0.35002786
+## [42,]  0.86995260  0.50525085
+## [43,]  0.86995260  0.81569685
+## [44,]  1.24819285  0.89330835
+## [45,]  1.43731298  0.42763936
+## [46,]  1.62643311  1.04853134
+## [47,]  1.62643311  1.90225783
+## [48,]  1.62643311  1.94106357
+## [49,]  1.62643311  2.98881880
+## [50,]  1.81555324  1.63061758</code></pre>
+<p>Izracunajmo prosek i disperziju originalnih i skaliranih podataka (zaokruzeno na 2 decimale):</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">apply</span>(cars, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">c</span>(<span class="kw">mean</span>(x), <span class="kw">var</span>(x))), <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>##      speed   dist
+## [1,] 15.40  42.98
+## [2,] 27.96 664.06</code></pre>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" data-line-number="1"><span class="kw">round</span>(<span class="kw">apply</span>(scaled_cars, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">c</span>(<span class="kw">mean</span>(x), <span class="kw">var</span>(x))), <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>##      speed dist
+## [1,]     0    0
+## [2,]     1    1</code></pre>
+<p>Dakle, ocekivano, skalirani podaci su takvi da su prosek i standardna devijacija svake od kolona, redom, 0 i 1.</p>
 
+</div>
 </div>
 </div>
             </section>

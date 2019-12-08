@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Matrix summary | Statistički softver 1</title>
   <meta name="description" content="3 Matrix summary | Statistički softver 1" />
-  <meta name="generator" content="bookdown 0.16.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.16.5 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Matrix summary | Statistički softver 1" />
   <meta property="og:type" content="book" />
@@ -290,21 +290,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Poredjenje za nedijagonalnu:</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(nondiag_matrix), <span class="kw">is_diagonal2</span>(nondiag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                          expr     min       lq      mean   median       uq
-##   is_diagonal(nondiag_matrix)   1.448   2.0615  57.04757   3.5445   5.1620
-##  is_diagonal2(nondiag_matrix) 352.462 363.3790 622.23039 614.4525 743.1725
+##                          expr     min      lq      mean   median       uq
+##   is_diagonal(nondiag_matrix)   1.425   2.170  56.91053   3.9380   5.7665
+##  is_diagonal2(nondiag_matrix) 358.658 370.209 612.41025 410.1305 759.2140
 ##       max neval
-##  5327.971   100
-##  4135.556   100</code></pre>
+##  5271.979   100
+##  4007.469   100</code></pre>
 <p>U ovom slucaju je brza prva implementacija. Pogledajmo i poredjenje za dijagonalnu matricu.</p>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(diag_matrix), <span class="kw">is_diagonal2</span>(diag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                       expr      min        lq      mean   median       uq
-##   is_diagonal(diag_matrix) 6108.969 6203.6790 6288.9912 6261.097 6330.800
-##  is_diagonal2(diag_matrix)  563.799  905.3185  940.1095  918.482  936.911
+##                       expr      min        lq      mean    median        uq
+##   is_diagonal(diag_matrix) 6164.278 6281.9125 6354.5522 6345.7985 6402.1630
+##  is_diagonal2(diag_matrix)  617.272  916.8185  958.7955  936.0815  953.0145
 ##       max neval
-##  6923.903   100
-##  3844.802   100</code></pre>
+##  6827.225   100
+##  3960.456   100</code></pre>
 <p>U ovom slucaju je druga implementacija ubedljivo brza. Ako pogledamo pazljivije, druga implementacija ima u oba slucaja isto vreme, dok se u prvoj implementaciji sa <code>for</code> petljom vremena drasticno razlikuju.</p>
 <p>Razlog za to je sto u <code>is_diagonal</code>, ako naidjemo na nenula element van dijagonale, odmah izlazimo iz funkcije, a to se desava prilicno brzo, jer vec u drugoj iteraciji petlje dodjemo na neki element van dijagonale. S druge strane, ako imamo dijagonalnu matricu, moramo da prodjemo kroz sve elemente matrice da bismo zakljucili da zaista nisu nule, a to zahteva veliko vreme.</p>
 <p>Ali avaj! Kada razmislite, druga, brza implementacija uvek mnozi svaki element sa svakim, pa poredi da li su <em>svi</em> elementi neke dve matrice jednaki, sto je mnogo operacija.</p>
