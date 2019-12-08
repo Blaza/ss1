@@ -159,3 +159,25 @@ cars #ugradjen skup podataka u R
 apply(cars, 2, summary)
 ```
 Rezultat je matrica u kojoj svaka kolona sadrzi rezultat poziva `summary` na odgovarajucu kolonu iz skupa podataka `cars` (kolone su `speed` i `dist`)
+
+### Standardizacija kolona dataframe-a
+
+Cesto je neophodno standradizovati kolone dataframe-a, primenom transformacije $\frac{X-m}{\sigma}$, da bismo dobili promenljivu sa ocekivanjem $0$ i disperzijom $1$. To mozemo lako odraditi funkcijom `apply`.
+
+Na primer, standardizovacemo kolone iz `cars` skupa podataka.
+
+```{r}
+scaled_cars <- apply(cars, 2, function(x){
+  (x - mean(x)) / sd(x)
+})
+scaled_cars
+```
+
+Izracunajmo prosek i disperziju originalnih i skaliranih podataka (zaokruzeno na 2 decimale):
+
+```{r}
+round(apply(cars, 2, function(x) c(mean(x), var(x))), 2)
+round(apply(scaled_cars, 2, function(x) c(mean(x), var(x))), 2)
+```
+
+Dakle, ocekivano, skalirani podaci su takvi da su prosek i standardna devijacija svake od kolona, redom, 0 i 1.
