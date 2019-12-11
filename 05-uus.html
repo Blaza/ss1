@@ -210,7 +210,7 @@ gde je <span class="math inline">\(C = F^{-1}_{t_{n-1}}(\frac{1+\beta}2)\)</span
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>)</a>
 <a class="sourceLine" id="cb254-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb254-3" data-line-number="3"><span class="kw">confidence_interval</span>(x, <span class="fl">0.95</span>)</a></code></pre></div>
-<pre><code>## [1] -0.1017043  0.4930140</code></pre>
+<pre><code>## [1] -0.1357438  0.3558892</code></pre>
 <p>Obratimo paznju na trenutak na interpretaciju nivoa poverenja <span class="math inline">\(\beta\)</span>. To je verovatnoca da dobijeni interval poverenja obuhvati stvarnu vrednost parametra <span class="math inline">\(m\)</span>. To znaci (ako je <span class="math inline">\(\beta=0.95\)</span>) da ako mnogo puta izvucemo uzorak, u <span class="math inline">\(95%\)</span> slucajeva ce interval poverenja sadrzati vrednost <span class="math inline">\(m\)</span>. Ispitajmo to:</p>
 <p>Prvo generisemo 10000 uzoraka i odgovarajucih intervala poverenja</p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1">intervals &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="fl">1e4</span>, {</a>
@@ -389,7 +389,7 @@ za odgovarajuce alternativne hipoteze, redom.</p>
 <h3><span class="header-section-number">5.3.1</span> Vilkoksonov test zasnovan na rangovima i znakovima</h3>
 <p>Vilkoksonov test ima slicnu svrhu kao t test, ali pretpostavljamo da je raspodela obelezja <span class="math inline">\(X\)</span> simetricna i zelimo da
 testiramo <span class="math inline">\(H_0 : m = m_0\)</span>, bez pretpostavke normalnosti. Koristimo test statistiku <span class="math display">\[T=\sum_{i=1}^{n} r_{i} I\left\{X_{i}-m_{0} \geq 0\right\},\]</span> gde su <span class="math inline">\(r_i\)</span> rangovi elemenata <span class="math inline">\(|X_i-m_0|\)</span> u uzorku <span class="math inline">\(\left|X_{1}-m_{0}\right|, \ldots,\left|X_{n}-m_{0}\right|\)</span>.</p>
-<p>U R-u je oovaj test implementiran u funkciji <code>wilcox.test</code>. Ova funkcija ima isti interfejs kao <code>t.test</code> (argumente koje prima i slicno).</p>
+<p>U R-u je ovaj test implementiran u funkciji <code>wilcox.test</code>. Ova funkcija ima isti interfejs kao <code>t.test</code> (argumente koje prima i slicno).</p>
 <p>Proverimo test nekim uzorkom iz binomne raspodele <span class="math inline">\(\mathcal{B}(10, 0.3)\)</span>. Trebalo bi da bude ocekivanje <span class="math inline">\(3\)</span>.</p>
 <div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">50</span>, <span class="dv">10</span>, <span class="fl">0.3</span>)</a>
 <a class="sourceLine" id="cb281-2" data-line-number="2"></a>
