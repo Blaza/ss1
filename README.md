@@ -20,7 +20,6 @@ Na kraju kursa, studenti
 - poznaju aspekte funkcionalnog programiranja u R-u, kroz upotrebu *apply funkcija.
 - poznaju osnovne razloge za spor kod i nacine da optimizuju kod radi boljih performansi
 - znaju da pisu izvestaje koristeci Rmarkdown
-- su upoznati sa osnovnim principom rada u Git-u kroz Github
 
 ## Sadrzaj
 
