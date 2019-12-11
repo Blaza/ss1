@@ -156,7 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="04-apply.html"><a href="04-apply.html#funkcija-apply"><i class="fa fa-check"></i><b>4.3</b> Funkcija <code>apply</code></a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="05-uus.html"><a href="05-uus.html"><i class="fa fa-check"></i><b>5</b> Uvod u statistiku</a><ul>
-<li class="chapter" data-level="5.1" data-path="05-uus.html"><a href="05-uus.html#intrervali-poverenja"><i class="fa fa-check"></i><b>5.1</b> Intrervali poverenja</a></li>
+<li class="chapter" data-level="5.1" data-path="05-uus.html"><a href="05-uus.html#intervali-poverenja"><i class="fa fa-check"></i><b>5.1</b> Intervali poverenja</a></li>
 <li class="chapter" data-level="5.2" data-path="05-uus.html"><a href="05-uus.html#studentov-t-test"><i class="fa fa-check"></i><b>5.2</b> Studentov t test</a></li>
 <li class="chapter" data-level="5.3" data-path="05-uus.html"><a href="05-uus.html#neparametarski-testovi"><i class="fa fa-check"></i><b>5.3</b> Neparametarski testovi</a></li>
 </ul></li>
@@ -295,21 +295,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Poredjenje za nedijagonalnu:</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(nondiag_matrix), <span class="kw">is_diagonal2</span>(nondiag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                          expr     min      lq    mean   median       uq
-##   is_diagonal(nondiag_matrix)   1.842   2.670  83.064   4.2385   7.2680
-##  is_diagonal2(nondiag_matrix) 407.235 418.627 730.341 475.4235 923.5095
+##                          expr     min       lq      mean   median       uq
+##   is_diagonal(nondiag_matrix)   1.778   2.7315  73.52761   4.0765   5.4470
+##  is_diagonal2(nondiag_matrix) 426.621 437.3215 716.17711 456.3265 910.7335
 ##       max neval
-##  7773.875   100
-##  4852.692   100</code></pre>
+##  6916.763   100
+##  3751.077   100</code></pre>
 <p>U ovom slucaju je brza prva implementacija. Pogledajmo i poredjenje za dijagonalnu matricu.</p>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(diag_matrix), <span class="kw">is_diagonal2</span>(diag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                       expr      min       lq     mean  median       uq      max
-##   is_diagonal(diag_matrix) 8043.526 8302.152 8471.998 8416.45 8601.711 9283.611
-##  is_diagonal2(diag_matrix)  637.956 1118.138 1180.619 1152.72 1184.099 4608.273
-##  neval
-##    100
-##    100</code></pre>
+##                       expr      min       lq     mean   median       uq
+##   is_diagonal(diag_matrix) 7568.873 7661.006 7738.429 7714.336 7776.395
+##  is_diagonal2(diag_matrix)  572.901 1028.265 1072.228 1043.196 1065.438
+##       max neval
+##  8433.105   100
+##  4575.983   100</code></pre>
 <p>U ovom slucaju je druga implementacija ubedljivo brza. Ako pogledamo pazljivije, druga implementacija ima u oba slucaja isto vreme, dok se u prvoj implementaciji sa <code>for</code> petljom vremena drasticno razlikuju.</p>
 <p>Razlog za to je sto u <code>is_diagonal</code>, ako naidjemo na nenula element van dijagonale, odmah izlazimo iz funkcije, a to se desava prilicno brzo, jer vec u drugoj iteraciji petlje dodjemo na neki element van dijagonale. S druge strane, ako imamo dijagonalnu matricu, moramo da prodjemo kroz sve elemente matrice da bismo zakljucili da zaista nisu nule, a to zahteva veliko vreme.</p>
 <p>Ali avaj! Kada razmislite, druga, brza implementacija uvek mnozi svaki element sa svakim, pa poredi da li su <em>svi</em> elementi neke dve matrice jednaki, sto je mnogo operacija.</p>

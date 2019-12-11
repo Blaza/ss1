@@ -156,7 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="04-apply.html"><a href="04-apply.html#funkcija-apply"><i class="fa fa-check"></i><b>4.3</b> Funkcija <code>apply</code></a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="05-uus.html"><a href="05-uus.html"><i class="fa fa-check"></i><b>5</b> Uvod u statistiku</a><ul>
-<li class="chapter" data-level="5.1" data-path="05-uus.html"><a href="05-uus.html#intrervali-poverenja"><i class="fa fa-check"></i><b>5.1</b> Intrervali poverenja</a></li>
+<li class="chapter" data-level="5.1" data-path="05-uus.html"><a href="05-uus.html#intervali-poverenja"><i class="fa fa-check"></i><b>5.1</b> Intervali poverenja</a></li>
 <li class="chapter" data-level="5.2" data-path="05-uus.html"><a href="05-uus.html#studentov-t-test"><i class="fa fa-check"></i><b>5.2</b> Studentov t test</a></li>
 <li class="chapter" data-level="5.3" data-path="05-uus.html"><a href="05-uus.html#neparametarski-testovi"><i class="fa fa-check"></i><b>5.3</b> Neparametarski testovi</a></li>
 </ul></li>
@@ -180,9 +180,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="uvod-u-statistiku" class="section level1">
 <h1><span class="header-section-number">5</span> Uvod u statistiku</h1>
 <p>R je napravljen od strane statisticara, i namena mu je prevashodno bas primena statistickih metoda na racunaru. Stoga je vrlo pogodan za implementaciju raznih statistickih alata o kojima smo ucili na Uvodu u statistiku, a skoro svi su vec i implementirani u nekom od nebrojano mnogo paketa na CRAN repozitorijumu. Za vecinu metoda koje biste zeleli da primenite u statistici, verovatno postoji bar 1 paket koji to vec radi, pa mozete preskociti rucnu implementaciju. U ovom, poslednjem, poglavlju cemo proci kroz neke od statistickih testova koje smo prosli na kursu Uvod u statistiku.</p>
-<p>Pre svega, digresija… Ukoliko vam treba da formule iz pdf-ova pretvarate u LaTeX bez prekucavanja, koristite program <a href="https://mathpix.com/">MathPix</a>.</p>
-<div id="intrervali-poverenja" class="section level2">
-<h2><span class="header-section-number">5.1</span> Intrervali poverenja</h2>
+<p>Pre svega, reklama… Ukoliko vam treba da formule iz pdf-ova pretvarate u LaTeX bez prekucavanja, koristite program <a href="https://mathpix.com/">MathPix</a>.</p>
+<div id="intervali-poverenja" class="section level2">
+<h2><span class="header-section-number">5.1</span> Intervali poverenja</h2>
 <p>Pre testova, podseticemo se intervala poverenja i implementirati ih u R-u. Ako pretpostavimo uzorak <span class="math inline">\(X_1, \dots, X_n\)</span> potice iz normalne raspodele <span class="math inline">\(\mathcal{N}(m, \sigma^2)\)</span>, znamo da vazi sledece
 <span class="math display">\[
 \frac{\overline{X} - m}{\widetilde{S}}\sqrt{n} \sim t_{n-1},
@@ -210,7 +210,7 @@ gde je <span class="math inline">\(C = F^{-1}_{t_{n-1}}(\frac{1+\beta}2)\)</span
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>)</a>
 <a class="sourceLine" id="cb254-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb254-3" data-line-number="3"><span class="kw">confidence_interval</span>(x, <span class="fl">0.95</span>)</a></code></pre></div>
-<pre><code>## [1] -0.1605538  0.3993458</code></pre>
+<pre><code>## [1] -0.1333042  0.3948981</code></pre>
 <p>Obratimo paznju na trenutak na interpretaciju nivoa poverenja <span class="math inline">\(\beta\)</span>. To je verovatnoca da dobijeni interval poverenja obuhvati stvarnu vrednost parametra <span class="math inline">\(m\)</span>. To znaci (ako je <span class="math inline">\(\beta=0.95\)</span>) da ako mnogo puta izvucemo uzorak, u <span class="math inline">\(95%\)</span> slucajeva ce interval poverenja sadrzati vrednost <span class="math inline">\(m\)</span>. Ispitajmo to:</p>
 <p>Prvo generisemo 10000 uzoraka i odgovarajucih intervala poverenja</p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1">intervals &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="fl">1e4</span>, {</a>
