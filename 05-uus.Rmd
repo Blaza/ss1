@@ -242,11 +242,11 @@ ks.test(x, "pnorm")
 
 p vrednost je prakticno nula, pa odbacujemo nultu hipotezu koja kaze da uzorak ima normalnu $\mathcal{N}(0,1)$ raspodelu.
 
-Mozemo da testiramo da li ima normalnu raspodelu $\mathcal{N}(15,5)$ (primetite promenjene parametre)
+Mozemo da testiramo da li ima normalnu raspodelu $\mathcal{N}(15,5^2)$ (primetite promenjene parametre)
 ```{r}
 ks.test(cars$speed, function(x) pnorm(x, 15, 5))
 ```
-U ovom slucaju je p vrednost 0.6, sto je vece od $\alpha=0.05$, pa ne odbacujemo hipotezu koja kaze da je uzorak `cars$speed` saglasan sa normalnom $\mathcal{N}(15,5)$ raspodelom.
+U ovom slucaju je p vrednost 0.6, sto je vece od $\alpha=0.05$, pa ne odbacujemo hipotezu koja kaze da je uzorak `cars$speed` saglasan sa normalnom $\mathcal{N}(15,5^2)$ raspodelom.
 
 I ovaj test se moze primeniti na testiranje o saglasnosti raspodele dva uzorka, tj. da li 2 uzorka imaju istu raspodelu:
 
