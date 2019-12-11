@@ -175,7 +175,7 @@ y <- rnorm(35, mean = 2, sd = 4)
 t.test(x, y)
 ```
 
-Ovde dobijamo malu p vrednost (0.002), sto ukazuje na to da treba odbaciti nultu hipotezuu korist alternativne, koja je po default-u $H_1:m_1 \neq m_2$, sto i pise u izlazu funkcije.
+Ovde dobijamo malu p vrednost (0.002), sto ukazuje na to da treba odbaciti nultu hipotezu u korist alternativne, koja je po default-u $H_1:m_1 \neq m_2$, sto i pise u izlazu funkcije.
 
 Ako bismo testirali sa alternativom $H_1:m_1 > m_2$...
 ```{r}
@@ -200,7 +200,7 @@ Kao rezultat imamo veliku p vrednost i ne odbacujemo nultu hipotezu.
 ### Vilkoksonov test zasnovan na rangovima i znakovima
 
 Vilkoksonov test ima slicnu svrhu kao t test, ali pretpostavljamo da je raspodela obelezja $X$ simetricna i zelimo da
-testiramo $H_0 : m = m_0$, bez pretpostavke normalnosti. Koristimo test statistiku $$T=\sum_{i=1}^{n} r_{i} I\left\{X_{i}-m_{0} \geq 0\right\}$$, gde su $r_i$ rangovi elemenata $|X_i-m_0|$ u uzorku $\left|X_{1}-m_{0}\right|, \ldots,\left|X_{n}-m_{0}\right|$.
+testiramo $H_0 : m = m_0$, bez pretpostavke normalnosti. Koristimo test statistiku $$T=\sum_{i=1}^{n} r_{i} I\left\{X_{i}-m_{0} \geq 0\right\},$$ gde su $r_i$ rangovi elemenata $|X_i-m_0|$ u uzorku $\left|X_{1}-m_{0}\right|, \ldots,\left|X_{n}-m_{0}\right|$.
 
 U R-u je oovaj test implementiran u funkciji `wilcox.test`. Ova funkcija ima isti interfejs kao `t.test` (argumente koje prima i slicno).
 
