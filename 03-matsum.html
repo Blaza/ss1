@@ -295,21 +295,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Poredjenje za nedijagonalnu:</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(nondiag_matrix), <span class="kw">is_diagonal2</span>(nondiag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##                          expr     min       lq      mean  median      uq
-##   is_diagonal(nondiag_matrix)   1.807   2.3175  71.66268   3.056   5.164
-##  is_diagonal2(nondiag_matrix) 405.054 414.2080 708.31781 433.501 917.843
+##                          expr     min       lq      mean   median      uq
+##   is_diagonal(nondiag_matrix)   1.785   2.5750  83.33801   4.3795   5.699
+##  is_diagonal2(nondiag_matrix) 402.924 416.2795 724.75071 444.1610 925.609
 ##       max neval
-##  6766.135   100
-##  3749.674   100</code></pre>
+##  7881.304   100
+##  4039.473   100</code></pre>
 <p>U ovom slucaju je brza prva implementacija. Pogledajmo i poredjenje za dijagonalnu matricu.</p>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">microbenchmark</span>(<span class="kw">is_diagonal</span>(diag_matrix), <span class="kw">is_diagonal2</span>(diag_matrix))</a></code></pre></div>
 <pre><code>## Unit: microseconds
 ##                       expr      min       lq     mean   median       uq
-##   is_diagonal(diag_matrix) 7784.285 7851.453 7913.743 7891.754 7954.872
-##  is_diagonal2(diag_matrix)  628.334 1082.883 1118.692 1093.617 1112.149
+##   is_diagonal(diag_matrix) 7761.993 7835.591 7966.224 7905.123 8008.265
+##  is_diagonal2(diag_matrix)  589.684 1095.233 1142.326 1115.652 1137.260
 ##       max neval
-##  8391.034   100
-##  4370.342   100</code></pre>
+##  8871.604   100
+##  4506.241   100</code></pre>
 <p>U ovom slucaju je druga implementacija ubedljivo brza. Ako pogledamo pazljivije, druga implementacija ima u oba slucaja isto vreme, dok se u prvoj implementaciji sa <code>for</code> petljom vremena drasticno razlikuju.</p>
 <p>Razlog za to je sto u <code>is_diagonal</code>, ako naidjemo na nenula element van dijagonale, odmah izlazimo iz funkcije, a to se desava prilicno brzo, jer vec u drugoj iteraciji petlje dodjemo na neki element van dijagonale. S druge strane, ako imamo dijagonalnu matricu, moramo da prodjemo kroz sve elemente matrice da bismo zakljucili da zaista nisu nule, a to zahteva veliko vreme.</p>
 <p>Ali avaj! Kada razmislite, druga, brza implementacija uvek mnozi svaki element sa svakim, pa poredi da li su <em>svi</em> elementi neke dve matrice jednaki, sto je mnogo operacija.</p>

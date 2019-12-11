@@ -210,7 +210,7 @@ gde je <span class="math inline">\(C = F^{-1}_{t_{n-1}}(\frac{1+\beta}2)\)</span
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>)</a>
 <a class="sourceLine" id="cb254-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb254-3" data-line-number="3"><span class="kw">confidence_interval</span>(x, <span class="fl">0.95</span>)</a></code></pre></div>
-<pre><code>## [1] -0.1357438  0.3558892</code></pre>
+<pre><code>## [1] -0.43071937  0.09934513</code></pre>
 <p>Obratimo paznju na trenutak na interpretaciju nivoa poverenja <span class="math inline">\(\beta\)</span>. To je verovatnoca da dobijeni interval poverenja obuhvati stvarnu vrednost parametra <span class="math inline">\(m\)</span>. To znaci (ako je <span class="math inline">\(\beta=0.95\)</span>) da ako mnogo puta izvucemo uzorak, u <span class="math inline">\(95%\)</span> slucajeva ce interval poverenja sadrzati vrednost <span class="math inline">\(m\)</span>. Ispitajmo to:</p>
 <p>Prvo generisemo 10000 uzoraka i odgovarajucih intervala poverenja</p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" data-line-number="1">intervals &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="fl">1e4</span>, {</a>
@@ -444,7 +444,7 @@ testiramo <span class="math inline">\(H_0 : m = m_0\)</span>, bez pretpostavke n
 ## D = 0.99997, p-value &lt; 2.2e-16
 ## alternative hypothesis: two-sided</code></pre>
 <p>p vrednost je prakticno nula, pa odbacujemo nultu hipotezu koja kaze da uzorak ima normalnu <span class="math inline">\(\mathcal{N}(0,1)\)</span> raspodelu.</p>
-<p>Mozemo da testiramo da li ima normalnu raspodelu <span class="math inline">\(\mathcal{N}(15,5)\)</span> (primetite promenjene parametre)</p>
+<p>Mozemo da testiramo da li ima normalnu raspodelu <span class="math inline">\(\mathcal{N}(15,5^2)\)</span> (primetite promenjene parametre)</p>
 <div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" data-line-number="1"><span class="kw">ks.test</span>(cars<span class="op">$</span>speed, <span class="cf">function</span>(x) <span class="kw">pnorm</span>(x, <span class="dv">15</span>, <span class="dv">5</span>))</a></code></pre></div>
 <pre><code>## Warning in ks.test(cars$speed, function(x) pnorm(x, 15, 5)): ties should not be
 ## present for the Kolmogorov-Smirnov test</code></pre>
@@ -454,7 +454,7 @@ testiramo <span class="math inline">\(H_0 : m = m_0\)</span>, bez pretpostavke n
 ## data:  cars$speed
 ## D = 0.10575, p-value = 0.631
 ## alternative hypothesis: two-sided</code></pre>
-<p>U ovom slucaju je p vrednost 0.6, sto je vece od <span class="math inline">\(\alpha=0.05\)</span>, pa ne odbacujemo hipotezu koja kaze da je uzorak <code>cars$speed</code> saglasan sa normalnom <span class="math inline">\(\mathcal{N}(15,5)\)</span> raspodelom.</p>
+<p>U ovom slucaju je p vrednost 0.6, sto je vece od <span class="math inline">\(\alpha=0.05\)</span>, pa ne odbacujemo hipotezu koja kaze da je uzorak <code>cars$speed</code> saglasan sa normalnom <span class="math inline">\(\mathcal{N}(15,5^2)\)</span> raspodelom.</p>
 <p>I ovaj test se moze primeniti na testiranje o saglasnosti raspodele dva uzorka, tj. da li 2 uzorka imaju istu raspodelu:</p>
 <p>Npr. ako imamo dva uzorka iz iste normalne raspodele, ocekujemo visoku p vrednost</p>
 <div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>)</a>
