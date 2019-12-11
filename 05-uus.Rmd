@@ -91,13 +91,13 @@ Opet nam je u $94.9%$ slucajeva stvarna vrednost ocekivanja $\frac1\lambda = 1/2
 
 ### Slucaj jednog uzorka
 
-Ako imamo uzorak iz normalne $\mathcal{N}(m, \sigma^2$ raspodele, mozemo testirati hipotezu $$H_0: m = m_0,$$ naspram neke od alternativa oblika $$H1: \begin{cases}m< m_0\\m\neq m_0\\m > m_0\end{cases}.$$ Za to mozemo da koristimo test statistiku $$t= \frac{\overline{X} - m_0}{\widetilde{S}}\sqrt{n} \sim t_{n-1}.$$
+Ako imamo uzorak iz normalne $\mathcal{N}(m, \sigma^2)$ raspodele, mozemo testirati hipotezu $$H_0: m = m_0,$$ naspram neke od alternativa oblika $$H_1: \begin{cases}m< m_0\\m\neq m_0\\m > m_0\end{cases}.$$ Za to mozemo da koristimo test statistiku $$t= \frac{\overline{X} - m_0}{\widetilde{S}}\sqrt{n} \sim t_{n-1}.$$
 
 Kriticna oblast ovog testa, sa nivoom $\alpha$ je oblika (za odgovarajuce alternative)
 
 $$W = \begin{cases}\{t < F^{-1}_{t_{n-1}}(\alpha)\}\\ \{ |t| > F^{-1}_{t_{n-1}}(1-\frac\alpha2)\}\\\{t > F^{-1}_{t_{n-1}}(1-\alpha)\}\end{cases}.$$
 
-Cesci nacin na koji se u statistickim paketima vrsi testiranje je nalazenje p vrednosti testa, pa poredjenje te vrednosti sa nivoom znacajnosti. P vrednst testa se ugubo moze opisati kao "kolicina dokaza za nultu hipotezu", pa ukoliko je velika ($p>\alpha$), onda ne odbacujemo nultu hipotezu, a ako je $p < \alpha$, onda odbacujemo nultu hipotezu u korist alternativne. P vrednost mozemo da izracunamo (u dvostranoj nultoj hipotezi slicno za ostale) kao $$p = P\{|t| > t_0\},$$ gde je $t_0$ realizovana vrednost test statistike na osnovu uzorka. U slucaju $t$ testa, p vrednost ce biti jednaka
+Cesci nacin na koji se u statistickim paketima vrsi testiranje je nalazenje p vrednosti testa, pa poredjenje te vrednosti sa nivoom znacajnosti. P vrednst testa se ugrubo moze opisati kao "kolicina dokaza za nultu hipotezu", pa ukoliko je velika ($p>\alpha$), onda ne odbacujemo nultu hipotezu, a ako je $p < \alpha$, onda odbacujemo nultu hipotezu u korist alternativne. P vrednost mozemo da izracunamo (u dvostranoj nultoj hipotezi slicno za ostale) kao $$p = P\{|t| > |t_0|\},$$ gde je $t_0$ realizovana vrednost test statistike na osnovu uzorka. U slucaju $t$ testa, p vrednost ce biti jednaka
 $$
 p = \begin{cases}F_{t_{n-1}}(t_0)\\ 2(1-F_{t_{n-1}}(|t_0|))\\ 1 - F_{t_{n-1}}(t_0)\end{cases},
 $$
@@ -112,7 +112,7 @@ pval_t_test <- function(x, m0, alternative){
   
   if(alternative == "less") {
     pval <- pt(stat, df = n - 1)
-  } else if(alternative == "both") {
+  } else if(alternative == "two.sided") {
     pval <- 2 * (1 - pt(abs(stat), df = n - 1))
   } else if(alternative == "greater") {
     pval <- 1 - pt(stat, df = n - 1)
@@ -129,7 +129,7 @@ Ugradjena funkcija u R-u koja sprovodi $t$ test se naziva `t.test`. Uporedicemo 
 ```{r}
 x <- rnorm(50, 1, 2)
 
-pval_t_test(x, 1, "both")
+pval_t_test(x, 1, "two.sided")
 t.test(x, mu=1, alternative = "two.sided")
 ```
 Ugradjena funkcija nam daje vise informacija od same p vrednosti, a p vrednost se poklapa u nasoj funkciji i ugradjenoj. 
