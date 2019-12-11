@@ -2,9 +2,9 @@
 
 R je napravljen od strane statisticara, i namena mu je prevashodno bas primena statistickih metoda na racunaru. Stoga je vrlo pogodan za implementaciju raznih statistickih alata o kojima smo ucili na Uvodu u statistiku, a skoro svi su vec i implementirani u nekom od nebrojano mnogo paketa na CRAN repozitorijumu. Za vecinu metoda koje biste zeleli da primenite u statistici, verovatno postoji bar 1 paket koji to vec radi, pa mozete preskociti rucnu implementaciju. U ovom, poslednjem, poglavlju cemo proci kroz neke od statistickih testova koje smo prosli na kursu Uvod u statistiku.
 
-Pre svega, digresija... Ukoliko vam treba da formule iz pdf-ova pretvarate u LaTeX bez prekucavanja, koristite program [MathPix](https://mathpix.com/).
+Pre svega, reklama... Ukoliko vam treba da formule iz pdf-ova pretvarate u LaTeX bez prekucavanja, koristite program [MathPix](https://mathpix.com/).
 
-## Intrervali poverenja
+## Intervali poverenja
 
 Pre testova, podseticemo se intervala poverenja i implementirati ih u R-u. Ako pretpostavimo uzorak $X_1, \dots, X_n$ potice iz normalne raspodele $\mathcal{N}(m, \sigma^2)$, znamo da vazi sledece
 $$
