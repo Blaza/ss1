@@ -1,6 +1,7 @@
 # Statistički Softver 1
 
 ***Beleške: https://blaza.github.io/ss1***
+***Seminarski: https://www.notion.so/blaza/SS1-Seminarski-837ea72c81db4eb4867c13062d0f4382***
 
 [![Build Status](https://travis-ci.org/Blaza/ss1.svg?branch=master)](https://travis-ci.org/Blaza/ss1)
 
